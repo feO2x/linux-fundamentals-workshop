@@ -1,6 +1,8 @@
 import { Deck, Slide } from '@revealjs/react'
 import type { RevealConfig } from 'reveal.js'
 import { AGENDA, type AgendaBlock } from '../data/agenda'
+import { CenteredLayout } from './CenteredLayout'
+import { ContentLayout } from './ContentLayout'
 
 // Feste 16:9-Leinwand, die Reveal auf das Browserfenster skaliert.
 const config: RevealConfig = {
@@ -23,21 +25,27 @@ export default function SlidesApp() {
   return (
     <Deck config={config}>
       <Slide>
-        <h1>Linux Fundamentals</h1>
+        <CenteredLayout>
+          <p className="eyebrow">Workshop</p>
+          <h1>Linux Fundamentals</h1>
+        </CenteredLayout>
       </Slide>
 
       <Slide id="kernel-user-space">
-        <h2>{kernelBlock.title}</h2>
-        <p>{kernelBlock.summary}</p>
+        <CenteredLayout>
+          <h2>{kernelBlock.title}</h2>
+          <p className="lede">{kernelBlock.summary}</p>
+        </CenteredLayout>
       </Slide>
 
       <Slide>
-        <h2>{kernelBlock.title}</h2>
-        <ul>
-          {kernelBlock.commands?.map((command) => (
-            <li key={command}>{command}</li>
-          ))}
-        </ul>
+        <ContentLayout title={kernelBlock.title}>
+          <ul>
+            {kernelBlock.commands?.map((command) => (
+              <li key={command}>{command}</li>
+            ))}
+          </ul>
+        </ContentLayout>
       </Slide>
     </Deck>
   )

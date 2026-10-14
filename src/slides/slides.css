@@ -2,3 +2,93 @@
 #root {
   height: 100%;
 }
+
+/* Reveal färbt den Viewport (body) weiß – wir übernehmen die Farben der Agenda. */
+.reveal-viewport {
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* Grundschrift für die 1280×720-Leinwand; Reveal skaliert sie mit. */
+.reveal {
+  font-family: var(--font-sans);
+  font-size: 30px;
+  line-height: 1.4;
+}
+
+/* reveal.css zentriert Text – auf unseren Folien steht er links. */
+.reveal .slides {
+  text-align: left;
+}
+
+/* Volle Leinwandhöhe, damit die Layouts darin verteilen können.
+   Kein Grid/Flex auf der section selbst: Reveal schaltet deren display um. */
+.reveal .slides > section {
+  height: 100%;
+}
+
+.reveal h1,
+.reveal h2,
+.reveal p,
+.reveal ul {
+  margin: 0;
+}
+
+.reveal h1,
+.reveal h2 {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.reveal h1 {
+  font-size: 2.75em;
+}
+
+.reveal h2 {
+  font-size: 1.6em;
+}
+
+.reveal .controls,
+.reveal .progress {
+  color: var(--accent);
+}
+
+.reveal .progress {
+  background: var(--border);
+}
+
+/* ---------- Layouts ---------- */
+
+.layout {
+  box-sizing: border-box;
+  height: 100%;
+  padding: 64px 80px;
+}
+
+.layout--centered {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 24px;
+}
+
+/* Titelzeile oben, Inhalt füllt die Resthöhe – egal, wie viel drinsteht. */
+.layout--content {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: 40px;
+}
+
+.eyebrow {
+  font-size: 0.6em;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.lede {
+  max-width: 900px;
+  color: var(--text-muted);
+}
