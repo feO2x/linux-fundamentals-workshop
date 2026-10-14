@@ -11,7 +11,7 @@ This spike only verifies that the integration works: dev server, production buil
 ## Acceptance Criteria
 
 - [ ] `npm run lint` and `npm run build` pass.
-- [ ] `npm run build` emits `dist/slides.html` next to `dist/index.html`.
+- [x] `npm run build` emits `dist/slides.html` next to `dist/index.html`.
 - [ ] `slides.html` shows a German deck with exactly three slides:
   1. A title slide ("Linux Fundamentals"), vertically centered.
   2. A vertically centered section slide for the agenda block "Kernel vs. User Space" whose title and summary come from `src/data/agenda.ts`. It has the slide id `kernel-user-space`.
