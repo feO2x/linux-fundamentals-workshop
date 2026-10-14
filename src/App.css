@@ -34,6 +34,18 @@
   font-size: 1.0625rem;
 }
 
+.hero__link {
+  display: inline-block;
+  margin-top: 1.25rem;
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.hero__link:hover {
+  text-decoration: underline;
+}
+
 .stats {
   display: flex;
   flex-wrap: wrap;

@@ -1,0 +1,171 @@
+/* Reveal nimmt 100 % der Höhe seines Elternelements ein – also muss #root mitwachsen. */
+#root {
+  height: 100%;
+}
+
+/* Reveal färbt den Viewport (body) weiß – wir übernehmen die Farben der Agenda. */
+.reveal-viewport {
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* Grundschrift für die 1280×720-Leinwand; Reveal skaliert sie mit. */
+.reveal {
+  font-family: var(--font-sans);
+  font-size: 30px;
+  line-height: 1.4;
+}
+
+/* reveal.css zentriert Text – auf unseren Folien steht er links. */
+.reveal .slides {
+  text-align: left;
+}
+
+/* Volle Leinwandhöhe, damit die Layouts darin verteilen können.
+   Kein Grid/Flex auf der section selbst: Reveal schaltet deren display um. */
+.reveal .slides > section {
+  height: 100%;
+}
+
+.reveal h1,
+.reveal h2,
+.reveal p,
+.reveal ul {
+  margin: 0;
+}
+
+.reveal h1,
+.reveal h2 {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.reveal h1 {
+  font-size: 2.75em;
+}
+
+.reveal h2 {
+  font-size: 1.6em;
+}
+
+.reveal .controls,
+.reveal .progress {
+  color: var(--accent);
+}
+
+.reveal .progress {
+  background: var(--border);
+}
+
+/* ---------- Layouts ---------- */
+
+.layout {
+  box-sizing: border-box;
+  height: 100%;
+  padding: 64px 80px;
+}
+
+.layout--centered {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 24px;
+}
+
+/* Titelzeile oben, Inhalt füllt die Resthöhe – egal, wie viel drinsteht. */
+.layout--content {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: 40px;
+}
+
+.eyebrow {
+  font-size: 0.6em;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.lede {
+  max-width: 900px;
+  color: var(--text-muted);
+}
+
+/* Inhaltsbereich als Spalte: ein Codeblock darin wächst auf die Resthöhe. */
+.layout__body {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-height: 0;
+}
+
+/* ---------- Code ---------- */
+
+/* position: relative, weil das Highlight-Plugin die Schritte als
+   absolut positionierte Kopien über den Codeblock legt. */
+.reveal pre {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  margin: 0;
+}
+
+/* .slides erhöht die Spezifität über die Regeln aus reveal.css
+   (html:not(.print-pdf) .reveal .hljs …). */
+.reveal .slides pre code.hljs {
+  display: block;
+  box-sizing: border-box;
+  height: 100%;
+  overflow: auto;
+  padding: 24px 28px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  line-height: 1.6;
+}
+
+.reveal .hljs.has-highlights tr:not(.highlight-line) {
+  opacity: 0.35;
+}
+
+.reveal .hljs.has-highlights tr.highlight-line {
+  background: var(--accent-wash);
+}
+
+.reveal .hljs-built_in,
+.reveal .hljs-keyword {
+  color: var(--accent);
+}
+
+.reveal .hljs-string,
+.reveal .hljs-variable,
+.reveal .hljs-template-variable {
+  color: var(--praxis);
+}
+
+.reveal .hljs-meta,
+.reveal .hljs-comment {
+  color: var(--text-dim);
+}
+
+/* ---------- Übung ---------- */
+.exercise {
+  padding-left: 20px;
+  border-left: 3px solid var(--praxis);
+  color: var(--text-muted);
+  font-size: 0.8em;
+}
+
+.exercise__label {
+  display: block;
+  font-size: 0.7em;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--praxis);
+}
