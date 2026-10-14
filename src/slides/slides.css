@@ -1,0 +1,4 @@
+/* Reveal nimmt 100 % der Höhe seines Elternelements ein – also muss #root mitwachsen. */
+#root {
+  height: 100%;
+}

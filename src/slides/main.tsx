@@ -1,8 +1,11 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
+import 'reveal.js/reveal.css'
+import './slides.css'
+import SlidesApp from './SlidesApp.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <h1>Linux Fundamentals — Folien</h1>
+    <SlidesApp />
   </StrictMode>,
 )
