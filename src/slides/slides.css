@@ -92,3 +92,80 @@
   max-width: 900px;
   color: var(--text-muted);
 }
+
+/* Inhaltsbereich als Spalte: ein Codeblock darin wächst auf die Resthöhe. */
+.layout__body {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-height: 0;
+}
+
+/* ---------- Code ---------- */
+
+/* position: relative, weil das Highlight-Plugin die Schritte als
+   absolut positionierte Kopien über den Codeblock legt. */
+.reveal pre {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  margin: 0;
+}
+
+/* .slides erhöht die Spezifität über die Regeln aus reveal.css
+   (html:not(.print-pdf) .reveal .hljs …). */
+.reveal .slides pre code.hljs {
+  display: block;
+  box-sizing: border-box;
+  height: 100%;
+  overflow: auto;
+  padding: 24px 28px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  line-height: 1.6;
+}
+
+.reveal .hljs.has-highlights tr:not(.highlight-line) {
+  opacity: 0.35;
+}
+
+.reveal .hljs.has-highlights tr.highlight-line {
+  background: var(--accent-wash);
+}
+
+.reveal .hljs-built_in,
+.reveal .hljs-keyword {
+  color: var(--accent);
+}
+
+.reveal .hljs-string,
+.reveal .hljs-variable,
+.reveal .hljs-template-variable {
+  color: var(--praxis);
+}
+
+.reveal .hljs-meta,
+.reveal .hljs-comment {
+  color: var(--text-dim);
+}
+
+/* ---------- Übung ---------- */
+.exercise {
+  padding-left: 20px;
+  border-left: 3px solid var(--praxis);
+  color: var(--text-muted);
+  font-size: 0.8em;
+}
+
+.exercise__label {
+  display: block;
+  font-size: 0.7em;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--praxis);
+}

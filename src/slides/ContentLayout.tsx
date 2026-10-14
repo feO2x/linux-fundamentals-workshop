@@ -10,7 +10,7 @@ export function ContentLayout({ title, children }: Props) {
   return (
     <div className="layout layout--content">
       <h2>{title}</h2>
-      <div>{children}</div>
+      <div className="layout__body">{children}</div>
     </div>
   )
 }

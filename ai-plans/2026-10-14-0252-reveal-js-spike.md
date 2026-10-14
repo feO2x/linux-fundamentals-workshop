@@ -10,22 +10,22 @@ This spike only verifies that the integration works: dev server, production buil
 
 ## Acceptance Criteria
 
-- [ ] `npm run lint` and `npm run build` pass.
+- [x] `npm run lint` and `npm run build` pass.
 - [x] `npm run build` emits `dist/slides.html` next to `dist/index.html`.
-- [ ] `slides.html` shows a German deck with exactly three slides:
+- [x] `slides.html` shows a German deck with exactly three slides:
   1. A title slide ("Linux Fundamentals"), vertically centered.
   2. A vertically centered section slide for the agenda block "Kernel vs. User Space" whose title and summary come from `src/data/agenda.ts`. It has the slide id `kernel-user-space`.
   3. A content slide using `<ContentLayout>`: the title is at the top, and below it the block's commands appear as a syntax-highlighted shell code block that fills the remaining height. Its lines are highlighted step by step, and a short exercise note appears afterwards as a fragment.
-- [ ] The title of a content slide stays in the same position no matter how much content the slide has. To check, temporarily add lines to the code block; the title must not move.
+- [x] The title of a content slide stays in the same position no matter how much content the slide has. To check, temporarily add lines to the code block; the title must not move.
 - [x] Text on content slides is left-aligned (Reveal's default `text-align: center` is overridden).
 - [x] Keyboard navigation (arrow keys, space) works. The URL hash follows the current slide, and reloading the page stays on that slide.
 - [x] Opening `slides.html#/kernel-user-space` directly shows the section slide.
 - [x] The deck renders at 16:9 and scales to fit the browser window without scroll bars, in both `npm run dev` and `npm run preview`.
-- [ ] The deck, including the code highlighting, uses the agenda's colors and fonts. No bundled Reveal theme or highlight theme (Monokai, Zenburn) is loaded.
-- [ ] The agenda page's JavaScript bundle doesn't contain reveal.js or highlight.js.
+- [x] The deck, including the code highlighting, uses the agenda's colors and fonts. No bundled Reveal theme or highlight theme (Monokai, Zenburn) is loaded.
+- [x] The agenda page's JavaScript bundle doesn't contain reveal.js or highlight.js.
 - [x] In `npm run dev` (StrictMode), there are no console errors and Reveal's controls and progress bar are not duplicated.
 - [x] The agenda page has a link to the slides, and it otherwise looks unchanged (no Reveal CSS leaks into it).
-- [ ] Served under the GitHub Pages subpath via `npm run build && npx vite preview --base /linux-fundamentals-workshop/`, both the agenda and the deck work, including the link between them and a reload on a slide.
+- [x] Served under the GitHub Pages subpath via `npm run build && npx vite preview --base /linux-fundamentals-workshop/`, both the agenda and the deck work, including the link between them and a reload on a slide.
 
 ## Technical Details
 
