@@ -1,6 +1,8 @@
 export type BlockKind = 'content' | 'break' | 'buffer'
 
 export interface AgendaBlock {
+  /** Stabile Kennung, z. B. als Folienanker (`slides.html#/<id>`). */
+  id: string
   /** Kurzer Titel des Blocks, wie er in der Agenda steht. */
   title: string
   /** Dauer in Minuten. */
@@ -21,6 +23,7 @@ export const START_TIME = '09:00'
 
 export const AGENDA: AgendaBlock[] = [
   {
+    id: 'einstieg',
     title: 'Einstieg & Setup',
     duration: 15,
     praxis: 10,
@@ -32,6 +35,7 @@ export const AGENDA: AgendaBlock[] = [
       'Container starten, erste Orientierung. Leitfrage: Warum ist hier so viel weniger los als auf dem eigenen Rechner?',
   },
   {
+    id: 'kernel-user-space',
     title: 'Kernel vs. User Space',
     duration: 15,
     praxis: 5,
@@ -43,18 +47,20 @@ export const AGENDA: AgendaBlock[] = [
       'Zwei Container parallel starten und die identische Kernel-Version vergleichen. Hinweis: Auf Windows und macOS läuft im Hintergrund eine kleine Linux-VM — die ist der Host.',
   },
   {
+    id: 'verzeichnisstruktur',
     title: 'Verzeichnisstruktur',
     duration: 25,
     praxis: 15,
     kind: 'content',
     summary:
       'Die wichtigsten Verzeichnisse und was davon im Container-Alltag wirklich zählt: /bin, /etc, /home, /var, /tmp, /usr.',
-    commands: ['ls', 'cd', 'which', 'tree'],
+    commands: ['pwd', 'ls', 'cd', 'which', 'tree'],
     praxisNote:
       'Schnitzeljagd statt Rundgang: sechs Fragen, jede mit einem Kommando beantwortbar. Wo liegt das ls-Binary? Welche Logdateien gibt es?',
   },
-  { title: 'Pause', duration: 10, kind: 'break' },
+  { id: 'pause-1', title: 'Pause', duration: 10, kind: 'break' },
   {
+    id: 'apt',
     title: 'Paketverwaltung mit apt',
     duration: 20,
     praxis: 12,
@@ -66,6 +72,7 @@ export const AGENDA: AgendaBlock[] = [
       'Die Teilnehmer installieren selbst die Werkzeuge, die im Rest des Workshops gebraucht werden: ps, less, tree. Bewusst nicht im Image vorinstalliert.',
   },
   {
+    id: 'alles-ist-eine-datei',
     title: 'Alles ist eine Datei',
     duration: 20,
     praxis: 12,
@@ -77,6 +84,7 @@ export const AGENDA: AgendaBlock[] = [
       'In /proc stöbern: eigene offene Dateien ansehen, cat /proc/1/cmdline — in einem Container ist PID 1 die eigene Anwendung, kein Init-System.',
   },
   {
+    id: 'users-groups',
     title: 'Users & Groups',
     duration: 30,
     praxis: 20,
@@ -87,8 +95,9 @@ export const AGENDA: AgendaBlock[] = [
     praxisNote:
       'Benutzer alice und bob anlegen, Gruppe team, dann su - alice und cd /root versuchen. Das "Permission denied" ist der Übergang zum nächsten Block.',
   },
-  { title: 'Pause', duration: 10, kind: 'break' },
+  { id: 'pause-2', title: 'Pause', duration: 10, kind: 'break' },
   {
+    id: 'berechtigungen',
     title: 'Berechtigungen',
     duration: 45,
     praxis: 30,
@@ -100,6 +109,7 @@ export const AGENDA: AgendaBlock[] = [
       'In Stufen: ls -l gemeinsam entziffern, Datei zwischen alice und bob freigeben, Oktal-Drill, dann chmod 644 auf ein Verzeichnis und cd versuchen.',
   },
   {
+    id: 'links-inodes',
     title: 'Links & Inodes',
     duration: 15,
     praxis: 10,
@@ -111,6 +121,7 @@ export const AGENDA: AgendaBlock[] = [
       'Beide Link-Arten anlegen, mit ls -li die identischen Inode-Nummern zeigen, das Original löschen — der Softlink bricht, der Hardlink überlebt.',
   },
   {
+    id: 'abschlussuebung',
     title: 'Abschlussübung',
     duration: 30,
     praxis: 30,
@@ -122,9 +133,17 @@ export const AGENDA: AgendaBlock[] = [
       'Nicht ausführbares Startskript, weltlesbare Config mit Passwort, nicht beschreibbares Logverzeichnis, toter Symlink. Zum Schluss: genau das macht ein Dockerfile mit COPY --chown und USER.',
   },
   {
+    id: 'puffer',
     title: 'Puffer & Fragen',
     duration: 5,
     kind: 'buffer',
     summary: 'Wiederholung, offene Fragen und der Transfer zum Thema Docker.',
   },
 ]
+
+/** Sucht einen Agenda-Block über seine Kennung. */
+export function findBlock(id: string): AgendaBlock {
+  const block = AGENDA.find((block) => block.id === id)
+  if (!block) throw new Error(`Agenda-Block "${id}" nicht gefunden`)
+  return block
+}

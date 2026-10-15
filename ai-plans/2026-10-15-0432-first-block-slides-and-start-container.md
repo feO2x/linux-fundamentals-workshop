@@ -14,21 +14,21 @@ The images are not published from GitHub. The user builds them and pushes them t
 
 ### Container
 
-- [ ] `containers/start/Dockerfile` builds an image based on `ubuntu:24.04`. In that image, `ps`, `tree`, `which`, `whoami`, `id` and `uname` are available, the shell starts in `/root`, and `LANG` is `C.UTF-8`.
-- [ ] `README.md` has a section (in German, like the rest of the README) on how to build and check the container images locally. It explains the `containers/<name>/` layout so that later images fit in.
-- [ ] Every answer to the scavenger hunt (see below) has been checked against the built image.
+- [x] `containers/start/Dockerfile` builds an image based on `ubuntu:24.04`. In that image, `ps`, `tree`, `which`, `whoami`, `id` and `uname` are available, the shell starts in `/root`, and `LANG` is `C.UTF-8`.
+- [x] `README.md` has a section (in German, like the rest of the README) on how to build and check the container images locally. It explains the `containers/<name>/` layout so that later images fit in.
+- [x] Every answer to the scavenger hunt (see below) has been checked against the built image.
 
 ### Slides
 
-- [ ] The placeholder slides from the spike are gone. The deck contains, in this order: title slide, agenda overview, the three blocks, and a break slide.
-- [ ] Every block starts with a section slide whose title and summary come from `src/data/agenda.ts`. It can be reached at `slides.html#/<block-id>`, using `einstieg`, `kernel-user-space` and `verzeichnisstruktur`.
-- [ ] The agenda overview and the break slide take their times from `AGENDA`/`START_TIME` (break slide: "weiter um 10:05"). If the agenda changes, the times change with it.
-- [ ] The slides show the exact `docker pull`/`docker run` commands for the start image, including `--hostname`. The image reference is defined in exactly one place in the code.
-- [ ] The block contents match the outline in Technical Details. Each block has its own exercise slide, and the scavenger hunt also has a solutions slide.
-- [ ] The two diagrams (kernel layers, VM vs. container) are made of HTML/CSS or inline SVG with the design tokens. They look right in both light and dark themes.
-- [ ] Every command in `agenda.ts` for these three blocks appears on the slides, and `pwd` is added to the commands of "Verzeichnisstruktur".
-- [ ] No slide overflows the 1280×720 canvas, in either theme.
-- [ ] `npm run format:check`, `npm run lint` and `npm run build` pass.
+- [x] The placeholder slides from the spike are gone. The deck contains, in this order: title slide, agenda overview, the three blocks, and a break slide.
+- [x] Every block starts with a section slide whose title and summary come from `src/data/agenda.ts`. It can be reached at `slides.html#/<block-id>`, using `einstieg`, `kernel-user-space` and `verzeichnisstruktur`.
+- [x] The agenda overview and the break slide take their times from `AGENDA`/`START_TIME` (break slide: "weiter um 10:05"). If the agenda changes, the times change with it.
+- [x] The slides show the exact `docker pull`/`docker run` commands for the start image, including `--hostname`. The image reference is defined in exactly one place in the code.
+- [x] The block contents match the outline in Technical Details. Each block has its own exercise slide, and the scavenger hunt also has a solutions slide.
+- [x] The two diagrams (kernel layers, VM vs. container) are made of HTML/CSS or inline SVG with the design tokens. They look right in both light and dark themes.
+- [x] Every command in `agenda.ts` for these three blocks appears on the slides, and `pwd` is added to the commands of "Verzeichnisstruktur".
+- [x] No slide overflows the 1280×720 canvas, in either theme.
+- [x] `npm run format:check`, `npm run lint` and `npm run build` pass.
 
 ## Technical Details
 

@@ -23,3 +23,8 @@ CI (`.github/workflows/deploy.yml`) runs these commands before deploying to GitH
 ## This is your space
 
 If you find something noteworthy about the codebase while implementing, list it here. A reviewer will discuss this with you afterwards.
+
+- highlight.js' `shell` grammar only recognizes prompts made of `[/~\w\d[\]()@-]*` followed by `$`, `#`, `%` or `>`. `root@workshop:~#` contains a `:`, so prompt/output blocks on the slides render without syntax colors (step highlighting still works).
+- The deck hides the line-number gutter (`.hljs-ln-numbers`) globally and code blocks are as tall as their content (the spike's `flex: 1` on `pre` was removed), since most slides combine code with text.
+- The `docker run` line uses `.code--small`, which fits an image reference of roughly 44 characters on the canvas. A longer registry path than the placeholder in `src/slides/containers.ts` would make the code block scroll horizontally.
+- Reveal merges URL query parameters into its config, so `slides.html?fragments=false&transition=none` is handy for screenshots. Fragments rendered by `WhenDeckReady` stay hidden in that mode, because Reveal reveals fragments only once at startup.

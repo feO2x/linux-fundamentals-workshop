@@ -1,0 +1,145 @@
+/* Diagramme aus HTML/CSS. Farben nur über die Design-Tokens,
+   damit beide Designs (hell/dunkel) ohne Sonderregeln funktionieren. */
+
+/* ---------- Kernel-Schichten ---------- */
+
+.kernel-layers {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 16px;
+  font-size: 0.8em;
+}
+
+.layer {
+  display: flex;
+  align-items: baseline;
+  gap: 24px;
+  padding: 18px 24px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.layer__name {
+  flex: 0 0 170px;
+  font-weight: 700;
+}
+
+.layer__items {
+  color: var(--text-muted);
+}
+
+.layer--kernel {
+  border-color: var(--accent);
+  background: var(--accent-wash);
+}
+
+.layer--kernel .layer__name {
+  color: var(--accent);
+}
+
+.layer--user {
+  border-color: var(--praxis-border);
+  background: var(--praxis-wash);
+}
+
+.layer--user .layer__name {
+  color: var(--praxis);
+}
+
+.layer__items code,
+.box code {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  color: var(--text);
+}
+
+/* Gestrichelte Linie mit Beschriftung in der Mitte. */
+.syscall-boundary {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 0.8em;
+  font-weight: 600;
+}
+
+.syscall-boundary::before,
+.syscall-boundary::after {
+  content: '';
+  flex: 1;
+  border-top: 2px dashed var(--accent);
+}
+
+/* ---------- VM vs. Container ---------- */
+
+.vm-vs-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  font-size: 0.7em;
+}
+
+.reveal .stack {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+}
+
+.stack figcaption {
+  margin-bottom: 6px;
+  font-weight: 700;
+}
+
+.stack__guests {
+  display: grid;
+  grid-auto-columns: 1fr;
+  grid-auto-flow: column;
+  gap: 10px;
+}
+
+.guest {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px;
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius);
+}
+
+.guest__label {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  color: var(--text-dim);
+}
+
+.box {
+  padding: 12px 14px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  background: var(--surface);
+  text-align: center;
+}
+
+.box--app {
+  border-color: var(--praxis-border);
+  background: var(--praxis-wash);
+}
+
+.box--kernel {
+  border-color: var(--accent);
+  background: var(--accent-wash);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.box--platform {
+  color: var(--text-muted);
+}
+
+.box--hardware {
+  background: var(--chip-bg);
+  color: var(--text-muted);
+}
