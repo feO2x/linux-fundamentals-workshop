@@ -1,4 +1,5 @@
 import { AgendaList } from './components/AgendaList'
+import { ThemeToggle } from './components/ThemeToggle'
 import { AGENDA, START_TIME } from './data/agenda'
 import { buildSchedule, formatDuration } from './lib/time'
 import './App.css'
@@ -11,7 +12,10 @@ export default function App() {
   return (
     <div className="page">
       <header className="hero">
-        <p className="hero__eyebrow">Workshop</p>
+        <div className="hero__top">
+          <p className="hero__eyebrow">Workshop</p>
+          <ThemeToggle />
+        </div>
         <h1 className="hero__title">Linux Fundamentals</h1>
         <p className="hero__lede">
           Vom Kernel bis zu Dateirechten — alles direkt im Container geübt. Der Workshop

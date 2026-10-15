@@ -13,6 +13,12 @@ bearbeiten.
 
 `kind: 'break'` und `kind: 'buffer'` stellen einen Block optisch zurück.
 
+## Helles und dunkles Design
+
+Agenda und Folien haben je einen Umschalter oben rechts. Die Wahl wird im Browser
+gespeichert und gilt für beide Seiten; ohne gespeicherte Wahl folgt das Design der
+Systemeinstellung. Die Farben für beide Designs stehen in [`src/tokens.css`](src/tokens.css).
+
 ## Handout
 
 Die Seite hat Druckstyles (helles Layout, keine Seitenumbrüche mitten in einem Block).

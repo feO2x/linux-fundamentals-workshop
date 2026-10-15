@@ -169,3 +169,23 @@
   text-transform: uppercase;
   color: var(--praxis);
 }
+
+/* ---------- Designumschalter ---------- */
+
+/* Unaufdringlich in der Ecke, solange niemand darauf zeigt. */
+.slides-theme-toggle {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 40;
+  opacity: 0.35;
+}
+
+.slides-theme-toggle:hover,
+.slides-theme-toggle:focus-visible {
+  opacity: 1;
+}
+
+html.print-pdf .slides-theme-toggle {
+  display: none;
+}
