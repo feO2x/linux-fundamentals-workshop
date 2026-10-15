@@ -1,5 +1,7 @@
 # Slides for the First Block and the Start Container
 
+*Frozen at 2026-10-15T04:32Z*
+
 ## Rationale
 
 The reveal.js spike (`2026-10-14-0252-reveal-js-spike.md`) set up the deck, but it only has placeholder slides. This plan adds the real content for the first block of the workshop, up to the first break: "Einstieg & Setup", "Kernel vs. User Space" and "Verzeichnisstruktur" (09:00–09:55). It also adds the container image that attendees start at the beginning.
