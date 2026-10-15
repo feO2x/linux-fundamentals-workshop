@@ -13,6 +13,7 @@ The images are not published from GitHub. The user builds them and pushes them t
 ### Container
 
 - [ ] `containers/start/Dockerfile` builds an image based on `ubuntu:24.04`. In that image, `ps`, `tree`, `which`, `whoami`, `id` and `uname` are available, the shell starts in `/root`, and `LANG` is `C.UTF-8`.
+- [ ] `README.md` has a section (in German, like the rest of the README) on how to build and check the container images locally. It explains the `containers/<name>/` layout so that later images fit in.
 - [ ] Every answer to the scavenger hunt (see below) has been checked against the built image.
 
 ### Slides
@@ -23,7 +24,7 @@ The images are not published from GitHub. The user builds them and pushes them t
 - [ ] The slides show the exact `docker pull`/`docker run` commands for the start image, including `--hostname`. The image reference is defined in exactly one place in the code.
 - [ ] The block contents match the outline in Technical Details. Each block has its own exercise slide, and the scavenger hunt also has a solutions slide.
 - [ ] The two diagrams (kernel layers, VM vs. container) are made of HTML/CSS or inline SVG with the design tokens. They look right in both light and dark themes.
-- [ ] The `commands` in `agenda.ts` for these three blocks match the commands on the slides.
+- [ ] Every command in `agenda.ts` for these three blocks appears on the slides, and `pwd` is added to the commands of "Verzeichnisstruktur".
 - [ ] No slide overflows the 1280×720 canvas, in either theme.
 - [ ] `npm run format:check`, `npm run lint` and `npm run build` pass.
 
@@ -103,7 +104,7 @@ Slide text is in German. Commands are shown as code blocks with step highlightin
 
 ### Verification
 
-- Docker is not available in the agent's WSL environment. The CI build plus smoke test is the automated feedback loop for the image. The user checks the scavenger hunt answers locally, or the agent does once Docker Desktop's WSL integration is enabled.
+- The image is built and checked locally; there is no CI integration. Build it with `docker build -t linux-workshop-start containers/start`, then check in a container that `ps` and `tree` are present (e.g. `docker run --rm linux-workshop-start sh -c 'command -v ps tree'`). The agent runs this and checks the scavenger hunt answers against the built image itself, since Docker is available in its environment.
 - In the browser, the user checks every slide for overflow in both themes, the section-slide anchors, and that the agenda page still matches the slides.
 
 ### Out of Scope
