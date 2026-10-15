@@ -16,8 +16,9 @@ Install dependencies with `npm ci` before running these commands.
 
 - `npm run lint`: lints `src/` with oxlint (React, TypeScript, and oxc rules from `.oxlintrc.json`).
 - `npm run build`: type-checks the project with `tsc -b` and builds the production bundle into `dist/` with Vite.
+- `npm run format:check`: checks formatting with Prettier. Use `npm run format` to fix formatting issues.
 
-CI (`.github/workflows/deploy.yml`) runs both commands before deploying to GitHub Pages.
+CI (`.github/workflows/deploy.yml`) runs these commands before deploying to GitHub Pages.
 
 ## This is your space
 
