@@ -1,6 +1,7 @@
 import { Code, Deck, Fragment, Slide } from '@revealjs/react'
 import type { RevealConfig } from 'reveal.js'
 import RevealHighlight from 'reveal.js/plugin/highlight'
+import { ThemeToggle } from '../components/ThemeToggle'
 import { AGENDA, type AgendaBlock } from '../data/agenda'
 import { CenteredLayout } from './CenteredLayout'
 import { ContentLayout } from './ContentLayout'
@@ -29,38 +30,42 @@ const kernelCommands = kernelBlock.commands ?? []
 
 export default function SlidesApp() {
   return (
-    <Deck config={config} plugins={plugins}>
-      <Slide>
-        <CenteredLayout>
-          <p className="eyebrow">Workshop</p>
-          <h1>Linux Fundamentals</h1>
-        </CenteredLayout>
-      </Slide>
+    <>
+      {/* Außerhalb des Decks, damit Reveal den Knopf nicht mitskaliert. */}
+      <ThemeToggle className="slides-theme-toggle" />
+      <Deck config={config} plugins={plugins}>
+        <Slide>
+          <CenteredLayout>
+            <p className="eyebrow">Workshop</p>
+            <h1>Linux Fundamentals</h1>
+          </CenteredLayout>
+        </Slide>
 
-      <Slide id="kernel-user-space">
-        <CenteredLayout>
-          <h2>{kernelBlock.title}</h2>
-          <p className="lede">{kernelBlock.summary}</p>
-        </CenteredLayout>
-      </Slide>
+        <Slide id="kernel-user-space">
+          <CenteredLayout>
+            <h2>{kernelBlock.title}</h2>
+            <p className="lede">{kernelBlock.summary}</p>
+          </CenteredLayout>
+        </Slide>
 
-      <Slide>
-        <ContentLayout title={kernelBlock.title}>
-          {/* Ein Hervorhebungsschritt pro Kommando: "1|2|…" */}
-          <Code
-            language="bash"
-            lineNumbers={kernelCommands.map((_, index) => index + 1).join('|')}
-          >
-            {kernelCommands.join('\n')}
-          </Code>
-          <WhenDeckReady>
-            <Fragment as="p" className="exercise">
-              <span className="exercise__label">Übung</span>
-              {kernelBlock.praxisNote}
-            </Fragment>
-          </WhenDeckReady>
-        </ContentLayout>
-      </Slide>
-    </Deck>
+        <Slide>
+          <ContentLayout title={kernelBlock.title}>
+            {/* Ein Hervorhebungsschritt pro Kommando: "1|2|…" */}
+            <Code
+              language="bash"
+              lineNumbers={kernelCommands.map((_, index) => index + 1).join('|')}
+            >
+              {kernelCommands.join('\n')}
+            </Code>
+            <WhenDeckReady>
+              <Fragment as="p" className="exercise">
+                <span className="exercise__label">Übung</span>
+                {kernelBlock.praxisNote}
+              </Fragment>
+            </WhenDeckReady>
+          </ContentLayout>
+        </Slide>
+      </Deck>
+    </>
   )
 }
