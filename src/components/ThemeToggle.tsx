@@ -10,7 +10,8 @@ interface Props {
 export function ThemeToggle({ className }: Props) {
   const [theme, setThemeState] = useState<Theme>(getTheme)
   const next: Theme = theme === 'dark' ? 'light' : 'dark'
-  const label = next === 'light' ? 'Helles Design aktivieren' : 'Dunkles Design aktivieren'
+  const label =
+    next === 'light' ? 'Helles Design aktivieren' : 'Dunkles Design aktivieren'
 
   function toggle() {
     setTheme(next)

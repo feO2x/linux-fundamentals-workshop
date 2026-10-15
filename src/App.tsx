@@ -23,7 +23,9 @@ export default function App() {
           Docker-Containern vor.
         </p>
 
-        <a className="hero__link" href="slides.html">Zu den Folien</a>
+        <a className="hero__link" href="slides.html">
+          Zu den Folien
+        </a>
 
         <dl className="stats">
           <div className="stat">
