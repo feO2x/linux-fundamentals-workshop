@@ -110,6 +110,10 @@
   color: var(--text-muted);
 }
 
+.lede--strong {
+  color: var(--text);
+}
+
 /* Inhaltsbereich als Spalte; Codeblöcke darin sind so hoch wie ihr Inhalt. */
 .layout__body {
   display: flex;
@@ -238,6 +242,11 @@
   font-size: 0.85em;
 }
 
+.question--section {
+  max-width: 900px;
+  font-size: 1em;
+}
+
 .question__label {
   display: block;
   font-size: 0.7em;
@@ -270,6 +279,17 @@
   padding-left: 20px;
   border-left: 3px solid var(--accent);
   font-weight: 600;
+}
+
+/* Der Grundsatz des Workshops – das, was hängen bleiben soll. */
+.principle {
+  padding: 20px 28px;
+  border-radius: var(--radius);
+  background: var(--accent-wash);
+  color: var(--text);
+  font-size: 1.05em;
+  font-weight: 700;
+  line-height: 1.3;
 }
 
 /* Begriff links, Erklärung rechts. Zeilen (.legend__row) übernehmen die
@@ -421,6 +441,73 @@
   font-weight: 600;
 }
 
+/* ---------- Suchweg ---------- */
+
+.search-path {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  padding: 0;
+  list-style: none;
+  counter-reset: step;
+  font-size: 0.75em;
+}
+
+.search-path__step {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 20px 22px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  counter-increment: step;
+}
+
+.search-path__step::before {
+  content: counter(step);
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-weight: 700;
+}
+
+.search-path__text {
+  color: var(--text-muted);
+}
+
+.search-path__tools {
+  margin-top: auto;
+  padding-top: 8px;
+}
+
+/* Einzeilige Erinnerung: Schritte mit Pfeilen dazwischen. */
+.search-path--compact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  margin-top: 6px;
+  font-size: 1em;
+}
+
+.search-path--compact li + li::before {
+  content: '→';
+  margin-right: 14px;
+  color: var(--text-dim);
+}
+
+.walkthrough {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-left: 1.3em;
+  font-size: 0.8em;
+}
+
+.walkthrough li::marker {
+  color: var(--accent);
+  font-weight: 700;
+}
+
 /* ---------- Verzeichnisse ---------- */
 
 .directories {
@@ -429,20 +516,30 @@
   font-size: 0.85em;
 }
 
+/* Frage | Verzeichnisse | Erklärung */
 .directories__row {
   display: grid;
-  grid-template-columns: 280px 1fr;
+  grid-template-columns: 330px 250px 1fr;
   align-items: baseline;
   padding: 14px 0;
   border-bottom: 1px solid var(--border);
 }
 
 .directories dt {
+  font-weight: 600;
+}
+
+.directories__paths {
   display: flex;
   gap: 12px;
 }
 
-.reveal .directories dt code {
+.directories dd:last-child {
+  color: var(--text-muted);
+  font-size: 0.85em;
+}
+
+.reveal .directories__paths code {
   color: var(--accent);
   font-weight: 600;
 }
@@ -452,7 +549,7 @@
   color: var(--text-muted);
 }
 
-.reveal .directories__row--later dt code {
+.reveal .directories__row--later .directories__paths code {
   color: var(--text-muted);
 }
 
@@ -466,6 +563,10 @@
   padding: 14px 16px;
   border-bottom: 1px solid var(--border);
   vertical-align: baseline;
+}
+
+.solutions td.solutions__path {
+  white-space: nowrap;
 }
 
 .solutions td.solutions__number {

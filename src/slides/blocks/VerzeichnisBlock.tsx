@@ -1,7 +1,10 @@
 import { Fragment, Slide } from '@revealjs/react'
+import type { ReactNode } from 'react'
 import { findBlock } from '../../data/agenda'
 import { ContentLayout } from '../ContentLayout'
 import { ExerciseSlide } from '../ExerciseSlide'
+import { Principle } from '../Principle'
+import { SearchPath } from '../SearchPath'
 import { SectionSlide } from '../SectionSlide'
 import { StepCode } from '../StepCode'
 import { WhenDeckReady } from '../WhenDeckReady'
@@ -9,6 +12,7 @@ import { WhenDeckReady } from '../WhenDeckReady'
 const BLOCK_ID = 'verzeichnisstruktur'
 
 const linksBlock = findBlock('links-inodes')
+const everythingIsAFileBlock = findBlock('alles-ist-eine-datei')
 
 // Ausgabe von `tree -L 1 /` im Start-Image, ohne die Zusammenfassung am Ende.
 const treeOutput = [
@@ -35,33 +39,62 @@ const treeOutput = [
   '└── var',
 ]
 
-const directories = [
-  { paths: ['/usr', '/bin'], text: 'Programme – /bin zeigt heute auf /usr/bin' },
-  { paths: ['/etc'], text: 'Konfigurationsdateien' },
-  { paths: ['/home', '/root'], text: 'Home-Verzeichnisse der Benutzer, /root für root' },
-  { paths: ['/var'], text: 'veränderliche Daten, z. B. Logs in /var/log' },
-  { paths: ['/tmp'], text: 'temporäre Dateien' },
+// Die Landkarte: Was sucht ihr, und in welchem Verzeichnis liegt so etwas?
+const directoryMap: { question: string; paths: string[]; text: ReactNode }[] = [
+  {
+    question: 'Ein Programm?',
+    paths: ['/usr/bin'],
+    text: (
+      <>
+        auch über <code>/bin</code> erreichbar
+      </>
+    ),
+  },
+  { question: 'Eine Einstellung?', paths: ['/etc'], text: 'Konfigurationsdateien' },
+  {
+    question: 'Was ist passiert?',
+    paths: ['/var/log'],
+    text: (
+      <>
+        Logs; in <code>/var</code> liegt, was sich ändert
+      </>
+    ),
+  },
+  {
+    question: 'Eure eigenen Dateien?',
+    paths: ['/home', '/root'],
+    text: (
+      <>
+        <code>/root</code> ist das Home von root
+      </>
+    ),
+  },
+  { question: 'Nur für kurz?', paths: ['/tmp'], text: 'temporäre Dateien, für alle' },
 ]
 
 // Gegen das gebaute Start-Image geprüft (siehe README).
-const scavengerHunt = [
+const scavengerHunt: { question: ReactNode; path: string[]; answer: ReactNode }[] = [
   {
     question: (
       <>
         Wo liegt das Programm <code>ls</code>?
       </>
     ),
-    command: 'which ls',
+    path: ['which ls'],
     answer: <code>/usr/bin/ls</code>,
   },
   {
-    question: 'Welche Ubuntu-Version läuft?',
-    command: 'cat /etc/os-release',
-    answer: 'Ubuntu 24.04.5 LTS (Noble Numbat)',
+    question: 'Welche Ubuntu-Version läuft hier?',
+    path: ['ls /etc', 'cat /etc/os-release'],
+    answer: (
+      <>
+        Ubuntu 24.04.5 LTS (steht auch in <code>issue</code> und <code>lsb-release</code>)
+      </>
+    ),
   },
   {
     question: 'Welche Logdateien gibt es?',
-    command: 'ls /var/log',
+    path: ['ls /var/log'],
     answer: (
       <>
         u. a. <code>dpkg.log</code>, <code>bootstrap.log</code>, <code>apt/</code>
@@ -69,8 +102,8 @@ const scavengerHunt = [
     ),
   },
   {
-    question: 'In welchem Verzeichnis startet die Shell?',
-    command: 'pwd',
+    question: 'In welchem Verzeichnis startet eure Shell?',
+    path: ['pwd'],
     answer: <code>/root</code>,
   },
   {
@@ -79,7 +112,7 @@ const scavengerHunt = [
         Welche versteckten Dateien liegen in <code>/root</code>?
       </>
     ),
-    command: 'ls -a /root',
+    path: ['ls -a /root'],
     answer: (
       <>
         <code>.bashrc</code> und <code>.profile</code>
@@ -92,7 +125,7 @@ const scavengerHunt = [
         Wie sieht <code>/etc/apt</code> als Baum aus?
       </>
     ),
-    command: 'tree /etc/apt',
+    path: ['tree /etc/apt'],
     answer: (
       <>
         7 Verzeichnisse, 12 Dateien, z. B. <code>sources.list.d/ubuntu.sources</code>
@@ -101,7 +134,7 @@ const scavengerHunt = [
   },
 ]
 
-/** Block „Verzeichnisstruktur“: der Verzeichnisbaum und die Navigation darin. */
+/** Block „Verzeichnisstruktur“: der Verzeichnisbaum und wie man darin sucht. */
 export function VerzeichnisBlock() {
   return (
     <>
@@ -126,7 +159,7 @@ export function VerzeichnisBlock() {
       </Slide>
 
       <Slide>
-        <ContentLayout title="Navigieren">
+        <ContentLayout title="Bewegen und umschauen">
           <StepCode
             lines={[
               'pwd        # Wo bin ich?',
@@ -143,31 +176,33 @@ export function VerzeichnisBlock() {
       </Slide>
 
       <Slide>
-        <ContentLayout title="Die wichtigsten Verzeichnisse">
+        <ContentLayout title="Wo liegt so etwas?">
           <dl className="directories">
-            {directories.map((directory) => (
-              <div key={directory.paths.join()} className="directories__row">
-                <dt>
-                  {directory.paths.map((path) => (
+            {directoryMap.map((entry) => (
+              <div key={entry.question} className="directories__row">
+                <dt>{entry.question}</dt>
+                <dd className="directories__paths">
+                  {entry.paths.map((path) => (
                     <code key={path}>{path}</code>
                   ))}
-                </dt>
-                <dd>{directory.text}</dd>
+                </dd>
+                <dd>{entry.text}</dd>
               </div>
             ))}
             <Fragment as="div" className="directories__row directories__row--later">
-              <dt>
+              <dt>Prozesse, Geräte?</dt>
+              <dd className="directories__paths">
                 <code>/proc</code>
                 <code>/dev</code>
-              </dt>
-              <dd>nach der Pause: „Alles ist eine Datei“</dd>
+              </dd>
+              <dd>nach der Pause: „{everythingIsAFileBlock.title}“</dd>
             </Fragment>
           </dl>
         </ContentLayout>
       </Slide>
 
       <Slide>
-        <ContentLayout title="Wo liegt ein Programm?">
+        <ContentLayout title="Wo liegt ein Programm genau?">
           <StepCode
             language="shell"
             lines={[
@@ -194,32 +229,119 @@ export function VerzeichnisBlock() {
         </ContentLayout>
       </Slide>
 
+      <Slide>
+        <ContentLayout title="So findet ihr alles">
+          <Principle />
+          <SearchPath />
+        </ContentLayout>
+      </Slide>
+
+      <Slide>
+        <ContentLayout title="Beispiel: Welche Shells gibt es hier?">
+          <div className="columns">
+            <ol className="walkthrough">
+              <li>
+                <strong>Was suche ich?</strong> Welche Shells erlaubt sind, ist eine
+                Einstellung.
+              </li>
+              <li>
+                <strong>Wo liegt so etwas?</strong> Einstellungen liegen in{' '}
+                <code>/etc</code>.
+              </li>
+              <li>
+                <strong>Umschauen:</strong> In <code>ls /etc</code> klingt{' '}
+                <code>shells</code> passend.
+              </li>
+              <li>
+                <strong>Reinschauen:</strong> <code>cat /etc/shells</code>
+              </li>
+            </ol>
+            <StepCode
+              language="shell"
+              lines={[
+                'root@workshop:~# ls /etc',
+                '…  passwd  profile  shells  skel  …',
+                'root@workshop:~# cat /etc/shells',
+                '# /etc/shells: valid login shells',
+                '/bin/sh',
+                '/usr/bin/sh',
+                '/bin/bash',
+                '/usr/bin/bash',
+                '/bin/rbash',
+                '/usr/bin/rbash',
+                '/usr/bin/dash',
+              ]}
+              steps="1-2|3-11"
+              className="code--small"
+            />
+          </div>
+        </ContentLayout>
+      </Slide>
+
       <ExerciseSlide
         blockId={BLOCK_ID}
         title="Übung: Schnitzeljagd"
         numbered
         tasks={scavengerHunt.map((entry) => entry.question)}
       >
-        <p className="note">
-          Jede Frage lässt sich mit einem einzigen Kommando beantworten.
-        </p>
+        <div className="question">
+          <span className="question__label">Kein Kommando parat? Geht den Suchweg</span>
+          <SearchPath compact />
+        </div>
       </ExerciseSlide>
 
       <Slide>
-        <ContentLayout title="Schnitzeljagd: Lösungen">
+        <ContentLayout title="Schnitzeljagd: So geht's">
           <table className="solutions">
             <tbody>
               {scavengerHunt.map((entry, index) => (
-                <tr key={entry.command}>
+                <tr key={index}>
                   <td className="solutions__number">{index + 1}</td>
-                  <td>
-                    <code>{entry.command}</code>
+                  <td className="solutions__path">
+                    {entry.path.map((command, step) => (
+                      <span key={command}>
+                        {step > 0 && ' → '}
+                        <code>{command}</code>
+                      </span>
+                    ))}
                   </td>
                   <td>{entry.answer}</td>
                 </tr>
               ))}
             </tbody>
           </table>
+        </ContentLayout>
+      </Slide>
+
+      <Slide>
+        <ContentLayout title="Welches System ist das denn nun?">
+          <StepCode
+            language="shell"
+            lines={[
+              'root@workshop:~# uname -a',
+              'Linux workshop 6.… #1 SMP … x86_64 GNU/Linux',
+              'root@workshop:~# cat /etc/os-release',
+              'PRETTY_NAME="Ubuntu 24.04.5 LTS"',
+              '…',
+            ]}
+            steps="1-2|3-5"
+            className="code--small"
+          />
+          <WhenDeckReady>
+            <Fragment as="ul" className="points">
+              <li>
+                <code>uname</code> fragt den Kernel – und der gehört dem Host.
+              </li>
+              <li>
+                <code>/etc/os-release</code> ist eine Datei im Container. Sie beschreibt
+                Ubuntu, also Programme und Dateien.
+              </li>
+            </Fragment>
+            <Fragment as="p" className="takeaway">
+              Ein Container bringt seinen User Space mit. Den Kernel leiht er sich vom
+              Host.
+            </Fragment>
+          </WhenDeckReady>
         </ContentLayout>
       </Slide>
     </>

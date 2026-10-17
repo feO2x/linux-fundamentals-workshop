@@ -30,8 +30,8 @@ export default function SlidesApp() {
         <KernelBlock />
         <VerzeichnisBlock />
         <BreakSlide blockId="pause-1">
-          Danach geht es in einem neuen Container weiter. <code>exit</code> beendet den
-          aktuellen.
+          Danach startet ihr einen neuen Container. Den aktuellen beendet ihr mit{' '}
+          <code>exit</code>.
         </BreakSlide>
       </Deck>
     </>

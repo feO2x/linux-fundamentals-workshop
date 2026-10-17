@@ -40,4 +40,4 @@ docker run --rm -it --hostname workshop linux-workshop-start
 
 Die Images werden nicht von GitHub aus veröffentlicht, sondern von Hand in die interne Registry gepusht. Den Image-Pfad, den die Folien anzeigen, legt `src/slides/containers.ts` fest. Achtung: Die Folien liegen öffentlich auf GitHub Pages, der Pfad ist dort also sichtbar.
 
-Ändert sich ein Image, müssen auch die Folien passen: Die Lösungen der Schnitzeljagd in `src/slides/blocks/VerzeichnisBlock.tsx` sind gegen das gebaute `start`-Image geprüft.
+Ändert sich ein Image, müssen auch die Folien passen: Die Lösungen der Schnitzeljagd und die Beispielausgaben (`/etc/shells`, `/etc/os-release`) in `src/slides/blocks/VerzeichnisBlock.tsx` sind gegen das gebaute `start`-Image geprüft.

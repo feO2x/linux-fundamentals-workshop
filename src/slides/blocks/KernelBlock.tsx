@@ -31,7 +31,7 @@ export function KernelBlock() {
       <SectionSlide blockId={BLOCK_ID} />
 
       <Slide>
-        <ContentLayout title="Was macht der Kernel?">
+        <ContentLayout title="Der Kernel verwaltet alles">
           <ul className="cards">
             {kernelTasks.map((task) => (
               <li key={task.title} className="card">
@@ -41,19 +41,24 @@ export function KernelBlock() {
             ))}
           </ul>
           <Fragment as="p" className="takeaway">
-            Nur der Kernel spricht direkt mit der Hardware.
+            Keins eurer Programme spricht direkt mit der Hardware – das darf nur der
+            Kernel.
           </Fragment>
         </ContentLayout>
       </Slide>
 
       <Slide>
-        <ContentLayout title="Kernel und User Space">
+        <ContentLayout title="Wo eure Programme laufen">
           <KernelLayers />
         </ContentLayout>
       </Slide>
 
       <Slide>
-        <ContentLayout title="Syscalls: Programme fragen den Kernel">
+        <ContentLayout title="Was passiert bei cat datei?">
+          <p className="note">
+            <code>cat</code> gibt eine Datei im Terminal aus. Dafür fragt es den Kernel,
+            mit sogenannten Syscalls:
+          </p>
           <StepCode lines={['cat datei']} />
           <ol className="syscalls">
             {syscalls.map((syscall) => (
@@ -64,13 +69,13 @@ export function KernelBlock() {
             ))}
           </ol>
           <Fragment as="p" className="note">
-            Jedes Programm im User Space arbeitet so – auch im Container.
+            So arbeitet jedes Programm – auch eure Shell, auch im Container.
           </Fragment>
         </ContentLayout>
       </Slide>
 
       <Slide>
-        <ContentLayout title="Prozesse im Container">
+        <ContentLayout title="Warum hier so wenig los ist">
           <StepCode
             language="shell"
             lines={[
@@ -85,12 +90,12 @@ export function KernelBlock() {
           <WhenDeckReady>
             <Fragment as="ul" className="points">
               <li>
-                <code>bash</code> ist PID 1, also der erste Prozess im Container. Daneben
-                läuft nur <code>ps</code> selbst.
+                Eure <code>bash</code> ist PID 1, also der erste Prozess im Container.
+                Daneben läuft nur <code>ps</code> selbst.
               </li>
               <li>
-                Auf dem eigenen Rechner laufen Hunderte Prozesse. Der Container sieht nur
-                seine eigenen – deshalb ist hier so wenig los.
+                Auf eurem Rechner laufen Hunderte Prozesse. Der Kernel zeigt eurem
+                Container nur dessen eigene.
               </li>
             </Fragment>
           </WhenDeckReady>
@@ -98,11 +103,11 @@ export function KernelBlock() {
       </Slide>
 
       <Slide>
-        <ContentLayout title="VM vs. Container">
+        <ContentLayout title="Warum Container sofort starten">
           <VmVsContainer />
           <Fragment as="p" className="takeaway">
-            Container haben keinen eigenen Kernel. Deshalb sind Images klein und starten
-            sofort.
+            Ein Container bringt keinen eigenen Kernel mit, der erst booten müsste.
+            Deshalb startet er sofort, und Images sind klein.
           </Fragment>
         </ContentLayout>
       </Slide>
@@ -112,21 +117,26 @@ export function KernelBlock() {
         title="Übung: Der Nachbar"
         tasks={[
           <>
-            In einem zweiten Terminal einen zweiten Container starten:
+            Öffnet ein zweites Terminal und startet einen Nachbarn:
             <StepCode
               lines={[runCommand('nachbar', START_IMAGE)]}
               className="code--small"
             />
           </>,
           <>
-            In beiden Containern <code>cat /proc/version</code> ausführen – gleicher
-            Kernel?
+            Vergleicht den Kernel. Er beschreibt sich selbst in der Datei{' '}
+            <code>/proc/version</code> – lest sie in beiden Containern mit{' '}
+            <code>cat</code>.
           </>,
           <>
-            In beiden Containern <code>ps aux</code> ausführen – gleiche Prozesse?
+            Vergleicht die Prozesse mit <code>ps aux</code>.
           </>,
         ]}
       >
+        <p className="question">
+          <span className="question__label">Leitfrage</span>
+          Was teilen sich die beiden Container, und was hat jeder für sich?
+        </p>
         <p className="note">
           <strong>Windows und macOS:</strong> Der Host ist eine Linux-VM im Hintergrund
           (WSL 2 bzw. Docker Desktop).

@@ -10,8 +10,13 @@ export interface AgendaBlock {
   /** Davon praktische Übungszeit in Minuten. */
   praxis?: number
   kind: BlockKind
-  /** Ein bis zwei Sätze zum Inhalt. */
+  /** Ein bis zwei Sätze zum Inhalt, für die Agenda-Seite. */
   summary?: string
+  /**
+   * Frage, mit der der Block auf den Folien beginnt. Anders als `summary`
+   * spricht sie die Teilnehmer direkt an.
+   */
+  leitfrage?: string
   /** Kommandos, die in diesem Block eingeführt werden. */
   commands?: string[]
   /** Was die Teilnehmer in der Übung konkret tun. */
@@ -30,6 +35,8 @@ export const AGENDA: AgendaBlock[] = [
     kind: 'content',
     summary:
       'Alle starten ihren Container und schauen sich um. Die Shell ist dabei nur ein ganz normales Programm im User Space — die Brücke zum Bash-Workshop.',
+    leitfrage:
+      'Ein frisches Linux liegt vor euch. Wie findet ihr heraus, wo ihr gelandet seid?',
     commands: ['docker run', 'whoami', 'id', 'uname -a'],
     praxisNote:
       'Container starten, erste Orientierung. Leitfrage: Warum ist hier so viel weniger los als auf dem eigenen Rechner?',
@@ -42,6 +49,8 @@ export const AGENDA: AgendaBlock[] = [
     kind: 'content',
     summary:
       'Was macht der Kernel eigentlich? Syscalls, Prozesse — und warum sich alle Container den Kernel des Hosts teilen. Genau deshalb sind Images klein und starten sofort.',
+    leitfrage:
+      'Warum startet euer Container in einer Sekunde, eine virtuelle Maschine aber erst nach einer Minute?',
     commands: ['ps aux', 'cat /proc/version'],
     praxisNote:
       'Zwei Container parallel starten und die identische Kernel-Version vergleichen. Hinweis: Auf Windows und macOS läuft im Hintergrund eine kleine Linux-VM — die ist der Host.',
@@ -54,7 +63,9 @@ export const AGENDA: AgendaBlock[] = [
     kind: 'content',
     summary:
       'Die wichtigsten Verzeichnisse und was davon im Container-Alltag wirklich zählt: /bin, /etc, /home, /var, /tmp, /usr.',
-    commands: ['pwd', 'ls', 'cd', 'which', 'tree'],
+    leitfrage:
+      'Ihr sucht ein Programm, eine Einstellung oder ein Log. Wo schaut ihr nach?',
+    commands: ['pwd', 'ls', 'cd', 'cat', 'which', 'tree'],
     praxisNote:
       'Schnitzeljagd statt Rundgang: sechs Fragen, jede mit einem Kommando beantwortbar. Wo liegt das ls-Binary? Welche Logdateien gibt es?',
   },

@@ -15,7 +15,7 @@ export function EinstiegBlock() {
       <SectionSlide blockId={BLOCK_ID} />
 
       <Slide>
-        <ContentLayout title="Den Container starten">
+        <ContentLayout title="Euer Linux für heute">
           <StepCode
             lines={[
               '# Vor dem Workshop: Image herunterladen',
@@ -31,7 +31,7 @@ export function EinstiegBlock() {
               <dt>
                 <code>-it</code>
               </dt>
-              <dd>interaktiv, mit Terminal – wir wollen tippen</dd>
+              <dd>interaktiv, mit Terminal – ihr wollt ja tippen</dd>
               <dt>
                 <code>--rm</code>
               </dt>
@@ -39,10 +39,10 @@ export function EinstiegBlock() {
               <dt>
                 <code>--hostname</code>
               </dt>
-              <dd>Rechnername im Container, taucht gleich im Prompt auf</dd>
+              <dd>Rechnername im Container, ihr seht ihn gleich im Prompt</dd>
             </Fragment>
             <Fragment as="p" className="note">
-              <strong>Windows:</strong> PowerShell oder Windows Terminal verwenden. In Git
+              <strong>Windows:</strong> Nehmt PowerShell oder Windows Terminal. In Git
               Bash scheitert der Start mit „the input device is not a TTY“.
             </Fragment>
           </WhenDeckReady>
@@ -50,7 +50,7 @@ export function EinstiegBlock() {
       </Slide>
 
       <Slide>
-        <ContentLayout title="Der Prompt verrät viel">
+        <ContentLayout title="Der Prompt ist eure erste Auskunft">
           <p className="prompt-anatomy">
             <span className="prompt-anatomy__user">root</span>@
             <span className="prompt-anatomy__host">workshop</span>:
@@ -60,25 +60,25 @@ export function EinstiegBlock() {
           <dl className="legend">
             <Fragment as="div" className="legend__row">
               <dt className="prompt-anatomy__user">root</dt>
-              <dd>Benutzer, als der die Shell läuft</dd>
+              <dd>wer ihr seid: der Benutzer, als der die Shell läuft</dd>
             </Fragment>
             <Fragment as="div" className="legend__row">
               <dt className="prompt-anatomy__host">workshop</dt>
               <dd>
-                Rechnername – kommt aus <code>--hostname</code>
+                auf welchem Rechner – kommt aus <code>--hostname</code>
               </dd>
             </Fragment>
             <Fragment as="div" className="legend__row">
               <dt className="prompt-anatomy__dir">~</dt>
               <dd>
-                aktuelles Verzeichnis; <code>~</code> ist das Home-Verzeichnis, bei root{' '}
+                wo ihr gerade seid; <code>~</code> ist euer Home-Verzeichnis, bei root{' '}
                 <code>/root</code>
               </dd>
             </Fragment>
             <Fragment as="div" className="legend__row">
               <dt className="prompt-anatomy__sign">#</dt>
               <dd>
-                <code>#</code> heißt root, normale Benutzer sehen <code>$</code>
+                <code>#</code> heißt root, als normaler Benutzer seht ihr <code>$</code>
               </dd>
             </Fragment>
           </dl>
@@ -86,7 +86,7 @@ export function EinstiegBlock() {
       </Slide>
 
       <Slide>
-        <ContentLayout title="Wer bin ich, wo bin ich?">
+        <ContentLayout title="Fragt das System selbst">
           <StepCode
             language="shell"
             lines={[
@@ -102,11 +102,11 @@ export function EinstiegBlock() {
           <WhenDeckReady>
             <Fragment as="ul" className="points">
               <li>
-                <code>uid=0</code> ist root – der Benutzer, der alles darf.
+                <code>uid=0</code> heißt: Ihr seid root, der Benutzer, der alles darf.
               </li>
               <li>
-                <code>uname -a</code> zeigt den Kernel. Die Version unterscheidet sich von
-                Rechner zu Rechner – dazu gleich mehr.
+                <code>uname -a</code> nennt den Kernel. Der kommt gar nicht aus dem
+                Container – woher dann, klärt der nächste Block.
               </li>
             </Fragment>
           </WhenDeckReady>
@@ -128,12 +128,12 @@ export function EinstiegBlock() {
               Programm wie <code>ls</code> oder <code>whoami</code>.
             </Fragment>
             <Fragment as="li">
-              <code>docker run</code> startet genau dieses Programm als Prozess im
-              Container. <code>exit</code> beendet die Shell – und damit den Container.
+              <code>docker run</code> hat genau dieses Programm für euch gestartet.{' '}
+              <code>exit</code> beendet die Shell – und damit den Container.
             </Fragment>
             <Fragment as="li">
-              Wie man mit der Shell arbeitet, war Thema im Bash-Workshop. Heute geht es um
-              das System darunter.
+              Wie ihr mit der Shell arbeitet, kennt ihr aus dem Bash-Workshop. Heute geht
+              es um das System darunter.
             </Fragment>
           </ul>
         </ContentLayout>
@@ -141,20 +141,21 @@ export function EinstiegBlock() {
 
       <ExerciseSlide
         blockId={BLOCK_ID}
-        title="Übung: Umschauen"
+        title="Übung: Schaut euch um"
         tasks={[
-          'Den Container starten (Kommando von eben).',
+          'Startet euren Container mit dem Kommando von eben.',
           <>
-            <code>whoami</code>, <code>id</code> und <code>uname -a</code> ausführen.
+            Findet heraus, wer ihr seid und welcher Kernel läuft (<code>whoami</code>,{' '}
+            <code>id</code>, <code>uname -a</code>).
           </>,
           <>
-            Mit <code>ls /</code> ansehen, was im Wurzelverzeichnis liegt.
+            Schaut nach, was im Wurzelverzeichnis liegt (<code>ls /</code>).
           </>,
         ]}
       >
         <p className="question">
           <span className="question__label">Leitfrage</span>
-          Warum ist hier so viel weniger los als auf dem eigenen Rechner?
+          Warum ist hier so viel weniger los als auf eurem eigenen Rechner?
         </p>
       </ExerciseSlide>
     </>
