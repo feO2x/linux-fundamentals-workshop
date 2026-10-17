@@ -1,0 +1,13 @@
+Workshop-App
+============
+
+So soll es laufen:
+
+- Die App läuft als Benutzer appuser:
+  su - appuser, dann /opt/app/start.sh
+- Die Konfiguration /etc/app/app.conf enthält ein Passwort.
+  Lesen dürfen sie nur appuser und root.
+- Ihre Logs schreibt die App nach /var/log/app/app.log.
+- /opt/app/current zeigt auf die aktuelle Version in /opt/app/releases.
+
+Leider klappt gerade nichts davon.

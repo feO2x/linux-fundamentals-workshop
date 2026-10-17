@@ -3,11 +3,15 @@ import type { RevealConfig } from 'reveal.js'
 import RevealHighlight from 'reveal.js/plugin/highlight'
 import { ThemeToggle } from '../components/ThemeToggle'
 import { BreakSlide } from './BreakSlide'
+import { AbschlussBlock } from './blocks/AbschlussBlock'
 import { AptBlock } from './blocks/AptBlock'
+import { BerechtigungenBlock } from './blocks/BerechtigungenBlock'
 import { DateiBlock } from './blocks/DateiBlock'
 import { EinstiegBlock } from './blocks/EinstiegBlock'
 import { KernelBlock } from './blocks/KernelBlock'
+import { LinksBlock } from './blocks/LinksBlock'
 import { Opening } from './blocks/Opening'
+import { PufferBlock } from './blocks/PufferBlock'
 import { UsersBlock } from './blocks/UsersBlock'
 import { VerzeichnisBlock } from './blocks/VerzeichnisBlock'
 
@@ -40,9 +44,13 @@ export default function SlidesApp() {
         <DateiBlock />
         <UsersBlock />
         <BreakSlide blockId="pause-2">
-          Danach startet ihr wieder einen neuen Container. Den aktuellen beendet ihr mit{' '}
-          <code>exit</code>.
+          Danach startet ihr einen neuen Container, in dem alice, bob und team schon
+          angelegt sind. Den aktuellen beendet ihr mit <code>exit</code>.
         </BreakSlide>
+        <BerechtigungenBlock />
+        <LinksBlock />
+        <AbschlussBlock />
+        <PufferBlock />
       </Deck>
     </>
   )

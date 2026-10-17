@@ -10,6 +10,12 @@ export const BARE_IMAGE = 'registry.example.com/linux-workshop/bare'
 /** Ersatz, falls apt im Workshop nicht durchkommt, gebaut aus `containers/tools/`. */
 export const TOOLS_IMAGE = 'registry.example.com/linux-workshop/tools'
 
+/**
+ * Image ab der zweiten Pause mit alice, bob, team und der kaputten
+ * Abschlussübung, gebaut aus `containers/users/`.
+ */
+export const USERS_IMAGE = 'registry.example.com/linux-workshop/users'
+
 /** Lädt das Image vor dem Workshop herunter. */
 export function pullCommand(image: string): string {
   return `docker pull ${image}`

@@ -332,6 +332,11 @@
   min-height: 0;
 }
 
+/* Mehr Platz links, z. B. für einen breiten Codeblock. */
+.columns--wide-first {
+  grid-template-columns: 3fr 2fr;
+}
+
 /* ---------- Agenda-Übersicht ---------- */
 
 .agenda-overview {
@@ -596,8 +601,30 @@
   vertical-align: baseline;
 }
 
+.solutions th {
+  padding: 0 16px 10px 0;
+  border-bottom: 1px solid var(--border-strong);
+  color: var(--text-muted);
+  font-size: 0.85em;
+  text-align: left;
+}
+
 .solutions td.solutions__path {
   white-space: nowrap;
+}
+
+/* Reparaturen der Abschlussübung: mehrere Kommandos untereinander. */
+.solutions--fixes {
+  font-size: 0.7em;
+}
+
+.solutions--fixes .solutions__path code {
+  display: block;
+  width: fit-content;
+}
+
+.solutions--fixes .solutions__path code + code {
+  margin-top: 6px;
 }
 
 .solutions td.solutions__number {
@@ -605,6 +632,80 @@
   padding-left: 0;
   color: var(--praxis);
   font-weight: 700;
+}
+
+/* ---------- Berechtigungen ---------- */
+
+.mode-anatomy {
+  align-self: flex-start;
+  display: flex;
+  gap: 0.35em;
+  padding: 20px 32px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  font-family: var(--font-mono);
+  font-size: 1.8em;
+  font-weight: 600;
+}
+
+.mode__type {
+  color: var(--text-muted);
+}
+
+.mode__user {
+  color: var(--accent);
+}
+
+.mode__group {
+  color: var(--praxis);
+}
+
+.mode__other {
+  color: var(--text);
+}
+
+.bits {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8em;
+}
+
+.bits th {
+  padding: 0 16px 12px 0;
+  border-bottom: 1px solid var(--border-strong);
+  color: var(--text-muted);
+  font-size: 0.85em;
+  text-align: left;
+}
+
+.bits td {
+  padding: 14px 16px 14px 0;
+  border-bottom: 1px solid var(--border);
+  vertical-align: baseline;
+}
+
+.bits td.bits__bit {
+  width: 2em;
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 1.2em;
+  font-weight: 700;
+}
+
+/* r = 4, w = 2, x = 1 als große Kacheln. */
+.octal {
+  display: flex;
+  gap: 24px;
+  font-size: 1.4em;
+  font-weight: 700;
+}
+
+.octal span {
+  padding: 16px 28px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
 }
 
 /* ---------- Pause ---------- */

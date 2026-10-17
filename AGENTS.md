@@ -32,3 +32,5 @@ If you find something noteworthy about the codebase while implementing, list it 
 - `ubuntu:24.04` already ships `procps`, so `ps` is available in every image. Only `tree` and `less` are missing in `bare`, which is what the apt block installs.
 - The "Dasselbe im Dockerfile" slide imports `containers/tools/Dockerfile?raw` and shows its `RUN` instruction, so the slide and the image cannot drift apart.
 - Outputs on the slides after the first break were taken from the built `bare` and `tools` images. IDs like `1002(team)` assume the order of the demo slides (alice, then team), not the exercise order (alice, bob, team).
+- On Ubuntu, regular users get umask `0002` (user private groups), root gets `0022`. A file alice creates is `rw-rw-r--`, which the umask slide in the permissions block explains.
+- The final exercise lives in the `users` image, so attendees can start a fresh, untouched container for it. `containers/users/fixed.Dockerfile` is the repaired setup; the slide shows it and the README explains how to check that the repairs are enough.

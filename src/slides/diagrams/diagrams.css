@@ -143,3 +143,63 @@
   background: var(--chip-bg);
   color: var(--text-muted);
 }
+
+/* ---------- Inodes ---------- */
+
+.inodes {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 48px;
+  font-size: 0.8em;
+}
+
+.inodes__column {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.inodes__column figcaption {
+  color: var(--text-muted);
+  font-size: 0.8em;
+  font-weight: 700;
+}
+
+.inodes__entry {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 20px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  background: var(--surface);
+  font-family: var(--font-mono);
+}
+
+.inodes__ref {
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-weight: 700;
+}
+
+.inodes__ref--link {
+  color: var(--praxis);
+}
+
+.inode {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px 20px;
+  border: 1px solid var(--accent);
+  border-radius: var(--radius);
+  background: var(--accent-wash);
+}
+
+.inode--link {
+  border-color: var(--praxis-border);
+  background: var(--praxis-wash);
+}
+
+.inode__data {
+  color: var(--text-muted);
+}

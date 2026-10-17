@@ -121,6 +121,7 @@ export const AGENDA: AgendaBlock[] = [
     kind: 'content',
     summary:
       'Das Kernstück des Workshops. rwx und die Oktalschreibweise, Besitzer und Gruppe — und das x-Bit auf Verzeichnissen, das erfahrungsgemäß niemand auf Anhieb richtig rät.',
+    leitfrage: 'Warum darf alice nicht nach /root – und woher weiß Linux das?',
     commands: ['ls -l', 'chmod', 'chown', 'umask'],
     praxisNote:
       'In Stufen: ls -l gemeinsam entziffern, Datei zwischen alice und bob freigeben, Oktal-Drill, dann chmod 644 auf ein Verzeichnis und cd versuchen.',
@@ -133,6 +134,8 @@ export const AGENDA: AgendaBlock[] = [
     kind: 'content',
     summary:
       'Hard- und Softlinks, und warum der Name nicht die Datei ist, sondern der Inode. Dieser Block ist gleichzeitig der Zeitpuffer.',
+    leitfrage:
+      '/bin zeigt auf /usr/bin, /proc/self/fd/1 auf euer Terminal. Was ist so ein Verweis eigentlich?',
     commands: ['ln -s', 'ln', 'ls -li'],
     praxisNote:
       'Beide Link-Arten anlegen, mit ls -li die identischen Inode-Nummern zeigen, das Original löschen — der Softlink bricht, der Hardlink überlebt.',
@@ -145,7 +148,8 @@ export const AGENDA: AgendaBlock[] = [
     kind: 'content',
     summary:
       'Ein absichtlich kaputtes Setup: Die Anwendung soll als appuser laufen, Logs schreiben, und die Config darf nicht für alle lesbar sein. Diagnose und Reparatur.',
-    commands: ['ls -l', 'id', 'chmod +x', 'chown -R'],
+    leitfrage: 'Eine Anwendung soll laufen, und nichts klappt. Findet ihr heraus, warum?',
+    commands: ['ls -l', 'id', 'chmod +x', 'chown -R', 'ln -s'],
     praxisNote:
       'Nicht ausführbares Startskript, weltlesbare Config mit Passwort, nicht beschreibbares Logverzeichnis, toter Symlink. Zum Schluss: genau das macht ein Dockerfile mit COPY --chown und USER.',
   },
@@ -155,6 +159,7 @@ export const AGENDA: AgendaBlock[] = [
     duration: 5,
     kind: 'buffer',
     summary: 'Wiederholung, offene Fragen und der Transfer zum Thema Docker.',
+    leitfrage: 'Was nehmt ihr mit – und was hat das alles mit Docker zu tun?',
   },
 ]
 
