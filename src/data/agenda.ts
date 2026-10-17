@@ -78,9 +78,11 @@ export const AGENDA: AgendaBlock[] = [
     kind: 'content',
     summary:
       'Warum ein frisches Image erst ein apt update braucht, wohin Pakete ihre Dateien legen — und die apt-Idiome, die später in jedem Dockerfile auftauchen.',
+    leitfrage:
+      'In eurem neuen Container fehlen tree und less. Wie bekommt ihr sie – und wo landen sie?',
     commands: ['apt update', 'apt install', 'apt search', 'dpkg -L'],
     praxisNote:
-      'Die Teilnehmer installieren selbst die Werkzeuge, die im Rest des Workshops gebraucht werden: ps, less, tree. Bewusst nicht im Image vorinstalliert.',
+      'Die Teilnehmer installieren selbst die Werkzeuge, die im Rest des Workshops gebraucht werden: less und tree. Bewusst nicht im Image vorinstalliert.',
   },
   {
     id: 'alles-ist-eine-datei',
@@ -90,6 +92,8 @@ export const AGENDA: AgendaBlock[] = [
     kind: 'content',
     summary:
       'Prozesse, Geräte und offene Dateien — alles über denselben Mechanismus erreichbar. /proc, /dev/null und File Descriptors machen Redirects plötzlich erklärbar.',
+    leitfrage:
+      'Linux beschreibt sich selbst in Dateien. Wo stehen dann eure laufenden Programme?',
     commands: ['/proc', '/dev/null', 'ls -l /proc/self/fd'],
     praxisNote:
       'In /proc stöbern: eigene offene Dateien ansehen, cat /proc/1/cmdline — in einem Container ist PID 1 die eigene Anwendung, kein Init-System.',
@@ -102,6 +106,8 @@ export const AGENDA: AgendaBlock[] = [
     kind: 'content',
     summary:
       'UID und GID sind nur Zahlen — das ist der Schlüssel zu Container-Berechtigungen. Dazu /etc/passwd, /etc/group und der Unterschied zu /etc/shadow.',
+    leitfrage:
+      'Bisher wart ihr immer root. Wer ist sonst noch auf diesem System – und woran erkennt Linux, wer wer ist?',
     commands: ['useradd', 'groupadd', 'usermod -aG', 'id', 'su -'],
     praxisNote:
       'Benutzer alice und bob anlegen, Gruppe team, dann su - alice und cd /root versuchen. Das "Permission denied" ist der Übergang zum nächsten Block.',

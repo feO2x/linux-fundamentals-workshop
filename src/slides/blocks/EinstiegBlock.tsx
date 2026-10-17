@@ -1,6 +1,6 @@
 import { Fragment, Slide } from '@revealjs/react'
 import { ContentLayout } from '../ContentLayout'
-import { START_IMAGE, pullCommand, runCommand } from '../containers'
+import { BARE_IMAGE, START_IMAGE, pullCommand, runCommand } from '../containers'
 import { ExerciseSlide } from '../ExerciseSlide'
 import { SectionSlide } from '../SectionSlide'
 import { StepCode } from '../StepCode'
@@ -18,12 +18,13 @@ export function EinstiegBlock() {
         <ContentLayout title="Euer Linux für heute">
           <StepCode
             lines={[
-              '# Vor dem Workshop: Image herunterladen',
+              '# Vor dem Workshop: Images herunterladen',
               pullCommand(START_IMAGE),
+              pullCommand(BARE_IMAGE),
               '# Container starten',
               runCommand('workshop', START_IMAGE),
             ]}
-            steps="1-2|3-4"
+            steps="1-3|4-5"
             className="code--small"
           />
           <WhenDeckReady>

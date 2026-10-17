@@ -3,9 +3,12 @@ import type { RevealConfig } from 'reveal.js'
 import RevealHighlight from 'reveal.js/plugin/highlight'
 import { ThemeToggle } from '../components/ThemeToggle'
 import { BreakSlide } from './BreakSlide'
+import { AptBlock } from './blocks/AptBlock'
+import { DateiBlock } from './blocks/DateiBlock'
 import { EinstiegBlock } from './blocks/EinstiegBlock'
 import { KernelBlock } from './blocks/KernelBlock'
 import { Opening } from './blocks/Opening'
+import { UsersBlock } from './blocks/UsersBlock'
 import { VerzeichnisBlock } from './blocks/VerzeichnisBlock'
 
 // Feste 16:9-Leinwand, die Reveal auf das Browserfenster skaliert.
@@ -31,6 +34,13 @@ export default function SlidesApp() {
         <VerzeichnisBlock />
         <BreakSlide blockId="pause-1">
           Danach startet ihr einen neuen Container. Den aktuellen beendet ihr mit{' '}
+          <code>exit</code>.
+        </BreakSlide>
+        <AptBlock />
+        <DateiBlock />
+        <UsersBlock />
+        <BreakSlide blockId="pause-2">
+          Danach startet ihr wieder einen neuen Container. Den aktuellen beendet ihr mit{' '}
           <code>exit</code>.
         </BreakSlide>
       </Deck>

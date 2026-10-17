@@ -314,6 +314,16 @@
   font-weight: 600;
 }
 
+/* Begriffsspalte so breit wie der längste Begriff, z. B. für lange Optionen. */
+.legend--auto {
+  grid-template-columns: max-content 1fr;
+}
+
+.legend--compact {
+  gap: 8px 28px;
+  font-size: 0.75em;
+}
+
 .columns {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -394,6 +404,27 @@
   text-decoration: underline;
   text-decoration-color: var(--border-strong);
   text-underline-offset: 0.2em;
+}
+
+/* ---------- /etc/passwd ---------- */
+
+.passwd-line {
+  align-self: flex-start;
+  padding: 16px 28px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  font-family: var(--font-mono);
+  font-size: 1.1em;
+  font-weight: 600;
+}
+
+.passwd-line__name {
+  color: var(--accent);
+}
+
+.passwd-line__id {
+  color: var(--praxis);
 }
 
 /* ---------- Kernel ---------- */
