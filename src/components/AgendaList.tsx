@@ -17,7 +17,7 @@ export function AgendaList({ blocks, start }: Props) {
       {blocks.map((block, index) => {
         const slot = schedule[index]
         return (
-          <li key={block.title + slot.start} className="block" data-kind={block.kind}>
+          <li key={block.id} className="block" data-kind={block.kind}>
             <div className="block__slot">
               <time className="block__time" dateTime={slot.start}>
                 {slot.start}

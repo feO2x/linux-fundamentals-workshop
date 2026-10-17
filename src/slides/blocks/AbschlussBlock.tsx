@@ -1,0 +1,201 @@
+import { Fragment, Slide } from '@revealjs/react'
+import type { ReactNode } from 'react'
+import fixedDockerfile from '../../../containers/users/fixed.Dockerfile?raw'
+import { ContentLayout } from '../ContentLayout'
+import { USERS_IMAGE, runCommand } from '../containers'
+import { ExerciseSlide } from '../ExerciseSlide'
+import { SectionSlide } from '../SectionSlide'
+import { StepCode } from '../StepCode'
+
+const BLOCK_ID = 'abschlussuebung'
+
+// Das reparierte Setup als Dockerfile, ohne die Kommentare am Anfang.
+const dockerfileLines = fixedDockerfile
+  .trimEnd()
+  .split('\n')
+  .filter((line) => !line.startsWith('#'))
+
+// Zeilennummern für die Schritte: COPY --chown, die RUN-Reparaturen, USER.
+const lineOf = (prefix: string) =>
+  dockerfileLines.findIndex((line) => line.startsWith(prefix)) + 1
+const dockerfileSteps = `${lineOf('COPY --chown')}|${lineOf('RUN chmod')}-${lineOf('USER') - 1}|${lineOf('USER')}`
+
+// Gegen das gebaute Users-Image geprüft (siehe README).
+const fixes: { symptom: ReactNode; cause: ReactNode; commands: string[] }[] = [
+  {
+    symptom: 'Permission denied beim Start',
+    cause: (
+      <>
+        <code>start.sh</code> ist nicht ausführbar
+      </>
+    ),
+    commands: ['chmod +x /opt/app/start.sh'],
+  },
+  {
+    symptom: 'Config ist für alle lesbar',
+    cause: (
+      <>
+        <code>app.conf</code> hat <code>644</code>
+      </>
+    ),
+    commands: ['chown root:appuser /etc/app/app.conf', 'chmod 640 /etc/app/app.conf'],
+  },
+  {
+    symptom: 'No such file or directory',
+    cause: (
+      <>
+        <code>current</code> zeigt auf <code>releases/1.0</code>
+      </>
+    ),
+    commands: ['rm /opt/app/current', 'ln -s releases/1.1 /opt/app/current'],
+  },
+  {
+    symptom: 'Permission denied beim Log',
+    cause: (
+      <>
+        <code>/var/log/app</code> gehört root
+      </>
+    ),
+    commands: ['chown -R appuser:appuser /var/log/app'],
+  },
+]
+
+/** Block „Abschlussübung“: ein kaputtes Setup diagnostizieren und reparieren. */
+export function AbschlussBlock() {
+  return (
+    <>
+      <SectionSlide blockId={BLOCK_ID} />
+
+      <Slide>
+        <ContentLayout title="Euer Auftrag">
+          <StepCode
+            lines={[runCommand('workshop', USERS_IMAGE)]}
+            className="code--small"
+          />
+          <p className="note">
+            Startet einen frischen Container, dann ist alles wieder wie neu. Die App in{' '}
+            <code>/opt/app</code> soll Folgendes tun – leider klappt nichts davon:
+          </p>
+          <ul className="points">
+            <li>
+              Sie läuft als Benutzer <code>appuser</code>.
+            </li>
+            <li>
+              Ihre Config <code>/etc/app/app.conf</code> enthält ein Passwort. Lesen
+              dürfen sie nur appuser und root.
+            </li>
+            <li>
+              Sie schreibt Logs nach <code>/var/log/app/app.log</code>.
+            </li>
+            <li>
+              <code>/opt/app/current</code> zeigt auf die aktuelle Version.
+            </li>
+          </ul>
+        </ContentLayout>
+      </Slide>
+
+      <ExerciseSlide
+        blockId={BLOCK_ID}
+        title="Abschlussübung: Repariert die App"
+        tasks={[
+          <>
+            Lest <code>/opt/app/LIESMICH</code>.
+          </>,
+          <>
+            Startet die App als appuser: <code>su - appuser</code>, dann{' '}
+            <code>/opt/app/start.sh</code>.
+          </>,
+          'Lest die Fehlermeldung, sucht die Ursache und repariert sie als root.',
+          <>
+            Wiederholt das, bis „Workshop-App 1.1 läuft.“ erscheint. Vier Fehler sind
+            versteckt.
+          </>,
+        ]}
+      >
+        <p className="question">
+          <span className="question__label">Bei jeder Fehlermeldung</span>
+          Wer bin ich (<code>id</code>)? Wem gehört das (<code>ls -l</code>)? Welche drei
+          Zeichen gelten für mich?
+        </p>
+      </ExerciseSlide>
+
+      <Slide>
+        <ContentLayout title="Falls ihr feststeckt">
+          <dl className="legend legend--auto">
+            <Fragment as="div" className="legend__row">
+              <dt>Permission denied beim Start</dt>
+              <dd>Was braucht ein Skript, damit man es starten kann?</dd>
+            </Fragment>
+            <Fragment as="div" className="legend__row">
+              <dt>„für alle lesbar“</dt>
+              <dd>
+                Wer muss lesen dürfen? Besitzer oder Gruppe – und alle anderen nicht.
+              </dd>
+            </Fragment>
+            <Fragment as="div" className="legend__row">
+              <dt>No such file or directory</dt>
+              <dd>
+                Wohin zeigt <code>/opt/app/current</code>? Was liegt in{' '}
+                <code>/opt/app/releases</code>?
+              </dd>
+            </Fragment>
+            <Fragment as="div" className="legend__row">
+              <dt>Permission denied beim Log</dt>
+              <dd>
+                Wem gehört <code>/var/log/app</code>, und wer will dort schreiben?
+              </dd>
+            </Fragment>
+          </dl>
+        </ContentLayout>
+      </Slide>
+
+      <Slide>
+        <ContentLayout title="Abschlussübung: So geht's">
+          <table className="solutions solutions--fixes">
+            <tbody>
+              {fixes.map((fix, index) => (
+                <tr key={index}>
+                  <td className="solutions__number">{index + 1}</td>
+                  <td>{fix.symptom}</td>
+                  <td>{fix.cause}</td>
+                  <td className="solutions__path">
+                    {fix.commands.map((command) => (
+                      <code key={command}>{command}</code>
+                    ))}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </ContentLayout>
+      </Slide>
+
+      <Slide>
+        <ContentLayout title="Genau das macht ein Dockerfile">
+          <div className="columns columns--wide-first">
+            <StepCode
+              language="dockerfile"
+              lines={dockerfileLines}
+              steps={dockerfileSteps}
+              className="code--dense"
+            />
+            <ul className="points">
+              <li>
+                <code>COPY --chown</code> legt Besitzer und Gruppe gleich beim Kopieren
+                fest.
+              </li>
+              <li>
+                <code>RUN chmod</code>, <code>ln -s</code> und <code>chown</code>: eure
+                Reparaturen, nur ein für alle Mal.
+              </li>
+              <li>
+                <code>USER appuser</code> ist wie <code>su - appuser</code> – alles danach
+                läuft als appuser, auch PID 1.
+              </li>
+            </ul>
+          </div>
+        </ContentLayout>
+      </Slide>
+    </>
+  )
+}
