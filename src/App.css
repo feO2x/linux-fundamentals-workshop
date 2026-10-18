@@ -280,14 +280,14 @@
     --bg: #fff;
     --surface: #fff;
     --surface-hover: #fff;
-    --border: #d4d8de;
-    --border-strong: #b8bec7;
-    --text: #14181f;
-    --text-muted: #46505f;
-    --text-dim: #6b7585;
-    --accent: #a8521a;
+    --border: #ccd5da;
+    --border-strong: #aab2b6;
+    --text: #002c46;
+    --text-muted: #2a4f65;
+    --text-dim: #557284;
+    --accent: #5c6e02;
     --accent-wash: transparent;
-    --praxis: #1f7a68;
+    --praxis: #006fb9;
     --praxis-wash: transparent;
     color-scheme: light;
   }
