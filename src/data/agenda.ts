@@ -82,7 +82,7 @@ export const AGENDA: AgendaBlock[] = [
       'In eurem neuen Container fehlen tree und less. Wie bekommt ihr sie – und wo landen sie?',
     commands: ['apt update', 'apt install', 'apt search', 'dpkg -L'],
     praxisNote:
-      'Die Teilnehmer installieren selbst die Werkzeuge, die im Rest des Workshops gebraucht werden: less und tree. Bewusst nicht im Image vorinstalliert.',
+      'Die Teilnehmer installieren selbst die Werkzeuge, die im Rest des Workshops gebraucht werden: less und tree. Bewusst nicht im Image vorinstalliert. Als Bonus holen sie sich den farbigen Prompt über die .bashrc zurück.',
   },
   {
     id: 'alles-ist-eine-datei',
