@@ -69,6 +69,11 @@ const directoryMap: { question: string; paths: string[]; text: ReactNode }[] = [
       </>
     ),
   },
+  {
+    question: 'Software ohne Paket?',
+    paths: ['/opt'],
+    text: 'zusätzliche Anwendungen, z. B. eure eigene',
+  },
   { question: 'Nur für kurz?', paths: ['/tmp'], text: 'temporäre Dateien, für alle' },
 ]
 
@@ -102,9 +107,18 @@ const scavengerHunt: { question: ReactNode; path: string[]; answer: ReactNode }[
     ),
   },
   {
-    question: 'In welchem Verzeichnis startet eure Shell?',
-    path: ['pwd'],
-    answer: <code>/root</code>,
+    question: (
+      <>
+        In welchen Dateien unter <code>/etc</code> steht euer Rechnername{' '}
+        <code>workshop</code>?
+      </>
+    ),
+    path: ['grep -r workshop /etc'],
+    answer: (
+      <>
+        <code>/etc/hostname</code> und <code>/etc/hosts</code>
+      </>
+    ),
   },
   {
     question: (
@@ -160,6 +174,7 @@ export function VerzeichnisBlock() {
 
       <Slide>
         <ContentLayout title="Bewegen und umschauen">
+          <p className="note">Kennt ihr aus dem Bash-Workshop – hier zum Nachschlagen:</p>
           <StepCode
             lines={[
               'pwd        # Wo bin ich?',
@@ -208,16 +223,20 @@ export function VerzeichnisBlock() {
             lines={[
               'root@workshop:~# which ls',
               '/usr/bin/ls',
+              'root@workshop:~# echo $PATH',
+              '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
               'root@workshop:~# ls -ld /bin',
               'lrwxrwxrwx 1 root root 7 Apr 22  2024 /bin -> usr/bin',
             ]}
-            steps="1-2|3-4"
+            steps="1-2|3-4|5-6"
+            className="code--small"
           />
           <WhenDeckReady>
             <Fragment as="ul" className="points">
               <li>
-                <code>which</code> sucht ein Programm in den Verzeichnissen, in denen die
-                Shell nach Programmen schaut.
+                <code>which</code> sucht ein Programm in den Verzeichnissen aus{' '}
+                <code>$PATH</code>, von links nach rechts. Die Variable kennt ihr aus dem
+                Bash-Workshop.
               </li>
               <li>
                 <code>/bin</code> ist nur ein Verweis auf <code>/usr/bin</code> (der{' '}

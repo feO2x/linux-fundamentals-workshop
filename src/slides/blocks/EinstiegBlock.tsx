@@ -1,6 +1,13 @@
 import { Fragment, Slide } from '@revealjs/react'
 import { ContentLayout } from '../ContentLayout'
-import { BARE_IMAGE, START_IMAGE, pullCommand, runCommand } from '../containers'
+import {
+  BARE_IMAGE,
+  START_IMAGE,
+  TOOLS_IMAGE,
+  USERS_IMAGE,
+  pullCommand,
+  runCommand,
+} from '../containers'
 import { ExerciseSlide } from '../ExerciseSlide'
 import { SectionSlide } from '../SectionSlide'
 import { StepCode } from '../StepCode'
@@ -21,10 +28,12 @@ export function EinstiegBlock() {
               '# Vor dem Workshop: Images herunterladen',
               pullCommand(START_IMAGE),
               pullCommand(BARE_IMAGE),
+              pullCommand(TOOLS_IMAGE),
+              pullCommand(USERS_IMAGE),
               '# Container starten',
               runCommand('workshop', START_IMAGE),
             ]}
-            steps="1-3|4-5"
+            steps="1-5|6-7"
             className="code--small"
           />
           <WhenDeckReady>

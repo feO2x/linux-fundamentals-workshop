@@ -171,6 +171,26 @@ export function AbschlussBlock() {
       </Slide>
 
       <Slide>
+        <ContentLayout title="Warum nicht einfach chmod 777?">
+          <p className="note">Ein Agent schlägt vor:</p>
+          <StepCode lines={['chmod -R 777 /opt/app /etc/app /var/log/app']} />
+          <ul className="points">
+            <Fragment as="li">
+              <code>777</code> heißt: Jeder darf alles. Start und Log würden klappen, den
+              toten Link repariert es nicht.
+            </Fragment>
+            <Fragment as="li">
+              Jeder Benutzer könnte jetzt <code>start.sh</code> umschreiben, und das
+              Passwort in <code>app.conf</code> läge offen. Genau das verweigert die App.
+            </Fragment>
+          </ul>
+          <Fragment as="p" className="takeaway">
+            Fragt stattdessen: Wer muss hier was dürfen? Und vergebt genau das.
+          </Fragment>
+        </ContentLayout>
+      </Slide>
+
+      <Slide>
         <ContentLayout title="Genau das macht ein Dockerfile">
           <div className="columns columns--wide-first">
             <StepCode

@@ -62,10 +62,10 @@ export const AGENDA: AgendaBlock[] = [
     praxis: 15,
     kind: 'content',
     summary:
-      'Die wichtigsten Verzeichnisse und was davon im Container-Alltag wirklich zählt: /bin, /etc, /home, /var, /tmp, /usr.',
+      'Die wichtigsten Verzeichnisse und was davon im Container-Alltag wirklich zählt: /bin, /etc, /home, /opt, /var, /tmp, /usr.',
     leitfrage:
       'Ihr sucht ein Programm, eine Einstellung oder ein Log. Wo schaut ihr nach?',
-    commands: ['pwd', 'ls', 'cd', 'cat', 'which', 'tree'],
+    commands: ['pwd', 'ls', 'cd', 'cat', 'which', 'tree', 'grep -r'],
     praxisNote:
       'Schnitzeljagd statt Rundgang: sechs Fragen, jede mit einem Kommando beantwortbar. Wo liegt das ls-Binary? Welche Logdateien gibt es?',
   },
@@ -108,7 +108,7 @@ export const AGENDA: AgendaBlock[] = [
       'UID und GID sind nur Zahlen — das ist der Schlüssel zu Container-Berechtigungen. Dazu /etc/passwd, /etc/group und der Unterschied zu /etc/shadow.',
     leitfrage:
       'Bisher wart ihr immer root. Wer ist sonst noch auf diesem System – und woran erkennt Linux, wer wer ist?',
-    commands: ['useradd', 'groupadd', 'usermod -aG', 'id', 'su -'],
+    commands: ['useradd', 'groupadd', 'usermod -aG', 'id', 'su -', 'sudo'],
     praxisNote:
       'Benutzer alice und bob anlegen, Gruppe team, dann su - alice und cd /root versuchen. Das "Permission denied" ist der Übergang zum nächsten Block.',
   },
