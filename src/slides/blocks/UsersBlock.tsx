@@ -214,6 +214,10 @@ export function UsersBlock() {
           <>
             Versucht als alice <code>cd /root</code>.
           </>,
+          <>
+            Bonus: Warum ist der Prompt von alice nicht farbig? Vergleicht ihre{' '}
+            <code>~/.bashrc</code> mit <code>/etc/skel/.bashrc</code>.
+          </>,
         ]}
       >
         <p className="question">
