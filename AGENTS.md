@@ -4,7 +4,7 @@ This repo contains all assets for my Linux Fundamentals workshop that I give at 
 
 ## General
 
-- When committing, sign off and use a Conventional Commits message and . Decide whether a message body should be included depending on the size.
+- When committing, sign off and use a Conventional Commits message. Decide whether a message body should be included depending on the changes.
 
 ## Guided Coding
 
@@ -20,9 +20,7 @@ Install dependencies with `npm ci` before running these commands.
 
 CI (`.github/workflows/deploy.yml`) runs these commands before deploying to GitHub Pages.
 
-## This is your space
-
-If you find something noteworthy about the codebase while implementing, list it here. A reviewer will discuss this with you afterwards.
+## Good to know
 
 - highlight.js' `shell` grammar only recognizes prompts made of `[/~\w\d[\]()@-]*` followed by `$`, `#`, `%` or `>`. `root@workshop:~#` contains a `:`, so prompt/output blocks on the slides render without syntax colors (step highlighting still works).
 - The deck hides the line-number gutter (`.hljs-ln-numbers`) globally and code blocks are as tall as their content (the spike's `flex: 1` on `pre` was removed), since most slides combine code with text.
@@ -34,3 +32,9 @@ If you find something noteworthy about the codebase while implementing, list it 
 - Outputs on the slides after the first break were taken from the built `bare` and `tools` images. IDs like `1002(team)` assume the order of the demo slides (alice, then team), not the exercise order (alice, bob, team).
 - On Ubuntu, regular users get umask `0002` (user private groups), root gets `0022`. A file alice creates is `rw-rw-r--`, which the umask slide in the permissions block explains.
 - The final exercise lives in the `users` image, so attendees can start a fresh, untouched container for it. `containers/users/fixed.Dockerfile` is the repaired setup; the slide shows it and the README explains how to check that the repairs are enough.
+- The colors in `src/tokens.css` come from gwvs.de (navy `#002c46`, lime `#b8db04`, blue `#006fb9`). Lime on white has a contrast of only ~1.6:1, so the light theme uses the darker brand green `#5c6e02` for `--accent` text and keeps lime for `--accent-dim` borders and `--accent-wash` areas.
+- The GWVS font DIN Pro is licensed and self-hosted on gwvs.de, so we cannot load it. `--font-sans` lists `'DIN Pro'` first (used if it is installed locally) and falls back to Barlow from Google Fonts, a DIN-like typeface.
+
+## This is your space
+
+If you find something noteworthy about the codebase while implementing, list it here. A reviewer will discuss this with you afterwards.

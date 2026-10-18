@@ -1,54 +1,59 @@
 /* Design-Tokens, die Agenda und Folien gemeinsam nutzen.
-   Dunkel ist der Standard; data-theme="light" auf <html> schaltet auf hell um. */
+   Dunkel ist der Standard; data-theme="light" auf <html> schaltet auf hell um.
+   Die Farben stammen aus dem Corporate Design von gwvs.de: Navy (#002c46) als
+   Grundfarbe, Limettengrün (#b8db04) als Akzent und Blau (#006fb9) als Zweitfarbe. */
 :root {
-  --bg: #0a0e14;
-  --surface: #111721;
-  --surface-hover: #151d29;
-  --border: #212b3a;
-  --border-strong: #2e3a4c;
+  --bg: #001623;
+  --surface: #001d2f;
+  --surface-hover: #00253a;
+  --border: #173b51;
+  --border-strong: #2a4f65;
 
-  --text: #e8eef6;
-  --text-muted: #8c9ab0;
-  --text-dim: #64748b;
+  --text: #fefefe;
+  --text-muted: #aab9c1;
+  --text-dim: #8096a3;
 
-  --accent: #e8833a;
-  --accent-dim: #b4622a;
-  --accent-wash: rgba(232, 131, 58, 0.12);
+  --accent: #b8db04;
+  --accent-dim: #7b9203;
+  --accent-wash: rgba(184, 219, 4, 0.12);
 
-  --praxis: #4fb3a0;
-  --praxis-wash: rgba(79, 179, 160, 0.12);
-  --praxis-border: rgba(79, 179, 160, 0.35);
+  --praxis: #5cb0e8;
+  --praxis-wash: rgba(92, 176, 232, 0.12);
+  --praxis-border: rgba(92, 176, 232, 0.35);
 
-  --chip-bg: rgba(255, 255, 255, 0.04);
+  --chip-bg: rgba(254, 254, 254, 0.06);
 
   --radius: 10px;
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-sans:
+    'DIN Pro', 'Barlow', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-mono:
     'JetBrains Mono', 'Fira Code', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
 
   color-scheme: dark;
 }
 
+/* Limettengrün ist auf Weiß als Schrift nicht lesbar – im hellen Design tragen
+   Akzent-Texte das dunkle Grün, die Limette bleibt für Flächen und Rahmen. */
 :root[data-theme='light'] {
-  --bg: #f5f6f8;
+  --bg: #f5f7f8;
   --surface: #ffffff;
-  --surface-hover: #fafbfc;
-  --border: #dde2e9;
-  --border-strong: #c5ccd6;
+  --surface-hover: #eef1f3;
+  --border: #dde3e6;
+  --border-strong: #ccd5da;
 
-  --text: #14181f;
-  --text-muted: #4a5568;
-  --text-dim: #5f6b7c;
+  --text: #002c46;
+  --text-muted: #2a4f65;
+  --text-dim: #557284;
 
-  --accent: #a8521a;
-  --accent-dim: #e2a97f;
-  --accent-wash: rgba(168, 82, 26, 0.08);
+  --accent: #5c6e02;
+  --accent-dim: #b8db04;
+  --accent-wash: rgba(184, 219, 4, 0.15);
 
-  --praxis: #1f7a68;
-  --praxis-wash: rgba(31, 122, 104, 0.08);
-  --praxis-border: rgba(31, 122, 104, 0.35);
+  --praxis: #006fb9;
+  --praxis-wash: rgba(0, 111, 185, 0.08);
+  --praxis-border: rgba(0, 111, 185, 0.35);
 
-  --chip-bg: rgba(20, 24, 31, 0.04);
+  --chip-bg: rgba(0, 44, 70, 0.06);
 
   color-scheme: light;
 }
