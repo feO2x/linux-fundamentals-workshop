@@ -7,6 +7,11 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends less tree \
     && rm -rf /var/lib/apt/lists/*
 
+# Farbiger Prompt: Ubuntus .bashrc schaltet ihn nur für TERM=xterm-color
+# ein, docker run -it setzt aber TERM=xterm. /etc/skel gilt für alle Benutzer,
+# die useradd -m danach anlegt.
+RUN sed -i 's/^#force/force/' /root/.bashrc /etc/skel/.bashrc
+
 # Dieselbe Reihenfolge wie in der Übung, damit die IDs übereinstimmen:
 # alice 1001, bob 1002, team 1003.
 RUN useradd -m -s /bin/bash alice \

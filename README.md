@@ -21,7 +21,7 @@ Das Verzeichnis `containers/<name>/` ist zugleich der Build-Kontext. So landet n
 | `tools` | `ubuntu:24.04` plus `tree` und `less`     | Ersatz für `bare`, falls apt nicht durchkommt |
 | `users` | wie `tools`, dazu alice, bob, team und die kaputte App der Abschlussübung | ab der zweiten Pause bis zum Ende |
 
-`ps` bringt `ubuntu:24.04` schon mit. Alle Images setzen `LANG=C.UTF-8` und starten in `/root`.
+`ps` bringt `ubuntu:24.04` schon mit. Alle Images setzen `LANG=C.UTF-8` und starten in `/root`. Bis auf `bare` schalten alle den farbigen Prompt aus Ubuntus `.bashrc` ein (`force_color_prompt=yes`), in `users` auch in `/etc/skel` für alice, bob und appuser. In `bare` holen ihn sich die Teilnehmer in der Bonusaufgabe des apt-Blocks selbst zurück.
 
 ### Lokal bauen und prüfen
 

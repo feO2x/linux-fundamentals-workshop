@@ -36,6 +36,14 @@ const dpkgOutput = [
   '/usr/share/man/man1/tree.1.gz',
 ]
 
+// Farbigen Prompt im nackten Image einschalten, wie im Start-Image.
+const colorPromptSteps = [
+  "root@workshop:~# grep -n '#force' ~/.bashrc",
+  '39:#force_color_prompt=yes',
+  "root@workshop:~# sed -i 's/^#force/force/' ~/.bashrc",
+  'root@workshop:~# source ~/.bashrc',
+]
+
 /** Block „Paketverwaltung mit apt“: Werkzeuge selbst installieren. */
 export function AptBlock() {
   return (
@@ -174,6 +182,41 @@ export function AptBlock() {
         </ContentLayout>
       </Slide>
 
+      <Slide>
+        <ContentLayout title="Wo sind die Farben hin?">
+          <p className="note">
+            Im Start-Image war euer Prompt grün und blau. Der Prompt ist eine Einstellung
+            eurer Shell – und die steht in <code>~/.bashrc</code>.
+          </p>
+          <StepCode
+            language="shell"
+            lines={colorPromptSteps}
+            steps="1-2|3|4"
+            className="code--small"
+          />
+          <dl className="legend legend--auto">
+            <Fragment as="div" className="legend__row">
+              <dt>grep -n</dt>
+              <dd>Zeilen mit einem Suchbegriff finden, samt Zeilennummer</dd>
+            </Fragment>
+            <Fragment as="div" className="legend__row">
+              <dt>#</dt>
+              <dd>macht die Zeile zum Kommentar – die Einstellung ist aus</dd>
+            </Fragment>
+            <Fragment as="div" className="legend__row">
+              <dt>sed -i 's/alt/neu/'</dt>
+              <dd>ersetzt Text direkt in der Datei</dd>
+            </Fragment>
+            <Fragment as="div" className="legend__row">
+              <dt>source</dt>
+              <dd>
+                liest die Datei neu ein – sonst wirkt sie erst in der nächsten Shell
+              </dd>
+            </Fragment>
+          </dl>
+        </ContentLayout>
+      </Slide>
+
       <ExerciseSlide
         blockId={BLOCK_ID}
         title="Übung: Besorgt euch eure Werkzeuge"
@@ -191,6 +234,7 @@ export function AptBlock() {
             Blättert mit <code>less</code> durch eine lange Liste:{' '}
             <code>apt search tree | less</code>
           </>,
+          'Bonus: Holt euch den farbigen Prompt zurück.',
         ]}
       >
         <p className="note">
