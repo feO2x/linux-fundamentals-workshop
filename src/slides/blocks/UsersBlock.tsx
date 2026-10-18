@@ -107,9 +107,13 @@ export function UsersBlock() {
                 <code>/etc/passwd</code> nach.
               </li>
               <li>
-                Container und Host teilen sich den Kernel – und damit die Zahlen. Eine
-                Datei mit UID 1000 gehört auf dem Host dem Benutzer mit UID 1000, ganz
-                gleich, unter welchem Namen.
+                Container und Host teilen sich den Kernel – und der kennt nur die Zahlen.
+                root im Container hat UID&nbsp;0, dieselbe Zahl wie root auf dem Host.
+              </li>
+              <li>
+                Docker schränkt diesen root zwar ein, trotzdem lässt man Anwendungen im
+                Container besser als eigenen Benutzer laufen. Wie, seht ihr in der
+                Abschlussübung.
               </li>
             </Fragment>
           </WhenDeckReady>
@@ -192,6 +196,41 @@ export function UsersBlock() {
               <li>
                 Der Prompt zeigt jetzt <code>$</code> statt <code>#</code>: Ihr seid nicht
                 mehr root.
+              </li>
+            </Fragment>
+          </WhenDeckReady>
+        </ContentLayout>
+      </Slide>
+
+      <Slide>
+        <ContentLayout title="Auf eurem eigenen Linux: sudo">
+          <StepCode
+            language="shell"
+            lines={[
+              'ich@laptop:~$ id',
+              'uid=1000(ich) gid=1000(ich) groups=1000(ich),27(sudo),…',
+              'ich@laptop:~$ apt install tree',
+              'E: Could not open lock file … (13: Permission denied)',
+              'E: Unable to acquire the dpkg frontend lock (…), are you root?',
+              'ich@laptop:~$ sudo apt install tree',
+              '[sudo] password for ich:',
+            ]}
+            steps="1-2|3-5|6-7"
+            className="code--small"
+          />
+          <WhenDeckReady>
+            <Fragment as="ul" className="points">
+              <li>
+                Im Container seid ihr root. In WSL oder auf einem Server seid ihr ein
+                normaler Benutzer – wie alice.
+              </li>
+              <li>
+                <code>sudo</code> führt ein einzelnes Kommando als root aus. Das dürfen
+                nur Mitglieder der Gruppe sudo, mit ihrem eigenen Passwort.
+              </li>
+              <li>
+                Erst lesen, was ein Kommando tut, dann <code>sudo</code> davor – erst
+                recht, wenn ein Agent es vorschlägt.
               </li>
             </Fragment>
           </WhenDeckReady>

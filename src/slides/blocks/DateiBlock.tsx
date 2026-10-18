@@ -113,11 +113,41 @@ export function DateiBlock() {
           <WhenDeckReady>
             <Fragment as="ul" className="points">
               <li>
-                <code>&gt;</code> lässt Ausgabe 1 auf eine Datei zeigen statt aufs
-                Terminal. <code>ls</code> merkt davon nichts.
+                <code>&gt;</code> kennt ihr aus dem Bash-Workshop. Es lässt Ausgabe 1 auf
+                eine Datei zeigen statt aufs Terminal. <code>ls</code> merkt davon nichts.
               </li>
               <li>
                 <code>2&gt;</code> macht dasselbe mit den Fehlermeldungen.
+              </li>
+            </Fragment>
+          </WhenDeckReady>
+        </ContentLayout>
+      </Slide>
+
+      <Slide>
+        <ContentLayout title="Auch Pipes sind nur Verweise">
+          <StepCode
+            language="shell"
+            lines={[
+              'root@workshop:~# ls -l /proc/self/fd | cat',
+              'total 0',
+              'lrwx------ 1 root root 64 Oct 17 14:16 0 -> /dev/pts/0',
+              'l-wx------ 1 root root 64 Oct 17 14:16 1 -> pipe:[81831]',
+              'lrwx------ 1 root root 64 Oct 17 14:16 2 -> /dev/pts/0',
+              'lr-x------ 1 root root 64 Oct 17 14:16 3 -> /proc/14/fd',
+            ]}
+            steps="1|2-6|4"
+            className="code--small"
+          />
+          <WhenDeckReady>
+            <Fragment as="ul" className="points">
+              <li>
+                <code>|</code> lässt Ausgabe 1 von <code>ls</code> auf eine Pipe zeigen
+                und Eingabe 0 von <code>cat</code> auf dieselbe Pipe.
+              </li>
+              <li>
+                Pipes und Redirects aus dem Bash-Workshop sind also dasselbe: umgebogene
+                Verweise, die der Kernel verwaltet.
               </li>
             </Fragment>
           </WhenDeckReady>
@@ -168,7 +198,8 @@ export function DateiBlock() {
           </>,
           <>
             Schaut euch mit <code>ls -l /proc/self/fd</code> eure offenen Dateien an –
-            einmal direkt, einmal mit <code>&gt; /tmp/fds</code>.
+            direkt, mit <code className="nowrap">&gt; /tmp/fds</code> und mit{' '}
+            <code className="nowrap">| cat</code>.
           </>,
           <>
             Lasst eine Fehlermeldung in <code>/dev/null</code> verschwinden.

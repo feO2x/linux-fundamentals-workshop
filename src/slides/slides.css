@@ -270,6 +270,11 @@
   color: var(--accent);
 }
 
+/* Für Kommandos im Fließtext, die nicht umbrechen sollen. */
+.nowrap {
+  white-space: nowrap;
+}
+
 .note {
   color: var(--text-muted);
   font-size: 0.7em;

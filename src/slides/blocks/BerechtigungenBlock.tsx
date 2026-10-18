@@ -68,7 +68,8 @@ export function BerechtigungenBlock() {
           />
           <p className="note">
             Das Image bringt alice, bob und die Gruppe team so mit, wie ihr sie vor der
-            Pause angelegt habt – dazu <code>tree</code> und <code>less</code>.
+            Pause angelegt habt – dazu <code>tree</code>, <code>less</code> und das
+            Teamverzeichnis <code>/srv/team</code>.
           </p>
         </ContentLayout>
       </Slide>
@@ -139,6 +140,11 @@ export function BerechtigungenBlock() {
           <Fragment as="p" className="takeaway">
             Vorsicht beim x auf Verzeichnissen – dazu gleich eine Übung zum Raten.
           </Fragment>
+          <Fragment as="p" className="note">
+            <code>/tmp</code> zeigt <code>drwxrwxrwt</code>: Dort dürfen alle Dateien
+            anlegen. Das <code>t</code> (Sticky Bit) sorgt dafür, dass jeder nur seine
+            eigenen löschen darf.
+          </Fragment>
         </ContentLayout>
       </Slide>
 
@@ -178,8 +184,9 @@ export function BerechtigungenBlock() {
           />
           <WhenDeckReady>
             <Fragment as="p" className="note">
-              <code>u</code>, <code>g</code> und <code>o</code> stehen für user, group und
-              others. Ändern darf die Rechte nur der Besitzer (und root).
+              <code>chmod</code> kennt ihr aus dem Bash-Workshop. <code>u</code>,{' '}
+              <code>g</code> und <code>o</code> stehen für user, group und others – die
+              drei Teile von eben. Ändern darf die Rechte nur der Besitzer (und root).
             </Fragment>
           </WhenDeckReady>
         </ContentLayout>
@@ -291,12 +298,12 @@ export function BerechtigungenBlock() {
         title="Übung: Teilt eine Datei"
         tasks={[
           <>
-            Als alice: Legt <code>/tmp/notiz.txt</code> an. Wem gehört sie, welche Rechte
-            hat sie?
+            Als alice: Legt <code>/srv/team/notiz.txt</code> an. Wem gehört sie, welche
+            Rechte hat sie?
           </>,
           <>
-            Als bob: Könnt ihr sie lesen? Könnt ihr etwas anhängen (
-            <code>echo Milch &gt;&gt; /tmp/notiz.txt</code>)?
+            Als bob: Könnt ihr sie lesen? Könnt ihr etwas anhängen?{' '}
+            <code className="nowrap">echo Milch &gt;&gt; /srv/team/notiz.txt</code>
           </>,
           <>
             Als alice: Gebt die Datei der Gruppe team. Probiert es als bob noch einmal.
@@ -309,8 +316,9 @@ export function BerechtigungenBlock() {
         ]}
       >
         <p className="note">
-          Den Benutzer wechselt ihr mit <code>exit</code> zurück zu root und dann{' '}
-          <code>su - bob</code>.
+          In <code>/srv/team</code> dürfen nur root und die Gruppe team. Den Benutzer
+          wechselt ihr mit <code>exit</code> zurück zu root und dann{' '}
+          <code className="nowrap">su - bob</code>.
         </p>
       </ExerciseSlide>
 

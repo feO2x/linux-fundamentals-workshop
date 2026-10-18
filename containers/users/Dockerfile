@@ -20,6 +20,13 @@ RUN useradd -m -s /bin/bash alice \
     && usermod -aG team alice \
     && usermod -aG team bob
 
+# Teamverzeichnis für die Übung „Teilt eine Datei“. Nicht /tmp: Dort
+# verhindert fs.protected_regular, dass bob mit >> an alices Datei anhängt,
+# selbst wenn die Gruppe team schreiben darf.
+RUN mkdir /srv/team \
+    && chown root:team /srv/team \
+    && chmod 770 /srv/team
+
 # Abschlussübung, absichtlich mit vier Fehlern:
 # - start.sh ist nicht ausführbar,
 # - app.conf mit Passwort ist für alle lesbar,
