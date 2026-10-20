@@ -167,7 +167,12 @@ export function VerzeichnisBlock() {
               </li>
               <li>Weitere Festplatten werden irgendwo in den Baum eingehängt.</li>
             </ul>
-            <StepCode language="shell" lines={treeOutput} className="code--dense" />
+            <StepCode
+              language="shell"
+              lines={treeOutput}
+              steps="1"
+              className="code--dense code--command"
+            />
           </div>
         </ContentLayout>
       </Slide>

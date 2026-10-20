@@ -180,6 +180,11 @@
   background: var(--accent-wash);
 }
 
+/* Hebt nur das Kommando hervor; die Ausgabe darunter bleibt voll lesbar. */
+.reveal pre.code--command .hljs.has-highlights tr:not(.highlight-line) {
+  opacity: 1;
+}
+
 .reveal .hljs-built_in,
 .reveal .hljs-keyword {
   color: var(--accent);

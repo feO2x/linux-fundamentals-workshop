@@ -146,7 +146,12 @@ export function AptBlock() {
                 verteilt sich über den ganzen Baum.
               </li>
             </ul>
-            <StepCode language="shell" lines={dpkgOutput} className="code--dense" />
+            <StepCode
+              language="shell"
+              lines={dpkgOutput}
+              steps="1"
+              className="code--dense code--command"
+            />
           </div>
         </ContentLayout>
       </Slide>
@@ -161,26 +166,28 @@ export function AptBlock() {
             lines={runInstruction}
             className="code--small"
           />
-          <dl className="legend legend--auto">
-            <Fragment as="div" className="legend__row">
-              <dt>apt-get</dt>
-              <dd>
-                wie <code>apt</code>, aber für Skripte gedacht
-              </dd>
-            </Fragment>
-            <Fragment as="div" className="legend__row">
-              <dt>-y</dt>
-              <dd>ohne Rückfrage – beim Bauen tippt niemand</dd>
-            </Fragment>
-            <Fragment as="div" className="legend__row">
-              <dt>--no-install-recommends</dt>
-              <dd>nur das Nötigste, das Image bleibt klein</dd>
-            </Fragment>
-            <Fragment as="div" className="legend__row">
-              <dt>rm -rf …/lists/*</dt>
-              <dd>Paketlisten wieder löschen – deshalb war eure Liste eben leer</dd>
-            </Fragment>
-          </dl>
+          <WhenDeckReady>
+            <dl className="legend legend--auto">
+              <Fragment as="div" className="legend__row">
+                <dt>apt-get</dt>
+                <dd>
+                  wie <code>apt</code>, aber für Skripte gedacht
+                </dd>
+              </Fragment>
+              <Fragment as="div" className="legend__row">
+                <dt>-y</dt>
+                <dd>ohne Rückfrage – beim Bauen tippt niemand</dd>
+              </Fragment>
+              <Fragment as="div" className="legend__row">
+                <dt>--no-install-recommends</dt>
+                <dd>nur das Nötigste, das Image bleibt klein</dd>
+              </Fragment>
+              <Fragment as="div" className="legend__row">
+                <dt>rm -rf …/lists/*</dt>
+                <dd>Paketlisten wieder löschen – deshalb war eure Liste eben leer</dd>
+              </Fragment>
+            </dl>
+          </WhenDeckReady>
         </ContentLayout>
       </Slide>
 
