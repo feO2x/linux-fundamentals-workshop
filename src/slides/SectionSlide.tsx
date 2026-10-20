@@ -9,7 +9,7 @@ interface Props {
 
 /**
  * Abschnittsfolie am Anfang eines Blocks, erreichbar unter `#/<blockId>`.
- * Titel, Leitfrage und Uhrzeit kommen aus der Agenda.
+ * Titel, Frage und Uhrzeit kommen aus der Agenda.
  */
 export function SectionSlide({ blockId }: Props) {
   const block = findBlock(blockId)
@@ -23,10 +23,10 @@ export function SectionSlide({ blockId }: Props) {
           {block.praxis ? `, davon ${block.praxis} min Praxis` : null}
         </p>
         <h2 className="section-title">{block.title}</h2>
-        {block.leitfrage && (
+        {block.question && (
           <p className="question question--section">
-            <span className="question__label">Leitfrage</span>
-            {block.leitfrage}
+            <span className="question__label">Findet heraus</span>
+            {block.question}
           </p>
         )}
       </CenteredLayout>

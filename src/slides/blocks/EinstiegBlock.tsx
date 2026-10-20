@@ -164,7 +164,7 @@ export function EinstiegBlock() {
         ]}
       >
         <p className="question">
-          <span className="question__label">Leitfrage</span>
+          <span className="question__label">Findet heraus</span>
           Warum ist hier so viel weniger los als auf eurem eigenen Rechner?
         </p>
       </ExerciseSlide>

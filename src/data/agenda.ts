@@ -16,7 +16,7 @@ export interface AgendaBlock {
    * Frage, mit der der Block auf den Folien beginnt. Anders als `summary`
    * spricht sie die Teilnehmer direkt an.
    */
-  leitfrage?: string
+  question?: string
   /** Kommandos, die in diesem Block eingeführt werden. */
   commands?: string[]
   /** Was die Teilnehmer in der Übung konkret tun. */
@@ -35,11 +35,10 @@ export const AGENDA: AgendaBlock[] = [
     kind: 'content',
     summary:
       'Alle starten ihren Container und schauen sich um. Die Shell ist dabei nur ein ganz normales Programm im User Space — die Brücke zum Bash-Workshop.',
-    leitfrage:
-      'Ein frisches Linux liegt vor euch. Wie findet ihr heraus, wo ihr gelandet seid?',
+    question: 'Ein frisches Linux liegt vor euch. Wo seid ihr hier gelandet?',
     commands: ['docker run', 'whoami', 'id', 'uname -a'],
     praxisNote:
-      'Container starten, erste Orientierung. Leitfrage: Warum ist hier so viel weniger los als auf dem eigenen Rechner?',
+      'Container starten, erste Orientierung: Warum ist hier so viel weniger los als auf dem eigenen Rechner?',
   },
   {
     id: 'kernel-user-space',
@@ -49,7 +48,7 @@ export const AGENDA: AgendaBlock[] = [
     kind: 'content',
     summary:
       'Was macht der Kernel eigentlich? Syscalls, Prozesse — und warum sich alle Container den Kernel des Hosts teilen. Genau deshalb sind Images klein und starten sofort.',
-    leitfrage:
+    question:
       'Warum startet euer Container in einer Sekunde, eine virtuelle Maschine aber erst nach einer Minute?',
     commands: ['ps aux', 'cat /proc/version'],
     praxisNote:
@@ -63,7 +62,7 @@ export const AGENDA: AgendaBlock[] = [
     kind: 'content',
     summary:
       'Die wichtigsten Verzeichnisse und was davon im Container-Alltag wirklich zählt: /bin, /etc, /home, /opt, /var, /tmp, /usr.',
-    leitfrage:
+    question:
       'Ihr sucht ein Programm, eine Einstellung oder ein Log. Wo schaut ihr nach?',
     commands: ['pwd', 'ls', 'cd', 'cat', 'which', 'tree', 'grep -r'],
     praxisNote:
@@ -78,7 +77,7 @@ export const AGENDA: AgendaBlock[] = [
     kind: 'content',
     summary:
       'Warum ein frisches Image erst ein apt update braucht, wohin Pakete ihre Dateien legen — und die apt-Idiome, die später in jedem Dockerfile auftauchen.',
-    leitfrage:
+    question:
       'In eurem neuen Container fehlen tree und less. Wie bekommt ihr sie – und wo landen sie?',
     commands: ['apt update', 'apt install', 'apt search', 'dpkg -L'],
     praxisNote:
@@ -92,7 +91,7 @@ export const AGENDA: AgendaBlock[] = [
     kind: 'content',
     summary:
       'Prozesse, Geräte und offene Dateien — alles über denselben Mechanismus erreichbar. /proc, /dev/null und File Descriptors machen Redirects plötzlich erklärbar.',
-    leitfrage:
+    question:
       'Linux beschreibt sich selbst in Dateien. Wo stehen dann eure laufenden Programme?',
     commands: ['/proc', '/dev/null', 'ls -l /proc/self/fd'],
     praxisNote:
@@ -106,7 +105,7 @@ export const AGENDA: AgendaBlock[] = [
     kind: 'content',
     summary:
       'UID und GID sind nur Zahlen — das ist der Schlüssel zu Container-Berechtigungen. Dazu /etc/passwd, /etc/group und der Unterschied zu /etc/shadow.',
-    leitfrage:
+    question:
       'Bisher wart ihr immer root. Wer ist sonst noch auf diesem System – und woran erkennt Linux, wer wer ist?',
     commands: ['useradd', 'groupadd', 'usermod -aG', 'id', 'su -', 'sudo'],
     praxisNote:
@@ -121,7 +120,7 @@ export const AGENDA: AgendaBlock[] = [
     kind: 'content',
     summary:
       'Das Kernstück des Workshops. rwx und die Oktalschreibweise, Besitzer und Gruppe — und das x-Bit auf Verzeichnissen, das erfahrungsgemäß niemand auf Anhieb richtig rät.',
-    leitfrage: 'Warum darf alice nicht nach /root – und woher weiß Linux das?',
+    question: 'Warum darf alice nicht nach /root – und woher weiß Linux das?',
     commands: ['ls -l', 'chmod', 'chown', 'umask'],
     praxisNote:
       'In Stufen: ls -l gemeinsam entziffern, Datei zwischen alice und bob freigeben, Oktal-Drill, dann chmod 644 auf ein Verzeichnis und cd versuchen.',
@@ -134,7 +133,7 @@ export const AGENDA: AgendaBlock[] = [
     kind: 'content',
     summary:
       'Hard- und Softlinks, und warum der Name nicht die Datei ist, sondern der Inode. Dieser Block ist gleichzeitig der Zeitpuffer.',
-    leitfrage:
+    question:
       '/bin zeigt auf /usr/bin, /proc/self/fd/1 auf euer Terminal. Was ist so ein Verweis eigentlich?',
     commands: ['ln -s', 'ln', 'ls -li'],
     praxisNote:
@@ -148,7 +147,7 @@ export const AGENDA: AgendaBlock[] = [
     kind: 'content',
     summary:
       'Ein absichtlich kaputtes Setup: Die Anwendung soll als appuser laufen, Logs schreiben, und die Config darf nicht für alle lesbar sein. Diagnose und Reparatur.',
-    leitfrage: 'Eine Anwendung soll laufen, und nichts klappt. Findet ihr heraus, warum?',
+    question: 'Eine Anwendung soll laufen, und nichts klappt. Woran liegt das?',
     commands: ['ls -l', 'id', 'chmod +x', 'chown -R', 'ln -s'],
     praxisNote:
       'Nicht ausführbares Startskript, weltlesbare Config mit Passwort, nicht beschreibbares Logverzeichnis, toter Symlink. Zum Schluss: genau das macht ein Dockerfile mit COPY --chown und USER.',
@@ -159,7 +158,7 @@ export const AGENDA: AgendaBlock[] = [
     duration: 5,
     kind: 'buffer',
     summary: 'Wiederholung, offene Fragen und der Transfer zum Thema Docker.',
-    leitfrage: 'Was nehmt ihr mit – und was hat das alles mit Docker zu tun?',
+    question: 'Was nehmt ihr mit – und was hat das alles mit Docker zu tun?',
   },
 ]
 

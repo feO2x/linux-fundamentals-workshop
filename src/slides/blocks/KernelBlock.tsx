@@ -134,7 +134,7 @@ export function KernelBlock() {
         ]}
       >
         <p className="question">
-          <span className="question__label">Leitfrage</span>
+          <span className="question__label">Findet heraus</span>
           Was teilen sich die beiden Container, und was hat jeder für sich?
         </p>
         <p className="note">

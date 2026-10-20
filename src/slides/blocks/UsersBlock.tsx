@@ -260,7 +260,7 @@ export function UsersBlock() {
         ]}
       >
         <p className="question">
-          <span className="question__label">Leitfrage</span>
+          <span className="question__label">Findet heraus</span>
           Warum darf alice nicht nach <code>/root</code> – und woher weiß Linux das?
         </p>
       </ExerciseSlide>
