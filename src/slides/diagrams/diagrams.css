@@ -88,8 +88,10 @@
   margin: 0;
 }
 
+/* Unten bündig, damit Host-Kernel und Hardware beider Seiten auf einer Höhe liegen. */
 .stack figcaption {
-  margin-bottom: 6px;
+  margin-bottom: auto;
+  padding-bottom: 6px;
   font-weight: 700;
 }
 
