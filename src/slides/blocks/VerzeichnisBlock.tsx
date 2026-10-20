@@ -182,10 +182,10 @@ export function VerzeichnisBlock() {
           <p className="note">Kennt ihr aus dem Bash-Workshop – hier zum Nachschlagen:</p>
           <StepCode
             lines={[
-              'pwd        # Wo bin ich?',
-              'ls         # Was liegt hier?',
+              'pwd        # print working directory – Wo bin ich?',
+              'ls         # list – Was liegt hier?',
               'ls -la     # alles, auch versteckte Dateien (beginnen mit .)',
-              'cd /etc    # absoluter Pfad: beginnt mit /',
+              'cd /etc    # change directory – absoluter Pfad: beginnt mit /',
               'cd apt     # relativer Pfad: ab dem aktuellen Verzeichnis',
               'cd ..      # eine Ebene nach oben',
               'cd ~       # ins Home-Verzeichnis (cd allein tut dasselbe)',
