@@ -130,16 +130,18 @@ export function UsersBlock() {
               'id alice                        # prüfen',
             ]}
           />
-          <ul className="points">
-            <Fragment as="li">
-              Ohne <code>-m</code> gibt es kein Home-Verzeichnis, ohne <code>-s</code>{' '}
-              bekommt alice nur <code>/bin/sh</code>.
-            </Fragment>
-            <Fragment as="li">
-              Vergesst das <code>-a</code> nicht: Ohne ersetzt <code>usermod -G</code>{' '}
-              alle Zusatzgruppen, statt eine hinzuzufügen.
-            </Fragment>
-          </ul>
+          <WhenDeckReady>
+            <ul className="points">
+              <Fragment as="li">
+                Ohne <code>-m</code> gibt es kein Home-Verzeichnis, ohne <code>-s</code>{' '}
+                bekommt alice nur <code>/bin/sh</code>.
+              </Fragment>
+              <Fragment as="li">
+                Vergesst das <code>-a</code> nicht: Ohne ersetzt <code>usermod -G</code>{' '}
+                alle Zusatzgruppen, statt eine hinzuzufügen.
+              </Fragment>
+            </ul>
+          </WhenDeckReady>
         </ContentLayout>
       </Slide>
 

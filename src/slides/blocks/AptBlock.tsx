@@ -114,17 +114,19 @@ export function AptBlock() {
               'apt install tree less   # Pakete installieren',
             ]}
           />
-          <ul className="points">
-            <Fragment as="li">
-              Paketname und Programmname sind nicht immer gleich: <code>ps</code> steckt
-              zum Beispiel im Paket <code>procps</code>.
-            </Fragment>
-            <Fragment as="li">
-              Die Liste von <code>apt search</code> ist lang. Sobald <code>less</code> da
-              ist, blättert ihr darin: <code>apt search tree | less</code>, beenden mit{' '}
-              <code>q</code>.
-            </Fragment>
-          </ul>
+          <WhenDeckReady>
+            <ul className="points">
+              <Fragment as="li">
+                Paketname und Programmname sind nicht immer gleich: <code>ps</code> steckt
+                zum Beispiel im Paket <code>procps</code>.
+              </Fragment>
+              <Fragment as="li">
+                Die Liste von <code>apt search</code> ist lang. Sobald <code>less</code>{' '}
+                da ist, blättert ihr darin: <code>apt search tree | less</code>, beenden
+                mit <code>q</code>.
+              </Fragment>
+            </ul>
+          </WhenDeckReady>
         </ContentLayout>
       </Slide>
 
@@ -194,26 +196,28 @@ export function AptBlock() {
             steps="1-2|3|4"
             className="code--small"
           />
-          <dl className="legend legend--auto">
-            <Fragment as="div" className="legend__row">
-              <dt>grep -n</dt>
-              <dd>Zeilen mit einem Suchbegriff finden, samt Zeilennummer</dd>
-            </Fragment>
-            <Fragment as="div" className="legend__row">
-              <dt>#</dt>
-              <dd>macht die Zeile zum Kommentar – die Einstellung ist aus</dd>
-            </Fragment>
-            <Fragment as="div" className="legend__row">
-              <dt>sed -i 's/alt/neu/'</dt>
-              <dd>ersetzt Text direkt in der Datei</dd>
-            </Fragment>
-            <Fragment as="div" className="legend__row">
-              <dt>source</dt>
-              <dd>
-                liest die Datei neu ein – sonst wirkt sie erst in der nächsten Shell
-              </dd>
-            </Fragment>
-          </dl>
+          <WhenDeckReady>
+            <dl className="legend legend--auto">
+              <Fragment as="div" className="legend__row">
+                <dt>grep -n</dt>
+                <dd>Zeilen mit einem Suchbegriff finden, samt Zeilennummer</dd>
+              </Fragment>
+              <Fragment as="div" className="legend__row">
+                <dt>#</dt>
+                <dd>macht die Zeile zum Kommentar – die Einstellung ist aus</dd>
+              </Fragment>
+              <Fragment as="div" className="legend__row">
+                <dt>sed -i 's/alt/neu/'</dt>
+                <dd>ersetzt Text direkt in der Datei</dd>
+              </Fragment>
+              <Fragment as="div" className="legend__row">
+                <dt>source</dt>
+                <dd>
+                  liest die Datei neu ein – sonst wirkt sie erst in der nächsten Shell
+                </dd>
+              </Fragment>
+            </dl>
+          </WhenDeckReady>
         </ContentLayout>
       </Slide>
 

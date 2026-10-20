@@ -132,20 +132,22 @@ export function EinstiegBlock() {
               '-rwxr-xr-x 1 root root 1446024 Mar 31  2024 /usr/bin/bash',
             ]}
           />
-          <ul className="points">
-            <Fragment as="li">
-              <code>bash</code> ist eine ganz normale Datei in <code>/usr/bin</code> – ein
-              Programm wie <code>ls</code> oder <code>whoami</code>.
-            </Fragment>
-            <Fragment as="li">
-              <code>docker run</code> hat genau dieses Programm für euch gestartet.{' '}
-              <code>exit</code> beendet die Shell – und damit den Container.
-            </Fragment>
-            <Fragment as="li">
-              Wie ihr mit der Shell arbeitet, kennt ihr aus dem Bash-Workshop. Heute geht
-              es um das System darunter.
-            </Fragment>
-          </ul>
+          <WhenDeckReady>
+            <ul className="points">
+              <Fragment as="li">
+                <code>bash</code> ist eine ganz normale Datei in <code>/usr/bin</code> –
+                ein Programm wie <code>ls</code> oder <code>whoami</code>.
+              </Fragment>
+              <Fragment as="li">
+                <code>docker run</code> hat genau dieses Programm für euch gestartet.{' '}
+                <code>exit</code> beendet die Shell – und damit den Container.
+              </Fragment>
+              <Fragment as="li">
+                Wie ihr mit der Shell arbeitet, kennt ihr aus dem Bash-Workshop. Heute
+                geht es um das System darunter.
+              </Fragment>
+            </ul>
+          </WhenDeckReady>
         </ContentLayout>
       </Slide>
 
