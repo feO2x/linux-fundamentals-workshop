@@ -5,6 +5,7 @@ import { ContentLayout } from '../ContentLayout'
 import { USERS_IMAGE, runCommand } from '../containers'
 import { ExerciseSlide } from '../ExerciseSlide'
 import { SectionSlide } from '../SectionSlide'
+import { Spoiler } from '../Spoiler'
 import { StepCode } from '../StepCode'
 
 const BLOCK_ID = 'abschlussuebung'
@@ -151,22 +152,24 @@ export function AbschlussBlock() {
 
       <Slide>
         <ContentLayout title="Abschlussübung: So geht's">
-          <table className="solutions solutions--fixes">
-            <tbody>
-              {fixes.map((fix, index) => (
-                <tr key={index}>
-                  <td className="solutions__number">{index + 1}</td>
-                  <td>{fix.symptom}</td>
-                  <td>{fix.cause}</td>
-                  <td className="solutions__path">
-                    {fix.commands.map((command) => (
-                      <code key={command}>{command}</code>
-                    ))}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <Spoiler>
+            <table className="solutions solutions--fixes">
+              <tbody>
+                {fixes.map((fix, index) => (
+                  <tr key={index}>
+                    <td className="solutions__number">{index + 1}</td>
+                    <td>{fix.symptom}</td>
+                    <td>{fix.cause}</td>
+                    <td className="solutions__path">
+                      {fix.commands.map((command) => (
+                        <code key={command}>{command}</code>
+                      ))}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </Spoiler>
         </ContentLayout>
       </Slide>
 

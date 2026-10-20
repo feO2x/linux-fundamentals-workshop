@@ -623,6 +623,22 @@
   white-space: nowrap;
 }
 
+/* Rückfrage und Lösung liegen übereinander (r-stack). */
+.spoiler {
+  align-items: start;
+}
+
+.reveal .spoiler > * {
+  width: 100%;
+}
+
+.spoiler__prompt {
+  align-self: center;
+  color: var(--text-muted);
+  font-size: 0.9em;
+  text-align: center;
+}
+
 /* Reparaturen der Abschlussübung: mehrere Kommandos untereinander. */
 .solutions--fixes {
   font-size: 0.7em;

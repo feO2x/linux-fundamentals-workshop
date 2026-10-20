@@ -6,6 +6,7 @@ import { ExerciseSlide } from '../ExerciseSlide'
 import { Principle } from '../Principle'
 import { SearchPath } from '../SearchPath'
 import { SectionSlide } from '../SectionSlide'
+import { Spoiler } from '../Spoiler'
 import { StepCode } from '../StepCode'
 import { WhenDeckReady } from '../WhenDeckReady'
 
@@ -316,24 +317,26 @@ export function VerzeichnisBlock() {
 
       <Slide>
         <ContentLayout title="Schnitzeljagd: So geht's">
-          <table className="solutions">
-            <tbody>
-              {scavengerHunt.map((entry, index) => (
-                <tr key={index}>
-                  <td className="solutions__number">{index + 1}</td>
-                  <td className="solutions__path">
-                    {entry.path.map((command, step) => (
-                      <span key={command}>
-                        {step > 0 && ' → '}
-                        <code>{command}</code>
-                      </span>
-                    ))}
-                  </td>
-                  <td>{entry.answer}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <Spoiler>
+            <table className="solutions">
+              <tbody>
+                {scavengerHunt.map((entry, index) => (
+                  <tr key={index}>
+                    <td className="solutions__number">{index + 1}</td>
+                    <td className="solutions__path">
+                      {entry.path.map((command, step) => (
+                        <span key={command}>
+                          {step > 0 && ' → '}
+                          <code>{command}</code>
+                        </span>
+                      ))}
+                    </td>
+                    <td>{entry.answer}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </Spoiler>
         </ContentLayout>
       </Slide>
 
