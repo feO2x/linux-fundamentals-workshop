@@ -6,6 +6,7 @@ import { ExerciseSlide } from '../ExerciseSlide'
 import { Principle } from '../Principle'
 import { SearchPath } from '../SearchPath'
 import { SectionSlide } from '../SectionSlide'
+import { Spoiler } from '../Spoiler'
 import { StepCode } from '../StepCode'
 import { WhenDeckReady } from '../WhenDeckReady'
 
@@ -167,7 +168,12 @@ export function VerzeichnisBlock() {
               </li>
               <li>Weitere Festplatten werden irgendwo in den Baum eingehängt.</li>
             </ul>
-            <StepCode language="shell" lines={treeOutput} className="code--dense" />
+            <StepCode
+              language="shell"
+              lines={treeOutput}
+              steps="1"
+              className="code--dense code--command"
+            />
           </div>
         </ContentLayout>
       </Slide>
@@ -177,10 +183,10 @@ export function VerzeichnisBlock() {
           <p className="note">Kennt ihr aus dem Bash-Workshop – hier zum Nachschlagen:</p>
           <StepCode
             lines={[
-              'pwd        # Wo bin ich?',
-              'ls         # Was liegt hier?',
+              'pwd        # print working directory – Wo bin ich?',
+              'ls         # list – Was liegt hier?',
               'ls -la     # alles, auch versteckte Dateien (beginnen mit .)',
-              'cd /etc    # absoluter Pfad: beginnt mit /',
+              'cd /etc    # change directory – absoluter Pfad: beginnt mit /',
               'cd apt     # relativer Pfad: ab dem aktuellen Verzeichnis',
               'cd ..      # eine Ebene nach oben',
               'cd ~       # ins Home-Verzeichnis (cd allein tut dasselbe)',
@@ -311,24 +317,26 @@ export function VerzeichnisBlock() {
 
       <Slide>
         <ContentLayout title="Schnitzeljagd: So geht's">
-          <table className="solutions">
-            <tbody>
-              {scavengerHunt.map((entry, index) => (
-                <tr key={index}>
-                  <td className="solutions__number">{index + 1}</td>
-                  <td className="solutions__path">
-                    {entry.path.map((command, step) => (
-                      <span key={command}>
-                        {step > 0 && ' → '}
-                        <code>{command}</code>
-                      </span>
-                    ))}
-                  </td>
-                  <td>{entry.answer}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <Spoiler>
+            <table className="solutions">
+              <tbody>
+                {scavengerHunt.map((entry, index) => (
+                  <tr key={index}>
+                    <td className="solutions__number">{index + 1}</td>
+                    <td className="solutions__path">
+                      {entry.path.map((command, step) => (
+                        <span key={command}>
+                          {step > 0 && ' → '}
+                          <code>{command}</code>
+                        </span>
+                      ))}
+                    </td>
+                    <td>{entry.answer}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </Spoiler>
         </ContentLayout>
       </Slide>
 

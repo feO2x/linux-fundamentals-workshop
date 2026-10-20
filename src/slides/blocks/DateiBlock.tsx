@@ -23,20 +23,23 @@ export function DateiBlock() {
               '1  9  cmdline  cpuinfo  …  meminfo  …  self  …  version  …',
             ]}
           />
-          <ul className="points">
-            <Fragment as="li">
-              Jede Zahl ist ein laufender Prozess, benannt nach seiner PID: <code>1</code>{' '}
-              ist eure <code>bash</code>, <code>9</code> das <code>ls</code> selbst.
-            </Fragment>
-            <Fragment as="li">
-              Der Kernel erzeugt <code>/proc</code> erst, wenn ihr hinschaut. Nichts davon
-              liegt auf der Festplatte.
-            </Fragment>
-            <Fragment as="li">
-              Genau hier liest <code>ps</code>. Sein Paket <code>procps</code> beschreibt
-              sich als „/proc file system utilities“.
-            </Fragment>
-          </ul>
+          <WhenDeckReady>
+            <ul className="points">
+              <Fragment as="li">
+                Jede Zahl ist ein laufender Prozess, benannt nach seiner PID:{' '}
+                <code>1</code> ist eure <code>bash</code>, <code>9</code> das{' '}
+                <code>ls</code> selbst.
+              </Fragment>
+              <Fragment as="li">
+                Der Kernel erzeugt <code>/proc</code> erst, wenn ihr hinschaut. Nichts
+                davon liegt auf der Festplatte.
+              </Fragment>
+              <Fragment as="li">
+                Genau hier liest <code>ps</code>. Sein Paket <code>procps</code>{' '}
+                beschreibt sich als „/proc file system utilities“.
+              </Fragment>
+            </ul>
+          </WhenDeckReady>
         </ContentLayout>
       </Slide>
 

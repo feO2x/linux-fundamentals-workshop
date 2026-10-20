@@ -13,7 +13,8 @@ function Guest({ label, kernel }: { label: string; kernel: boolean }) {
 }
 
 /**
- * Links: Jede VM bringt ihren eigenen Kernel mit.
+ * Links: Jede VM bringt ihren eigenen Kernel mit, zusätzlich zu dem des Hosts,
+ * auf dem der Hypervisor läuft.
  * Rechts: Alle Container teilen sich den Kernel des Hosts.
  */
 export function VmVsContainer() {
@@ -26,6 +27,7 @@ export function VmVsContainer() {
           <Guest label="VM 2" kernel />
         </div>
         <div className="box box--platform">Hypervisor</div>
+        <div className="box box--kernel">Kernel des Hosts</div>
         <div className="box box--hardware">Hardware</div>
       </figure>
 

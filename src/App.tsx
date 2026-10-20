@@ -23,8 +23,11 @@ export default function App() {
           Docker-Containern vor.
         </p>
 
-        <a className="hero__link" href="slides.html">
+        <a className="cta" href="slides.html">
           Zu den Folien
+          <span className="cta__arrow" aria-hidden="true">
+            →
+          </span>
         </a>
 
         <dl className="stats">

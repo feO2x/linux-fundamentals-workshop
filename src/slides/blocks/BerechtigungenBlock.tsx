@@ -247,16 +247,18 @@ export function BerechtigungenBlock() {
               'chown -R alice:team /srv/x   # -R: mit allem, was darin liegt',
             ]}
           />
-          <ul className="points">
-            <Fragment as="li">
-              Einen neuen Besitzer festlegen darf nur root. Sonst könnte jeder anderen
-              Dateien unterschieben.
-            </Fragment>
-            <Fragment as="li">
-              Die Gruppe darf auch der Besitzer ändern, aber nur auf eine Gruppe, in der
-              man selbst Mitglied ist.
-            </Fragment>
-          </ul>
+          <WhenDeckReady>
+            <ul className="points">
+              <Fragment as="li">
+                Einen neuen Besitzer festlegen darf nur root. Sonst könnte jeder anderen
+                Dateien unterschieben.
+              </Fragment>
+              <Fragment as="li">
+                Die Gruppe darf auch der Besitzer ändern, aber nur auf eine Gruppe, in der
+                man selbst Mitglied ist.
+              </Fragment>
+            </ul>
+          </WhenDeckReady>
         </ContentLayout>
       </Slide>
 

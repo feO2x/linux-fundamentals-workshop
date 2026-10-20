@@ -17,6 +17,11 @@
   --accent-dim: #7b9203;
   --accent-wash: rgba(184, 219, 4, 0.12);
 
+  /* Navy auf Limette erreicht in beiden Designs einen Kontrast von ~10:1. */
+  --cta-bg: #b8db04;
+  --cta-bg-hover: #cbe83a;
+  --cta-text: #002c46;
+
   --praxis: #5cb0e8;
   --praxis-wash: rgba(92, 176, 232, 0.12);
   --praxis-border: rgba(92, 176, 232, 0.35);
@@ -48,6 +53,8 @@
   --accent: #5c6e02;
   --accent-dim: #b8db04;
   --accent-wash: rgba(184, 219, 4, 0.15);
+
+  --cta-bg-hover: #a6c504;
 
   --praxis: #006fb9;
   --praxis-wash: rgba(0, 111, 185, 0.08);

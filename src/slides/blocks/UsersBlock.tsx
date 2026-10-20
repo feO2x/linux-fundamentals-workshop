@@ -130,16 +130,18 @@ export function UsersBlock() {
               'id alice                        # prüfen',
             ]}
           />
-          <ul className="points">
-            <Fragment as="li">
-              Ohne <code>-m</code> gibt es kein Home-Verzeichnis, ohne <code>-s</code>{' '}
-              bekommt alice nur <code>/bin/sh</code>.
-            </Fragment>
-            <Fragment as="li">
-              Vergesst das <code>-a</code> nicht: Ohne ersetzt <code>usermod -G</code>{' '}
-              alle Zusatzgruppen, statt eine hinzuzufügen.
-            </Fragment>
-          </ul>
+          <WhenDeckReady>
+            <ul className="points">
+              <Fragment as="li">
+                Ohne <code>-m</code> gibt es kein Home-Verzeichnis, ohne <code>-s</code>{' '}
+                bekommt alice nur <code>/bin/sh</code>.
+              </Fragment>
+              <Fragment as="li">
+                Vergesst das <code>-a</code> nicht: Ohne ersetzt <code>usermod -G</code>{' '}
+                alle Zusatzgruppen, statt eine hinzuzufügen.
+              </Fragment>
+            </ul>
+          </WhenDeckReady>
         </ContentLayout>
       </Slide>
 
@@ -260,7 +262,7 @@ export function UsersBlock() {
         ]}
       >
         <p className="question">
-          <span className="question__label">Leitfrage</span>
+          <span className="question__label">Findet heraus</span>
           Warum darf alice nicht nach <code>/root</code> – und woher weiß Linux das?
         </p>
       </ExerciseSlide>

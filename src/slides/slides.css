@@ -180,6 +180,11 @@
   background: var(--accent-wash);
 }
 
+/* Hebt nur das Kommando hervor; die Ausgabe darunter bleibt voll lesbar. */
+.reveal pre.code--command .hljs.has-highlights tr:not(.highlight-line) {
+  opacity: 1;
+}
+
 .reveal .hljs-built_in,
 .reveal .hljs-keyword {
   color: var(--accent);
@@ -616,6 +621,22 @@
 
 .solutions td.solutions__path {
   white-space: nowrap;
+}
+
+/* Rückfrage und Lösung liegen übereinander (r-stack). */
+.spoiler {
+  align-items: start;
+}
+
+.reveal .spoiler > * {
+  width: 100%;
+}
+
+.spoiler__prompt {
+  align-self: center;
+  color: var(--text-muted);
+  font-size: 0.9em;
+  text-align: center;
 }
 
 /* Reparaturen der Abschlussübung: mehrere Kommandos untereinander. */
