@@ -1,5 +1,7 @@
 # Linux Fundamentals — Workshop-Agenda
 
+**Zur Website: [feo2x.github.io/linux-fundamentals-workshop](https://feo2x.github.io/linux-fundamentals-workshop/)**
+
 Agenda-Seite und Slides für den vierstündigen Workshop „Linux Fundamentals“.
 
 ## Container-Images
