@@ -27,22 +27,23 @@ Das Verzeichnis `containers/<name>/` ist zugleich der Build-Kontext. So landet n
 
 ### Lokal bauen und prüfen
 
-Ein Image wird mit seinem Verzeichnis als Kontext gebaut, hier am Beispiel von `start`:
+`scripts/build-images.sh` baut jedes Image mit seinem Verzeichnis als Kontext und taggt es als `hub.gwvs.de/levelup/linux-fundamentals/<name>`, also mit dem Pfad, den die Folien anzeigen:
 
 ```bash
-docker build -t linux-workshop-start containers/start
+scripts/build-images.sh              # alle Images
+scripts/build-images.sh start users  # nur die genannten
 ```
 
-Prüfen, ob die erwarteten Werkzeuge da sind:
+Prüfen, ob die erwarteten Werkzeuge da sind, hier am Beispiel von `start`:
 
 ```bash
-docker run --rm linux-workshop-start sh -c 'command -v ps; command -v tree'
+docker run --rm hub.gwvs.de/levelup/linux-fundamentals/start sh -c 'command -v ps; command -v tree'
 ```
 
 Und wie im Workshop interaktiv starten (der Prompt sollte `root@workshop:~#` lauten):
 
 ```bash
-docker run --rm -it --hostname workshop linux-workshop-start
+docker run --rm -it --hostname workshop hub.gwvs.de/levelup/linux-fundamentals/start
 ```
 
 ### Abschlussübung prüfen
@@ -56,6 +57,6 @@ docker run --rm linux-workshop-app-fixed
 
 Die letzte Zeile der Ausgabe muss `Workshop-App 1.1 läuft.` lauten.
 
-Die Images werden nicht von GitHub aus veröffentlicht, sondern von Hand in die interne Registry gepusht. Die Image-Pfade, die die Folien anzeigen, legt `src/slides/containers.ts` fest. Achtung: Die Folien liegen öffentlich auf GitHub Pages, die Pfade sind dort also sichtbar.
+Die Images werden nicht von GitHub aus veröffentlicht, sondern nach `scripts/build-images.sh` von Hand in die interne Registry gepusht (`docker push hub.gwvs.de/levelup/linux-fundamentals/<name>`). Die Image-Pfade, die die Folien anzeigen, legt `src/slides/containers.ts` fest; der Präfix in `scripts/build-images.sh` muss dazu passen. Achtung: Die Folien liegen öffentlich auf GitHub Pages, die Pfade sind dort also sichtbar.
 
 Ändert sich ein Image, müssen auch die Folien passen: Die Lösungen der Schnitzeljagd und die Beispielausgaben (`/etc/shells`, `/etc/os-release`) in `src/slides/blocks/VerzeichnisBlock.tsx` sind gegen das gebaute `start`-Image geprüft, die Ausgaben in `AptBlock.tsx`, `DateiBlock.tsx` und `UsersBlock.tsx` gegen `bare` bzw. `tools`, die in `BerechtigungenBlock.tsx`, `LinksBlock.tsx` und `AbschlussBlock.tsx` gegen `users`. Die sudo-Folie in `UsersBlock.tsx` stammt aus einem `ubuntu:24.04`-Container mit nachinstalliertem `sudo`. Die Dockerfile-Folien lesen `containers/tools/Dockerfile` und `containers/users/fixed.Dockerfile` direkt ein.
