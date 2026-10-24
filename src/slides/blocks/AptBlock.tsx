@@ -1,5 +1,4 @@
 import { Fragment, Slide } from '@revealjs/react'
-import toolsDockerfile from '../../../containers/tools/Dockerfile?raw'
 import { ContentLayout } from '../ContentLayout'
 import { BARE_IMAGE, TOOLS_IMAGE, runCommand } from '../containers'
 import { ExerciseSlide } from '../ExerciseSlide'
@@ -8,14 +7,6 @@ import { StepCode } from '../StepCode'
 import { WhenDeckReady } from '../WhenDeckReady'
 
 const BLOCK_ID = 'apt'
-
-// Die RUN-Anweisung aus dem Ersatz-Image: dieselben Schritte wie in der Übung.
-const dockerfileLines = toolsDockerfile.split('\n')
-const runStart = dockerfileLines.findIndex((line) => line.startsWith('RUN '))
-const runEnd = dockerfileLines.findIndex(
-  (line, index) => index >= runStart && !line.endsWith('\\'),
-)
-const runInstruction = dockerfileLines.slice(runStart, runEnd + 1)
 
 // Ausgabe von `dpkg -L tree` im nackten Image.
 const dpkgOutput = [
@@ -153,41 +144,6 @@ export function AptBlock() {
               className="code--dense code--command"
             />
           </div>
-        </ContentLayout>
-      </Slide>
-
-      <Slide>
-        <ContentLayout title="Dasselbe im Dockerfile">
-          <p className="note">
-            So ist das Ersatz-Image für diesen Block gebaut – mit euren Schritten:
-          </p>
-          <StepCode
-            language="dockerfile"
-            lines={runInstruction}
-            className="code--small"
-          />
-          <WhenDeckReady>
-            <dl className="legend legend--auto">
-              <Fragment as="div" className="legend__row">
-                <dt>apt-get</dt>
-                <dd>
-                  wie <code>apt</code>, aber für Skripte gedacht
-                </dd>
-              </Fragment>
-              <Fragment as="div" className="legend__row">
-                <dt>-y</dt>
-                <dd>ohne Rückfrage – beim Bauen tippt niemand</dd>
-              </Fragment>
-              <Fragment as="div" className="legend__row">
-                <dt>--no-install-recommends</dt>
-                <dd>nur das Nötigste, das Image bleibt klein</dd>
-              </Fragment>
-              <Fragment as="div" className="legend__row">
-                <dt>rm -rf …/lists/*</dt>
-                <dd>Paketlisten wieder löschen – deshalb war eure Liste eben leer</dd>
-              </Fragment>
-            </dl>
-          </WhenDeckReady>
         </ContentLayout>
       </Slide>
 
