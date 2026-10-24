@@ -21,9 +21,11 @@ interface Props {
  * zwei Codeblöcken auf einer Folie bekäme ein gleichzeitig eingefügtes Fragment
  * seine Nummer schon beim ersten Block - vor den Schritten des zweiten.
  *
- * Explizite `index`-Props helfen nicht: Reveal nummeriert beim Start alle
- * Fragmente lückenlos neu, solange die Code-Schritte noch fehlen - ein
- * Fragment mit `index={1}` bekommt dabei die 0.
+ * Explizite `index`-Props außerhalb dieser Komponente helfen nicht: Reveal
+ * nummeriert beim Start alle Fragmente lückenlos neu, solange die Code-Schritte
+ * noch fehlen - ein Fragment mit `index={1}` bekommt dabei die 0. Innerhalb
+ * dieser Komponente wirken sie: Ein Fragment mit dem Index eines Code-Schritts
+ * erscheint zusammen mit diesem Schritt.
  */
 export function WhenDeckReady({ children }: Props) {
   const deck = useReveal()

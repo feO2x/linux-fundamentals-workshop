@@ -150,8 +150,8 @@ export function AptBlock() {
       <Slide>
         <ContentLayout title="Wo sind die Farben hin?">
           <p className="note">
-            Im Start-Image war euer Prompt grün und blau. Der Prompt ist eine Einstellung
-            eurer Shell - und die steht in <code>~/.bashrc</code>.
+            Im Start-Image war euer Prompt grün. Der Prompt ist eine Einstellung eurer
+            Shell - und die steht in <code>~/.bashrc</code>.
           </p>
           <StepCode
             language="shell"
@@ -159,21 +159,24 @@ export function AptBlock() {
             steps="1-2|3|4"
             className="code--small"
           />
+          {/* Jede Zeile erscheint mit ihrem Code-Schritt: Die ersten beiden gehören
+              zu den Zeilen 1-2, die von Anfang an hervorgehoben sind, die anderen
+              teilen sich den Index mit den Schritten für Zeile 3 und 4. */}
           <WhenDeckReady>
             <dl className="legend legend--auto">
-              <Fragment as="div" className="legend__row">
+              <div className="legend__row">
                 <dt>grep -n</dt>
                 <dd>Zeilen mit einem Suchbegriff finden, samt Zeilennummer</dd>
-              </Fragment>
-              <Fragment as="div" className="legend__row">
+              </div>
+              <div className="legend__row">
                 <dt>#</dt>
                 <dd>macht die Zeile zum Kommentar - die Einstellung ist aus</dd>
-              </Fragment>
-              <Fragment as="div" className="legend__row">
+              </div>
+              <Fragment as="div" className="legend__row" index={0}>
                 <dt>sed -i 's/alt/neu/'</dt>
                 <dd>ersetzt Text direkt in der Datei</dd>
               </Fragment>
-              <Fragment as="div" className="legend__row">
+              <Fragment as="div" className="legend__row" index={1}>
                 <dt>source</dt>
                 <dd>
                   liest die Datei neu ein - sonst wirkt sie erst in der nächsten Shell
