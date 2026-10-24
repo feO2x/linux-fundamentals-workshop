@@ -107,7 +107,7 @@ export function UsersBlock() {
                 <code>/etc/passwd</code> nach.
               </li>
               <li>
-                Container und Host teilen sich den Kernel – und der kennt nur die Zahlen.
+                Container und Host teilen sich den Kernel - und der kennt nur die Zahlen.
                 root im Container hat UID&nbsp;0, dieselbe Zahl wie root auf dem Host.
               </li>
               <li>
@@ -224,14 +224,14 @@ export function UsersBlock() {
             <Fragment as="ul" className="points">
               <li>
                 Im Container seid ihr root. In WSL oder auf einem Server seid ihr ein
-                normaler Benutzer – wie alice.
+                normaler Benutzer - wie alice.
               </li>
               <li>
                 <code>sudo</code> führt ein einzelnes Kommando als root aus. Das dürfen
                 nur Mitglieder der Gruppe sudo, mit ihrem eigenen Passwort.
               </li>
               <li>
-                Erst lesen, was ein Kommando tut, dann <code>sudo</code> davor – erst
+                Erst lesen, was ein Kommando tut, dann <code>sudo</code> davor - erst
                 recht, wenn ein Agent es vorschlägt.
               </li>
             </Fragment>
@@ -263,7 +263,7 @@ export function UsersBlock() {
       >
         <p className="question">
           <span className="question__label">Findet heraus</span>
-          Warum darf alice nicht nach <code>/root</code> – und woher weiß Linux das?
+          Warum darf alice nicht nach <code>/root</code> - und woher weiß Linux das?
         </p>
       </ExerciseSlide>
     </>

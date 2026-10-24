@@ -25,7 +25,7 @@ export function SectionSlide({ blockId }: Props) {
         <h2 className="section-title">{block.title}</h2>
         {block.question && (
           <p className="question question--section">
-            <span className="question__label">Findet heraus</span>
+            <span className="question__label">Euer Ziel</span>
             {block.question}
           </p>
         )}
