@@ -19,10 +19,10 @@ interface Props {
  * Die Kinder erscheinen erst einen Render nach dem Bereitwerden: Jeder `<Code>`
  * nummeriert die Fragmente seiner Folie neu, sobald er hervorgehoben wurde. Mit
  * zwei Codeblöcken auf einer Folie bekäme ein gleichzeitig eingefügtes Fragment
- * seine Nummer schon beim ersten Block – vor den Schritten des zweiten.
+ * seine Nummer schon beim ersten Block - vor den Schritten des zweiten.
  *
  * Explizite `index`-Props helfen nicht: Reveal nummeriert beim Start alle
- * Fragmente lückenlos neu, solange die Code-Schritte noch fehlen – ein
+ * Fragmente lückenlos neu, solange die Code-Schritte noch fehlen - ein
  * Fragment mit `index={1}` bekommt dabei die 0.
  */
 export function WhenDeckReady({ children }: Props) {

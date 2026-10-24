@@ -13,7 +13,7 @@ const permissionsBlock = findBlock('berechtigungen')
 // Die Felder einer Zeile aus /etc/passwd, am Beispiel des Benutzers ubuntu.
 const passwdFields = [
   { value: 'ubuntu', className: 'passwd-line__name', text: 'Benutzername' },
-  { value: 'x', text: 'Passwort – steht in Wahrheit in /etc/shadow' },
+  { value: 'x', text: 'Passwort - steht in Wahrheit in /etc/shadow' },
   { value: '1000', className: 'passwd-line__id', text: 'UID, die Nummer des Benutzers' },
   {
     value: '1000',

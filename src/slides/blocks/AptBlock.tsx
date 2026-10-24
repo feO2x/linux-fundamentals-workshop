@@ -60,7 +60,7 @@ export function AptBlock() {
           <WhenDeckReady>
             <Fragment as="p" className="takeaway">
               Dieses Image ist so nackt wie ein frisches <code>ubuntu:24.04</code>. Was
-              fehlt, installiert ihr selbst – mit apt, dem Paketmanager von Ubuntu.
+              fehlt, installiert ihr selbst - mit apt, dem Paketmanager von Ubuntu.
             </Fragment>
           </WhenDeckReady>
         </ContentLayout>
@@ -85,7 +85,7 @@ export function AptBlock() {
             <Fragment as="ul" className="points">
               <li>
                 apt kennt Pakete nur aus seinen Paketlisten in{' '}
-                <code>/var/lib/apt/lists</code> – und die sind im Image leer.
+                <code>/var/lib/apt/lists</code> - und die sind im Image leer.
               </li>
               <li>
                 <code>apt update</code> lädt die Listen herunter. Erst danach findet{' '}
@@ -130,7 +130,7 @@ export function AptBlock() {
               </li>
               <li>
                 Das Programm landet in <code>/usr/bin</code>, die Doku in{' '}
-                <code>/usr/share/doc</code> – die Landkarte von vorhin.
+                <code>/usr/share/doc</code> - die Landkarte von vorhin.
               </li>
               <li>
                 Es gibt keinen Programmordner wie <code>C:\Programme</code>. Ein Paket
@@ -151,7 +151,7 @@ export function AptBlock() {
         <ContentLayout title="Wo sind die Farben hin?">
           <p className="note">
             Im Start-Image war euer Prompt grün und blau. Der Prompt ist eine Einstellung
-            eurer Shell – und die steht in <code>~/.bashrc</code>.
+            eurer Shell - und die steht in <code>~/.bashrc</code>.
           </p>
           <StepCode
             language="shell"
@@ -167,7 +167,7 @@ export function AptBlock() {
               </Fragment>
               <Fragment as="div" className="legend__row">
                 <dt>#</dt>
-                <dd>macht die Zeile zum Kommentar – die Einstellung ist aus</dd>
+                <dd>macht die Zeile zum Kommentar - die Einstellung ist aus</dd>
               </Fragment>
               <Fragment as="div" className="legend__row">
                 <dt>sed -i 's/alt/neu/'</dt>
@@ -176,7 +176,7 @@ export function AptBlock() {
               <Fragment as="div" className="legend__row">
                 <dt>source</dt>
                 <dd>
-                  liest die Datei neu ein – sonst wirkt sie erst in der nächsten Shell
+                  liest die Datei neu ein - sonst wirkt sie erst in der nächsten Shell
                 </dd>
               </Fragment>
             </dl>

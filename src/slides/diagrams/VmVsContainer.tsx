@@ -38,7 +38,7 @@ export function VmVsContainer() {
           <Guest label="nachbar" kernel={false} />
           <Guest label="…" kernel={false} />
         </div>
-        <div className="box box--kernel">Kernel des Hosts – geteilt</div>
+        <div className="box box--kernel">Kernel des Hosts - geteilt</div>
         <div className="box box--hardware">Hardware</div>
       </Fragment>
     </div>

@@ -83,7 +83,7 @@ export function PufferBlock() {
               Wie ihr sucht: Was suche ich? Wo liegt so etwas? Umschauen, reinschauen.
             </Fragment>
             <Fragment as="li">
-              Wer was darf: Besitzer, Gruppe, alle anderen – und es gilt die erste Gruppe
+              Wer was darf: Besitzer, Gruppe, alle anderen - und es gilt die erste Gruppe
               von Rechten, die passt.
             </Fragment>
           </ul>

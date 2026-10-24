@@ -1,9 +1,9 @@
-/* Reveal nimmt 100 % der Höhe seines Elternelements ein – also muss #root mitwachsen. */
+/* Reveal nimmt 100 % der Höhe seines Elternelements ein - also muss #root mitwachsen. */
 #root {
   height: 100%;
 }
 
-/* Reveal färbt den Viewport (body) weiß – wir übernehmen die Farben der Agenda. */
+/* Reveal färbt den Viewport (body) weiß - wir übernehmen die Farben der Agenda. */
 .reveal-viewport {
   background: var(--bg);
   color: var(--text);
@@ -16,7 +16,7 @@
   line-height: 1.4;
 }
 
-/* reveal.css zentriert Text – auf unseren Folien steht er links. */
+/* reveal.css zentriert Text - auf unseren Folien steht er links. */
 .reveal .slides {
   text-align: left;
 }
@@ -90,7 +90,7 @@
   gap: 24px;
 }
 
-/* Titelzeile oben, Inhalt füllt die Resthöhe – egal, wie viel drinsteht. */
+/* Titelzeile oben, Inhalt füllt die Resthöhe - egal, wie viel drinsteht. */
 .layout--content {
   display: grid;
   grid-template-rows: auto minmax(0, 1fr);
@@ -150,7 +150,7 @@
 }
 
 /* Das Highlight-Plugin braucht Zeilennummern für die Schritte. Angezeigt
-   werden sie nicht – bei Kommandos würden sie nur zum Abtippen verleiten. */
+   werden sie nicht - bei Kommandos würden sie nur zum Abtippen verleiten. */
 .reveal .hljs-ln-numbers {
   display: none;
 }
@@ -291,7 +291,7 @@
   font-weight: 600;
 }
 
-/* Der Grundsatz des Workshops – das, was hängen bleiben soll. */
+/* Der Grundsatz des Workshops - das, was hängen bleiben soll. */
 .principle {
   padding: 20px 28px;
   border-radius: var(--radius);

@@ -77,7 +77,7 @@ export function LinksBlock() {
                 <code>rm</code> löscht nur einen Namen.
               </li>
               <li>
-                Der Softlink zeigt auf einen Namen, den es nicht mehr gibt – ein toter
+                Der Softlink zeigt auf einen Namen, den es nicht mehr gibt - ein toter
                 Link. <code>/bin -&gt; usr/bin</code> ist auch ein Softlink, nur ein
                 lebendiger.
               </li>
@@ -96,7 +96,7 @@ export function LinksBlock() {
           </>,
           <>
             Ändert die Rechte über den Hardlink (<code>chmod 600 hart</code>). Was
-            passiert mit dem Original – und warum?
+            passiert mit dem Original - und warum?
           </>,
           'Löscht das Original. Was sagen beide Links jetzt?',
         ]}

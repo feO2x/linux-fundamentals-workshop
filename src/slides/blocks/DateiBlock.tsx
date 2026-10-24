@@ -56,7 +56,7 @@ export function DateiBlock() {
               das alle anderen Programme startet.
             </Fragment>
             <Fragment as="li">
-              Im Container ist PID 1 eure Anwendung – hier <code>bash</code>. Endet sie,
+              Im Container ist PID 1 eure Anwendung - hier <code>bash</code>. Endet sie,
               endet der Container. Deshalb beendet <code>exit</code> ihn.
             </Fragment>
             <Fragment as="li" className="note">
@@ -85,13 +85,13 @@ export function DateiBlock() {
           <WhenDeckReady>
             <Fragment as="dl" className="legend legend--auto">
               <dt>0</dt>
-              <dd>Eingabe (stdin) – was ihr tippt</dd>
+              <dd>Eingabe (stdin) - was ihr tippt</dd>
               <dt>1</dt>
               <dd>Ausgabe (stdout)</dd>
               <dt>2</dt>
               <dd>Fehlermeldungen (stderr)</dd>
               <dt>/dev/pts/0</dt>
-              <dd>euer Terminal – auch nur eine Datei</dd>
+              <dd>euer Terminal - auch nur eine Datei</dd>
             </Fragment>
           </WhenDeckReady>
         </ContentLayout>
@@ -176,7 +176,7 @@ export function DateiBlock() {
           <WhenDeckReady>
             <Fragment as="ul" className="points">
               <li>
-                In <code>/dev</code> liegen Geräte als Dateien – im Container nur eine
+                In <code>/dev</code> liegen Geräte als Dateien - im Container nur eine
                 Handvoll.
               </li>
               <li>
@@ -200,7 +200,7 @@ export function DateiBlock() {
             Was läuft als PID 1? Lest <code>/proc/1/cmdline</code>.
           </>,
           <>
-            Schaut euch mit <code>ls -l /proc/self/fd</code> eure offenen Dateien an –
+            Schaut euch mit <code>ls -l /proc/self/fd</code> eure offenen Dateien an -
             direkt, mit <code className="nowrap">&gt; /tmp/fds</code> und mit{' '}
             <code className="nowrap">| cat</code>.
           </>,

@@ -68,7 +68,7 @@ export function BerechtigungenBlock() {
           />
           <p className="note">
             Das Image bringt alice, bob und die Gruppe team so mit, wie ihr sie vor der
-            Pause angelegt habt – dazu <code>tree</code>, <code>less</code> und das
+            Pause angelegt habt - dazu <code>tree</code>, <code>less</code> und das
             Teamverzeichnis <code>/srv/team</code>.
           </p>
         </ContentLayout>
@@ -138,7 +138,7 @@ export function BerechtigungenBlock() {
             </tbody>
           </table>
           <Fragment as="p" className="takeaway">
-            Vorsicht beim x auf Verzeichnissen – dazu gleich eine Übung zum Raten.
+            Vorsicht beim x auf Verzeichnissen - dazu gleich eine Übung zum Raten.
           </Fragment>
           <Fragment as="p" className="note">
             <code>/tmp</code> zeigt <code>drwxrwxrwt</code>: Dort dürfen alle Dateien
@@ -185,7 +185,7 @@ export function BerechtigungenBlock() {
           <WhenDeckReady>
             <Fragment as="p" className="note">
               <code>chmod</code> kennt ihr aus dem Bash-Workshop. <code>u</code>,{' '}
-              <code>g</code> und <code>o</code> stehen für user, group und others – die
+              <code>g</code> und <code>o</code> stehen für user, group und others - die
               drei Teile von eben. Ändern darf die Rechte nur der Besitzer (und root).
             </Fragment>
           </WhenDeckReady>
@@ -367,7 +367,7 @@ export function BerechtigungenBlock() {
             <Fragment as="ul" className="points">
               <li>
                 Mit <code>r</code>, aber ohne <code>x</code> seht ihr nur die Namen.
-                Hinein und an die Dateien kommt ihr nicht – auch dann nicht, wenn euch der
+                Hinein und an die Dateien kommt ihr nicht - auch dann nicht, wenn euch der
                 Ordner gehört.
               </li>
               <li>

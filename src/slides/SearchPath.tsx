@@ -42,7 +42,7 @@ const STEPS: Step[] = [
   },
   {
     title: 'Reinschauen',
-    text: 'die Datei lesen, die passend klingt – oder alle auf einmal durchsuchen',
+    text: 'die Datei lesen, die passend klingt - oder alle auf einmal durchsuchen',
     tools: (
       <>
         <code>cat</code> <code>grep -r</code>

@@ -41,7 +41,7 @@ export function KernelBlock() {
             ))}
           </ul>
           <Fragment as="p" className="takeaway">
-            Keins eurer Programme spricht direkt mit der Hardware – das darf nur der
+            Keins eurer Programme spricht direkt mit der Hardware - das darf nur der
             Kernel.
           </Fragment>
         </ContentLayout>
@@ -69,7 +69,7 @@ export function KernelBlock() {
             ))}
           </ol>
           <Fragment as="p" className="note">
-            So arbeitet jedes Programm – auch eure Shell, auch im Container.
+            So arbeitet jedes Programm - auch eure Shell, auch im Container.
           </Fragment>
         </ContentLayout>
       </Slide>
@@ -125,7 +125,7 @@ export function KernelBlock() {
           </>,
           <>
             Vergleicht den Kernel. Er beschreibt sich selbst in der Datei{' '}
-            <code>/proc/version</code> – lest sie in beiden Containern mit{' '}
+            <code>/proc/version</code> - lest sie in beiden Containern mit{' '}
             <code>cat</code>.
           </>,
           <>

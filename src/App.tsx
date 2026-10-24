@@ -38,7 +38,7 @@ export default function App() {
           <div className="stat">
             <dt>Zeitrahmen</dt>
             <dd>
-              {START_TIME}–{end}
+              {START_TIME}-{end}
             </dd>
           </div>
           <div className="stat stat--accent">

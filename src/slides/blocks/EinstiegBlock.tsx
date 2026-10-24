@@ -41,7 +41,7 @@ export function EinstiegBlock() {
               <dt>
                 <code>-it</code>
               </dt>
-              <dd>interaktiv, mit Terminal – ihr wollt ja tippen</dd>
+              <dd>interaktiv, mit Terminal - ihr wollt ja tippen</dd>
               <dt>
                 <code>--rm</code>
               </dt>
@@ -75,7 +75,7 @@ export function EinstiegBlock() {
             <Fragment as="div" className="legend__row">
               <dt className="prompt-anatomy__host">workshop</dt>
               <dd>
-                auf welchem Rechner – kommt aus <code>--hostname</code>
+                auf welchem Rechner - kommt aus <code>--hostname</code>
               </dd>
             </Fragment>
             <Fragment as="div" className="legend__row">
@@ -116,7 +116,7 @@ export function EinstiegBlock() {
               </li>
               <li>
                 <code>uname -a</code> nennt den Kernel. Der kommt gar nicht aus dem
-                Container – woher dann, klärt der nächste Block.
+                Container - woher dann, klärt der nächste Block.
               </li>
             </Fragment>
           </WhenDeckReady>
@@ -135,12 +135,12 @@ export function EinstiegBlock() {
           <WhenDeckReady>
             <ul className="points">
               <Fragment as="li">
-                <code>bash</code> ist eine ganz normale Datei in <code>/usr/bin</code> –
+                <code>bash</code> ist eine ganz normale Datei in <code>/usr/bin</code> -
                 ein Programm wie <code>ls</code> oder <code>whoami</code>.
               </Fragment>
               <Fragment as="li">
                 <code>docker run</code> hat genau dieses Programm für euch gestartet.{' '}
-                <code>exit</code> beendet die Shell – und damit den Container.
+                <code>exit</code> beendet die Shell - und damit den Container.
               </Fragment>
               <Fragment as="li">
                 Wie ihr mit der Shell arbeitet, kennt ihr aus dem Bash-Workshop. Heute

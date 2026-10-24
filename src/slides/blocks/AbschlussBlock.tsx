@@ -75,7 +75,7 @@ export function AbschlussBlock() {
           />
           <p className="note">
             Startet einen frischen Container, dann ist alles wieder wie neu. Die App in{' '}
-            <code>/opt/app</code> soll Folgendes tun – leider klappt nichts davon:
+            <code>/opt/app</code> soll Folgendes tun - leider klappt nichts davon:
           </p>
           <ul className="points">
             <li>
@@ -130,7 +130,7 @@ export function AbschlussBlock() {
             <Fragment as="div" className="legend__row">
               <dt>„für alle lesbar“</dt>
               <dd>
-                Wer muss lesen dürfen? Besitzer oder Gruppe – und alle anderen nicht.
+                Wer muss lesen dürfen? Besitzer oder Gruppe - und alle anderen nicht.
               </dd>
             </Fragment>
             <Fragment as="div" className="legend__row">
@@ -212,7 +212,7 @@ export function AbschlussBlock() {
                 Reparaturen, nur ein für alle Mal.
               </li>
               <li>
-                <code>USER appuser</code> ist wie <code>su - appuser</code> – alles danach
+                <code>USER appuser</code> ist wie <code>su - appuser</code> - alles danach
                 läuft als appuser, auch PID 1.
               </li>
             </ul>
