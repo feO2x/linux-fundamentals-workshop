@@ -185,7 +185,7 @@ export function VerzeichnisBlock() {
             lines={[
               'pwd        # print working directory - Wo bin ich?',
               'ls         # list - Was liegt hier?',
-              'ls -la     # alles, auch versteckte Dateien (beginnen mit .)',
+              'ls -lah    # Liste, auch versteckte Dateien, mit Größenangaben',
               'cd /etc    # change directory - absoluter Pfad: beginnt mit /',
               'cd apt     # relativer Pfad: ab dem aktuellen Verzeichnis',
               'cd ..      # eine Ebene nach oben',
@@ -231,7 +231,7 @@ export function VerzeichnisBlock() {
               '/usr/bin/ls',
               'root@workshop:~# echo $PATH',
               '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
-              'root@workshop:~# ls -ld /bin',
+              'root@workshop:~# ls -lah /bin',
               'lrwxrwxrwx 1 root root 7 Apr 22  2024 /bin -> usr/bin',
             ]}
             steps="1-2|3-4|5-6"
@@ -284,7 +284,7 @@ export function VerzeichnisBlock() {
             <StepCode
               language="shell"
               lines={[
-                'root@workshop:~# ls /etc',
+                'root@workshop:~# ls -lah /etc',
                 '…  passwd  profile  shells  skel  …',
                 'root@workshop:~# cat /etc/shells',
                 '# /etc/shells: valid login shells',
