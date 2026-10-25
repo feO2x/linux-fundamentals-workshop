@@ -1,12 +1,66 @@
 import { Fragment, Slide } from '@revealjs/react'
+import type { ReactNode } from 'react'
 import { ContentLayout } from '../ContentLayout'
 import { ExerciseSlide } from '../ExerciseSlide'
 import { SearchPath } from '../SearchPath'
 import { SectionSlide } from '../SectionSlide'
+import { Spoiler } from '../Spoiler'
 import { StepCode } from '../StepCode'
 import { WhenDeckReady } from '../WhenDeckReady'
 
 const BLOCK_ID = 'alles-ist-eine-datei'
+
+// Lösungen zur Übung, gegen das gebaute Tools-Image geprüft.
+const solutions: { task: string; commands: string[]; answer: ReactNode }[] = [
+  {
+    task: 'PIDs wiederfinden',
+    commands: ['ls /proc', 'ps aux'],
+    answer: (
+      <>
+        PID 1 ist <code>bash</code>. Die zweite PID ist das Kommando selbst und bei jedem
+        Aufruf neu.
+      </>
+    ),
+  },
+  {
+    task: 'Was läuft als PID 1?',
+    commands: ['cat /proc/1/cmdline'],
+    answer: (
+      <>
+        <code>/bin/bash</code>, eure Shell
+      </>
+    ),
+  },
+  {
+    task: 'Offene Dateien',
+    commands: [
+      'ls -l /proc/self/fd',
+      'ls -l /proc/self/fd > /tmp/fds',
+      'cat /tmp/fds',
+      'ls -l /proc/self/fd | cat',
+    ],
+    answer: (
+      <>
+        Nur <code>1</code> ändert sich: Terminal, <code>/tmp/fds</code>, Pipe
+      </>
+    ),
+  },
+  {
+    task: 'Fehlermeldung verschwinden lassen',
+    commands: ['ls /gibtsnicht 2> /dev/null'],
+    answer: 'Keine Meldung, nur der nächste Prompt',
+  },
+  {
+    task: 'Arbeitsspeicher',
+    commands: ['ls /proc', 'cat /proc/meminfo'],
+    answer: (
+      <>
+        <code>MemTotal</code> zeigt den ganzen Speicher des Hosts. Den Kernel teilt sich
+        der Container mit ihm.
+      </>
+    ),
+  },
+]
 
 /** Block „Alles ist eine Datei“: /proc, File Descriptors und /dev. */
 export function DateiBlock() {
@@ -218,6 +272,28 @@ export function DateiBlock() {
           <SearchPath compact />
         </div>
       </ExerciseSlide>
+
+      <Slide>
+        <ContentLayout title="Stöbern in /proc: So geht's">
+          <Spoiler>
+            <table className="solutions solutions--stacked">
+              <tbody>
+                {solutions.map((solution) => (
+                  <tr key={solution.task}>
+                    <td>{solution.task}</td>
+                    <td className="solutions__path">
+                      {solution.commands.map((command) => (
+                        <code key={command}>{command}</code>
+                      ))}
+                    </td>
+                    <td>{solution.answer}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </Spoiler>
+        </ContentLayout>
+      </Slide>
     </>
   )
 }
