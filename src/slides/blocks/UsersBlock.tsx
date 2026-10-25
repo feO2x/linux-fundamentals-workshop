@@ -65,13 +65,8 @@ const solutions: { task: string; commands: string[]; answer: ReactNode }[] = [
   },
   {
     task: 'cd /root',
-    commands: ['cd /root', 'ls -ld /root'],
-    answer: (
-      <>
-        Permission denied: <code>/root</code> gehört UID 0, und nur der Besitzer darf
-        hinein (<code>drwx------</code>)
-      </>
-    ),
+    commands: ['cd /root'],
+    answer: 'Permission denied - warum, klärt der nächste Block',
   },
   {
     task: 'Bonus: Prompt',

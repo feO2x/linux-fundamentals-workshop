@@ -75,15 +75,17 @@ export function BerechtigungenBlock() {
       </Slide>
 
       <Slide>
-        <ContentLayout title="Die Antwort steht bei ls -l">
+        <ContentLayout title="Warum darf alice nicht nach /root?">
           <StepCode
             language="shell"
             lines={[
+              'alice@workshop:~$ cd /root',
+              '-bash: cd: /root: Permission denied',
               'root@workshop:~# ls -ld /root /home/alice',
               'drwxr-x--- 2 alice alice 4096 Oct 17 14:32 /home/alice',
               'drwx------ 2 root  root  4096 Sep 30 14:26 /root',
             ]}
-            steps="1-3|2|3"
+            steps="1-2|3-5|4|5"
           />
           <WhenDeckReady>
             <Fragment as="ul" className="points">
