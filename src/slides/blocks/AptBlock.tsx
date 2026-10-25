@@ -1,8 +1,10 @@
 import { Fragment, Slide } from '@revealjs/react'
+import type { ReactNode } from 'react'
 import { ContentLayout } from '../ContentLayout'
-import { BARE_IMAGE, TOOLS_IMAGE, runCommand } from '../containers'
+import { BARE_IMAGE, runCommand } from '../containers'
 import { ExerciseSlide } from '../ExerciseSlide'
 import { SectionSlide } from '../SectionSlide'
+import { Spoiler } from '../Spoiler'
 import { StepCode } from '../StepCode'
 import { WhenDeckReady } from '../WhenDeckReady'
 
@@ -33,6 +35,46 @@ const colorPromptSteps = [
   '39:#force_color_prompt=yes',
   "root@workshop:~# sed -i 's/^#force/force/' ~/.bashrc",
   'root@workshop:~# source ~/.bashrc',
+]
+
+// Lösungen zur Übung, gegen das gebaute Tools-Image geprüft.
+const solutions: { task: string; commands: string[]; answer: ReactNode }[] = [
+  {
+    task: 'tree und less installieren',
+    commands: ['apt update', 'apt install tree less'],
+    answer: (
+      <>
+        Ohne <code>apt update</code> findet apt keines der beiden Pakete
+      </>
+    ),
+  },
+  {
+    task: 'Wo liegt less?',
+    commands: ['dpkg -L less'],
+    answer: (
+      <>
+        <code>/usr/bin/less</code>
+      </>
+    ),
+  },
+  {
+    task: 'Durch die Liste blättern',
+    commands: ['apt search tree | less'],
+    answer: (
+      <>
+        Pfeiltasten und Leertaste blättern, <code>q</code> beendet
+      </>
+    ),
+  },
+  {
+    task: 'Bonus: farbiger Prompt',
+    commands: [
+      "grep -n '#force' ~/.bashrc",
+      "sed -i 's/^#force/force/' ~/.bashrc",
+      'source ~/.bashrc',
+    ],
+    answer: 'Der Prompt ist wieder grün',
+  },
 ]
 
 /** Block „Paketverwaltung mit apt“: Werkzeuge selbst installieren. */
@@ -206,13 +248,29 @@ export function AptBlock() {
           </>,
           'Bonus: Holt euch den farbigen Prompt zurück.',
         ]}
-      >
-        <p className="note">
-          <strong>apt kommt nicht durch?</strong> Dann startet stattdessen das
-          Ersatz-Image, in dem beides schon installiert ist:
-        </p>
-        <StepCode lines={[runCommand('workshop', TOOLS_IMAGE)]} className="code--small" />
-      </ExerciseSlide>
+      />
+
+      <Slide>
+        <ContentLayout title="Werkzeuge: So geht's">
+          <Spoiler>
+            <table className="solutions solutions--stacked">
+              <tbody>
+                {solutions.map((solution) => (
+                  <tr key={solution.task}>
+                    <td>{solution.task}</td>
+                    <td className="solutions__path">
+                      {solution.commands.map((command) => (
+                        <code key={command}>{command}</code>
+                      ))}
+                    </td>
+                    <td>{solution.answer}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </Spoiler>
+        </ContentLayout>
+      </Slide>
     </>
   )
 }

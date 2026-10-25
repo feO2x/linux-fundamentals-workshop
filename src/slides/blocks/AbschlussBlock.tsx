@@ -153,7 +153,7 @@ export function AbschlussBlock() {
       <Slide>
         <ContentLayout title="Abschlussübung: So geht's">
           <Spoiler>
-            <table className="solutions solutions--fixes">
+            <table className="solutions solutions--stacked">
               <tbody>
                 {fixes.map((fix, index) => (
                   <tr key={index}>

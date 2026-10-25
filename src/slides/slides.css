@@ -639,17 +639,17 @@
   text-align: center;
 }
 
-/* Reparaturen der Abschlussübung: mehrere Kommandos untereinander. */
-.solutions--fixes {
+/* Mehrere Kommandos pro Zeile untereinander, z. B. die Reparaturen der Abschlussübung. */
+.solutions--stacked {
   font-size: 0.7em;
 }
 
-.solutions--fixes .solutions__path code {
+.solutions--stacked .solutions__path code {
   display: block;
   width: fit-content;
 }
 
-.solutions--fixes .solutions__path code + code {
+.solutions--stacked .solutions__path code + code {
   margin-top: 6px;
 }
 
