@@ -1,8 +1,10 @@
 import { Fragment, Slide } from '@revealjs/react'
+import type { ReactNode } from 'react'
 import { findBlock } from '../../data/agenda'
 import { ContentLayout } from '../ContentLayout'
 import { ExerciseSlide } from '../ExerciseSlide'
 import { SectionSlide } from '../SectionSlide'
+import { Spoiler } from '../Spoiler'
 import { StepCode } from '../StepCode'
 import { WhenDeckReady } from '../WhenDeckReady'
 
@@ -23,6 +25,64 @@ const passwdFields = [
   { value: 'Ubuntu', text: 'Kommentar, oft der volle Name' },
   { value: '/home/ubuntu', text: 'Home-Verzeichnis' },
   { value: '/bin/bash', text: 'Shell nach der Anmeldung' },
+]
+
+// Lösungen zur Übung, gegen das gebaute Tools-Image geprüft.
+const solutions: { task: string; commands: string[]; answer: ReactNode }[] = [
+  {
+    task: 'Benutzer finden',
+    commands: ['cat /etc/passwd'],
+    answer: (
+      <>
+        Vor allem Dienste wie <code>daemon</code>, dazu <code>ubuntu</code> mit
+        UID&nbsp;1000
+      </>
+    ),
+  },
+  {
+    task: 'alice und bob anlegen',
+    commands: [
+      'useradd -m -s /bin/bash alice',
+      'groupadd team',
+      'usermod -aG team alice',
+    ],
+    answer: (
+      <>
+        Für bob dasselbe, nur ohne <code>groupadd</code>. <code>id alice</code> zeigt{' '}
+        <code>team</code> unter <code>groups</code>.
+      </>
+    ),
+  },
+  {
+    task: 'Als alice',
+    commands: ['su - alice'],
+    answer: (
+      <>
+        <code>whoami</code> sagt <code>alice</code>, <code>id</code> zeigt UID&nbsp;1001
+        und die Gruppe <code>team</code>
+      </>
+    ),
+  },
+  {
+    task: 'cd /root',
+    commands: ['cd /root', 'ls -ld /root'],
+    answer: (
+      <>
+        Permission denied: <code>/root</code> gehört UID 0, und nur der Besitzer darf
+        hinein (<code>drwx------</code>)
+      </>
+    ),
+  },
+  {
+    task: 'Bonus: Prompt',
+    commands: ['diff ~/.bashrc /etc/skel/.bashrc'],
+    answer: (
+      <>
+        Keine Ausgabe: <code>useradd -m</code> kopiert <code>/etc/skel</code>. Geändert
+        habt ihr nur die <code>.bashrc</code> von root.
+      </>
+    ),
+  },
 ]
 
 /** Block „Users & Groups“: Benutzer, Gruppen und was der Kernel davon sieht. */
@@ -303,6 +363,28 @@ export function UsersBlock() {
           Warum darf alice nicht nach <code>/root</code> - und woher weiß Linux das?
         </p>
       </ExerciseSlide>
+
+      <Slide>
+        <ContentLayout title="alice und bob: So geht's">
+          <Spoiler>
+            <table className="solutions solutions--stacked">
+              <tbody>
+                {solutions.map((solution) => (
+                  <tr key={solution.task}>
+                    <td>{solution.task}</td>
+                    <td className="solutions__path">
+                      {solution.commands.map((command) => (
+                        <code key={command}>{command}</code>
+                      ))}
+                    </td>
+                    <td>{solution.answer}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </Spoiler>
+        </ContentLayout>
+      </Slide>
     </>
   )
 }
