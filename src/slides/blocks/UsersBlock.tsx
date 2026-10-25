@@ -121,6 +121,42 @@ export function UsersBlock() {
       </Slide>
 
       <Slide>
+        <ContentLayout title="Eine Hauptgruppe, viele Zusatzgruppen">
+          <StepCode
+            language="shell"
+            lines={[
+              'root@workshop:~# id ubuntu',
+              'uid=1000(ubuntu) gid=1000(ubuntu) groups=1000(ubuntu),4(adm),…,27(sudo),…',
+              'root@workshop:~# grep ubuntu /etc/group',
+              'adm:x:4:ubuntu',
+              '…',
+              'sudo:x:27:ubuntu',
+              '…',
+              'ubuntu:x:1000:',
+            ]}
+            steps="1-2|3-8"
+            className="code--small"
+          />
+          <WhenDeckReady>
+            <ul className="points">
+              <Fragment as="li">
+                <strong>Hauptgruppe:</strong> genau eine, die GID in{' '}
+                <code>/etc/passwd</code>. Neue Dateien gehören ihr. Unter Ubuntu heißt sie
+                wie der Benutzer.
+              </Fragment>
+              <Fragment as="li">
+                <strong>Zusatzgruppen:</strong> beliebig viele. Jede Zeile in{' '}
+                <code>/etc/group</code> listet im letzten Feld ihre Mitglieder.
+              </Fragment>
+              <Fragment as="li">
+                Selbst beitreten kann niemand - root nimmt Benutzer in eine Gruppe auf.
+              </Fragment>
+            </ul>
+          </WhenDeckReady>
+        </ContentLayout>
+      </Slide>
+
+      <Slide>
         <ContentLayout title="Benutzer und Gruppen anlegen">
           <StepCode
             lines={[
@@ -228,7 +264,8 @@ export function UsersBlock() {
               </li>
               <li>
                 <code>sudo</code> führt ein einzelnes Kommando als root aus. Das dürfen
-                nur Mitglieder der Gruppe sudo, mit ihrem eigenen Passwort.
+                nur Mitglieder der Gruppe sudo, mit ihrem eigenen Passwort. Neue Gruppen
+                gelten erst nach der nächsten Anmeldung.
               </li>
               <li>
                 Erst lesen, was ein Kommando tut, dann <code>sudo</code> davor - erst
