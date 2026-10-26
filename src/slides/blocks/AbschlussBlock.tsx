@@ -36,10 +36,10 @@ const fixes: { symptom: ReactNode; cause: ReactNode; commands: string[] }[] = [
     symptom: 'Config ist für alle lesbar',
     cause: (
       <>
-        <code>app.conf</code> hat <code>644</code>
+        <code>app.conf</code> hat <code>rw-r--r--</code>
       </>
     ),
-    commands: ['chown root:appuser /etc/app/app.conf', 'chmod 640 /etc/app/app.conf'],
+    commands: ['chown root:appuser /etc/app/app.conf', 'chmod o-r /etc/app/app.conf'],
   },
   {
     symptom: 'No such file or directory',
@@ -74,8 +74,8 @@ export function AbschlussBlock() {
             className="code--small"
           />
           <p className="note">
-            Startet einen frischen Container, dann ist alles wieder wie neu. Die App in{' '}
-            <code>/opt/app</code> soll Folgendes tun – leider klappt nichts davon:
+            Startet einen frischen Container. Die App in <code>/opt/app</code> soll
+            Folgendes tun - leider klappt nichts davon:
           </p>
           <ul className="points">
             <li>
@@ -130,7 +130,7 @@ export function AbschlussBlock() {
             <Fragment as="div" className="legend__row">
               <dt>„für alle lesbar“</dt>
               <dd>
-                Wer muss lesen dürfen? Besitzer oder Gruppe – und alle anderen nicht.
+                Wer muss lesen dürfen? Besitzer oder Gruppe - und alle anderen nicht.
               </dd>
             </Fragment>
             <Fragment as="div" className="legend__row">
@@ -153,7 +153,7 @@ export function AbschlussBlock() {
       <Slide>
         <ContentLayout title="Abschlussübung: So geht's">
           <Spoiler>
-            <table className="solutions solutions--fixes">
+            <table className="solutions solutions--stacked">
               <tbody>
                 {fixes.map((fix, index) => (
                   <tr key={index}>
@@ -179,8 +179,8 @@ export function AbschlussBlock() {
           <StepCode lines={['chmod -R 777 /opt/app /etc/app /var/log/app']} />
           <ul className="points">
             <Fragment as="li">
-              <code>777</code> heißt: Jeder darf alles. Start und Log würden klappen, den
-              toten Link repariert es nicht.
+              <code>777</code> heißt <code>rwxrwxrwx</code>: Jeder darf alles. Start und
+              Log würden klappen, den toten Link repariert es nicht.
             </Fragment>
             <Fragment as="li">
               Jeder Benutzer könnte jetzt <code>start.sh</code> umschreiben, und das
@@ -188,13 +188,13 @@ export function AbschlussBlock() {
             </Fragment>
           </ul>
           <Fragment as="p" className="takeaway">
-            Fragt stattdessen: Wer muss hier was dürfen? Und vergebt genau das.
+            Fragt stattdessen: Welche Rechte benötigt der Nutzer meines Prozesses?
           </Fragment>
         </ContentLayout>
       </Slide>
 
       <Slide>
-        <ContentLayout title="Genau das macht ein Dockerfile">
+        <ContentLayout title="Ein Einblick in den nächsten Workshop">
           <div className="columns columns--wide-first">
             <StepCode
               language="dockerfile"
@@ -212,7 +212,7 @@ export function AbschlussBlock() {
                 Reparaturen, nur ein für alle Mal.
               </li>
               <li>
-                <code>USER appuser</code> ist wie <code>su - appuser</code> – alles danach
+                <code>USER appuser</code> ist wie <code>su - appuser</code> - alles danach
                 läuft als appuser, auch PID 1.
               </li>
             </ul>

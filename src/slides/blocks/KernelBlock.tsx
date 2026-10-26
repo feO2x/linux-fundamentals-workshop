@@ -41,7 +41,7 @@ export function KernelBlock() {
             ))}
           </ul>
           <Fragment as="p" className="takeaway">
-            Keins eurer Programme spricht direkt mit der Hardware – das darf nur der
+            Keins eurer Programme spricht direkt mit der Hardware - das darf nur der
             Kernel.
           </Fragment>
         </ContentLayout>
@@ -69,7 +69,7 @@ export function KernelBlock() {
             ))}
           </ol>
           <Fragment as="p" className="note">
-            So arbeitet jedes Programm – auch eure Shell, auch im Container.
+            So arbeitet jedes Programm - auch eure Shell, auch im Container.
           </Fragment>
         </ContentLayout>
       </Slide>
@@ -81,8 +81,8 @@ export function KernelBlock() {
             lines={[
               'root@workshop:~# ps aux',
               'USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND',
-              'root           1  0.5  0.0   5028  4260 pts/0    Ss   09:01   0:00 /bin/bash',
-              'root           9  0.0  0.0   8296  4368 pts/0    R+   09:04   0:00 ps aux',
+              'root           1  0.5  0.0   5028  4260 pts/0    Ss   08:31   0:00 /bin/bash',
+              'root           9  0.0  0.0   8296  4368 pts/0    R+   08:34   0:00 ps aux',
             ]}
             steps="1|3|4"
             className="code--small"
@@ -125,7 +125,7 @@ export function KernelBlock() {
           </>,
           <>
             Vergleicht den Kernel. Er beschreibt sich selbst in der Datei{' '}
-            <code>/proc/version</code> – lest sie in beiden Containern mit{' '}
+            <code>/proc/version</code> - lest sie in beiden Containern mit{' '}
             <code>cat</code>.
           </>,
           <>

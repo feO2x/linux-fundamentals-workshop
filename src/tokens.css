@@ -37,7 +37,7 @@
   color-scheme: dark;
 }
 
-/* Limettengrün ist auf Weiß als Schrift nicht lesbar – im hellen Design tragen
+/* Limettengrün ist auf Weiß als Schrift nicht lesbar - im hellen Design tragen
    Akzent-Texte das dunkle Grün, die Limette bleibt für Flächen und Rahmen. */
 :root[data-theme='light'] {
   --bg: #f5f7f8;

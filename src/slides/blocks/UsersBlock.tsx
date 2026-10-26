@@ -1,8 +1,10 @@
 import { Fragment, Slide } from '@revealjs/react'
+import type { ReactNode } from 'react'
 import { findBlock } from '../../data/agenda'
 import { ContentLayout } from '../ContentLayout'
 import { ExerciseSlide } from '../ExerciseSlide'
 import { SectionSlide } from '../SectionSlide'
+import { Spoiler } from '../Spoiler'
 import { StepCode } from '../StepCode'
 import { WhenDeckReady } from '../WhenDeckReady'
 
@@ -13,7 +15,7 @@ const permissionsBlock = findBlock('berechtigungen')
 // Die Felder einer Zeile aus /etc/passwd, am Beispiel des Benutzers ubuntu.
 const passwdFields = [
   { value: 'ubuntu', className: 'passwd-line__name', text: 'Benutzername' },
-  { value: 'x', text: 'Passwort – steht in Wahrheit in /etc/shadow' },
+  { value: 'x', text: 'Passwort - steht in Wahrheit in /etc/shadow' },
   { value: '1000', className: 'passwd-line__id', text: 'UID, die Nummer des Benutzers' },
   {
     value: '1000',
@@ -23,6 +25,59 @@ const passwdFields = [
   { value: 'Ubuntu', text: 'Kommentar, oft der volle Name' },
   { value: '/home/ubuntu', text: 'Home-Verzeichnis' },
   { value: '/bin/bash', text: 'Shell nach der Anmeldung' },
+]
+
+// Lösungen zur Übung, gegen das gebaute Tools-Image geprüft.
+const solutions: { task: string; commands: string[]; answer: ReactNode }[] = [
+  {
+    task: 'Benutzer finden',
+    commands: ['cat /etc/passwd'],
+    answer: (
+      <>
+        Vor allem Dienste wie <code>daemon</code>, dazu <code>ubuntu</code> mit
+        UID&nbsp;1000
+      </>
+    ),
+  },
+  {
+    task: 'alice und bob anlegen',
+    commands: [
+      'useradd -m -s /bin/bash alice',
+      'groupadd team',
+      'usermod -aG team alice',
+    ],
+    answer: (
+      <>
+        Für bob dasselbe, nur ohne <code>groupadd</code>. <code>id alice</code> zeigt{' '}
+        <code>team</code> unter <code>groups</code>.
+      </>
+    ),
+  },
+  {
+    task: 'Als alice',
+    commands: ['su - alice'],
+    answer: (
+      <>
+        <code>whoami</code> sagt <code>alice</code>, <code>id</code> zeigt UID&nbsp;1001
+        und die Gruppe <code>team</code>
+      </>
+    ),
+  },
+  {
+    task: 'cd /root',
+    commands: ['cd /root'],
+    answer: 'Permission denied - warum, klärt der nächste Block',
+  },
+  {
+    task: 'Bonus: Prompt',
+    commands: ['diff ~/.bashrc /etc/skel/.bashrc'],
+    answer: (
+      <>
+        Keine Ausgabe: <code>useradd -m</code> kopiert <code>/etc/skel</code>. Geändert
+        habt ihr nur die <code>.bashrc</code> von root.
+      </>
+    ),
+  },
 ]
 
 /** Block „Users & Groups“: Benutzer, Gruppen und was der Kernel davon sieht. */
@@ -107,7 +162,7 @@ export function UsersBlock() {
                 <code>/etc/passwd</code> nach.
               </li>
               <li>
-                Container und Host teilen sich den Kernel – und der kennt nur die Zahlen.
+                Container und Host teilen sich den Kernel - und der kennt nur die Zahlen.
                 root im Container hat UID&nbsp;0, dieselbe Zahl wie root auf dem Host.
               </li>
               <li>
@@ -116,6 +171,42 @@ export function UsersBlock() {
                 Abschlussübung.
               </li>
             </Fragment>
+          </WhenDeckReady>
+        </ContentLayout>
+      </Slide>
+
+      <Slide>
+        <ContentLayout title="Eine Hauptgruppe, viele Zusatzgruppen">
+          <StepCode
+            language="shell"
+            lines={[
+              'root@workshop:~# id ubuntu',
+              'uid=1000(ubuntu) gid=1000(ubuntu) groups=1000(ubuntu),4(adm),…,27(sudo),…',
+              'root@workshop:~# grep ubuntu /etc/group',
+              'adm:x:4:ubuntu',
+              '…',
+              'sudo:x:27:ubuntu',
+              '…',
+              'ubuntu:x:1000:',
+            ]}
+            steps="1-2|3-8"
+            className="code--small"
+          />
+          <WhenDeckReady>
+            <ul className="points">
+              <Fragment as="li">
+                <strong>Hauptgruppe:</strong> genau eine, die GID in{' '}
+                <code>/etc/passwd</code>. Neue Dateien gehören ihr. Unter Ubuntu heißt sie
+                wie der Benutzer.
+              </Fragment>
+              <Fragment as="li">
+                <strong>Zusatzgruppen:</strong> beliebig viele. Jede Zeile in{' '}
+                <code>/etc/group</code> listet im letzten Feld ihre Mitglieder.
+              </Fragment>
+              <Fragment as="li">
+                Selbst beitreten kann niemand - root nimmt Benutzer in eine Gruppe auf.
+              </Fragment>
+            </ul>
           </WhenDeckReady>
         </ContentLayout>
       </Slide>
@@ -224,14 +315,15 @@ export function UsersBlock() {
             <Fragment as="ul" className="points">
               <li>
                 Im Container seid ihr root. In WSL oder auf einem Server seid ihr ein
-                normaler Benutzer – wie alice.
+                normaler Benutzer - wie alice.
               </li>
               <li>
                 <code>sudo</code> führt ein einzelnes Kommando als root aus. Das dürfen
-                nur Mitglieder der Gruppe sudo, mit ihrem eigenen Passwort.
+                nur Mitglieder der Gruppe sudo, mit ihrem eigenen Passwort. Neue Gruppen
+                gelten erst nach der nächsten Anmeldung.
               </li>
               <li>
-                Erst lesen, was ein Kommando tut, dann <code>sudo</code> davor – erst
+                Erst lesen, was ein Kommando tut, dann <code>sudo</code> davor - erst
                 recht, wenn ein Agent es vorschlägt.
               </li>
             </Fragment>
@@ -263,9 +355,31 @@ export function UsersBlock() {
       >
         <p className="question">
           <span className="question__label">Findet heraus</span>
-          Warum darf alice nicht nach <code>/root</code> – und woher weiß Linux das?
+          Warum darf alice nicht nach <code>/root</code> - und woher weiß Linux das?
         </p>
       </ExerciseSlide>
+
+      <Slide>
+        <ContentLayout title="alice und bob: So geht's">
+          <Spoiler>
+            <table className="solutions solutions--stacked">
+              <tbody>
+                {solutions.map((solution) => (
+                  <tr key={solution.task}>
+                    <td>{solution.task}</td>
+                    <td className="solutions__path">
+                      {solution.commands.map((command) => (
+                        <code key={command}>{command}</code>
+                      ))}
+                    </td>
+                    <td>{solution.answer}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </Spoiler>
+        </ContentLayout>
+      </Slide>
     </>
   )
 }

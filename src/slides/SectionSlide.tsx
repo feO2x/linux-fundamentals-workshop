@@ -19,13 +19,13 @@ export function SectionSlide({ blockId }: Props) {
     <Slide id={blockId}>
       <CenteredLayout>
         <p className="eyebrow">
-          {slot.start}–{slot.end} · {block.duration} min
+          {slot.start}-{slot.end} · {block.duration} min
           {block.praxis ? `, davon ${block.praxis} min Praxis` : null}
         </p>
         <h2 className="section-title">{block.title}</h2>
         {block.question && (
           <p className="question question--section">
-            <span className="question__label">Findet heraus</span>
+            <span className="question__label">Euer Ziel</span>
             {block.question}
           </p>
         )}

@@ -1,12 +1,66 @@
 import { Fragment, Slide } from '@revealjs/react'
+import type { ReactNode } from 'react'
 import { ContentLayout } from '../ContentLayout'
 import { ExerciseSlide } from '../ExerciseSlide'
 import { SearchPath } from '../SearchPath'
 import { SectionSlide } from '../SectionSlide'
+import { Spoiler } from '../Spoiler'
 import { StepCode } from '../StepCode'
 import { WhenDeckReady } from '../WhenDeckReady'
 
 const BLOCK_ID = 'alles-ist-eine-datei'
+
+// Lösungen zur Übung, gegen das gebaute Tools-Image geprüft.
+const solutions: { task: string; commands: string[]; answer: ReactNode }[] = [
+  {
+    task: 'PIDs wiederfinden',
+    commands: ['ls /proc', 'ps aux'],
+    answer: (
+      <>
+        PID 1 ist <code>bash</code>. Die zweite PID ist das Kommando selbst und bei jedem
+        Aufruf neu.
+      </>
+    ),
+  },
+  {
+    task: 'Was läuft als PID 1?',
+    commands: ['cat /proc/1/cmdline'],
+    answer: (
+      <>
+        <code>/bin/bash</code>, eure Shell
+      </>
+    ),
+  },
+  {
+    task: 'Offene Dateien',
+    commands: [
+      'ls -l /proc/self/fd',
+      'ls -l /proc/self/fd > /tmp/fds',
+      'cat /tmp/fds',
+      'ls -l /proc/self/fd | cat',
+    ],
+    answer: (
+      <>
+        Nur <code>1</code> ändert sich: Terminal, <code>/tmp/fds</code>, Pipe
+      </>
+    ),
+  },
+  {
+    task: 'Fehlermeldung verschwinden lassen',
+    commands: ['ls /gibtsnicht 2> /dev/null'],
+    answer: 'Keine Meldung, nur der nächste Prompt',
+  },
+  {
+    task: 'Arbeitsspeicher',
+    commands: ['ls /proc', 'cat /proc/meminfo'],
+    answer: (
+      <>
+        <code>MemTotal</code> zeigt den ganzen Speicher des Hosts. Den Kernel teilt sich
+        der Container mit ihm.
+      </>
+    ),
+  },
+]
 
 /** Block „Alles ist eine Datei“: /proc, File Descriptors und /dev. */
 export function DateiBlock() {
@@ -56,7 +110,7 @@ export function DateiBlock() {
               das alle anderen Programme startet.
             </Fragment>
             <Fragment as="li">
-              Im Container ist PID 1 eure Anwendung – hier <code>bash</code>. Endet sie,
+              Im Container ist PID 1 eure Anwendung - hier <code>bash</code>. Endet sie,
               endet der Container. Deshalb beendet <code>exit</code> ihn.
             </Fragment>
             <Fragment as="li" className="note">
@@ -85,13 +139,13 @@ export function DateiBlock() {
           <WhenDeckReady>
             <Fragment as="dl" className="legend legend--auto">
               <dt>0</dt>
-              <dd>Eingabe (stdin) – was ihr tippt</dd>
+              <dd>Eingabe (stdin) - was ihr tippt</dd>
               <dt>1</dt>
               <dd>Ausgabe (stdout)</dd>
               <dt>2</dt>
               <dd>Fehlermeldungen (stderr)</dd>
               <dt>/dev/pts/0</dt>
-              <dd>euer Terminal – auch nur eine Datei</dd>
+              <dd>euer Terminal - auch nur eine Datei</dd>
             </Fragment>
           </WhenDeckReady>
         </ContentLayout>
@@ -176,7 +230,7 @@ export function DateiBlock() {
           <WhenDeckReady>
             <Fragment as="ul" className="points">
               <li>
-                In <code>/dev</code> liegen Geräte als Dateien – im Container nur eine
+                In <code>/dev</code> liegen Geräte als Dateien - im Container nur eine
                 Handvoll.
               </li>
               <li>
@@ -200,7 +254,7 @@ export function DateiBlock() {
             Was läuft als PID 1? Lest <code>/proc/1/cmdline</code>.
           </>,
           <>
-            Schaut euch mit <code>ls -l /proc/self/fd</code> eure offenen Dateien an –
+            Schaut euch mit <code>ls -l /proc/self/fd</code> eure offenen Dateien an -
             direkt, mit <code className="nowrap">&gt; /tmp/fds</code> und mit{' '}
             <code className="nowrap">| cat</code>.
           </>,
@@ -218,6 +272,28 @@ export function DateiBlock() {
           <SearchPath compact />
         </div>
       </ExerciseSlide>
+
+      <Slide>
+        <ContentLayout title="Stöbern in /proc: So geht's">
+          <Spoiler>
+            <table className="solutions solutions--stacked">
+              <tbody>
+                {solutions.map((solution) => (
+                  <tr key={solution.task}>
+                    <td>{solution.task}</td>
+                    <td className="solutions__path">
+                      {solution.commands.map((command) => (
+                        <code key={command}>{command}</code>
+                      ))}
+                    </td>
+                    <td>{solution.answer}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </Spoiler>
+        </ContentLayout>
+      </Slide>
     </>
   )
 }

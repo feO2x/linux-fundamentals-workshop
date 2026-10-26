@@ -56,7 +56,7 @@ This spike only verifies that the integration works: dev server, production buil
 - Set `center: false` and give slides the full canvas height (`.reveal .slides > section { height: 100% }`). Reveal shows and hides slides by changing their `display` value, so don't make the `<section>` itself a grid or flex container. Put the layout on a wrapper element inside the slide.
 - Add two layout components under `src/slides/`: a centered one for the title and section slides, and `<ContentLayout title=…>` for content slides (title row at the top, content area that takes the remaining height). The `center` class on a `<Slide>` is an alternative for the centered case. The implementer picks one.
 - The code block must fill the remaining height inside the content area, either via the grid or via Reveal's `r-stretch`. It must not overflow the canvas.
-- Slides need their own base font size for the 1280×720 canvas (roughly 28–32px). The agenda's 16px base is for a web page. Colors and fonts still come from the shared tokens.
+- Slides need their own base font size for the 1280×720 canvas (roughly 28-32px). The agenda's 16px base is for a web page. Colors and fonts still come from the shared tokens.
 
 ### Syntax Highlighting
 

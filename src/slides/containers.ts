@@ -1,4 +1,4 @@
-// Achtung: Die Folien liegen auf GitHub Pages – die Pfade sind dann öffentlich.
+// Achtung: Die Folien liegen auf GitHub Pages - die Pfade sind dann öffentlich.
 
 /** Start-Image für den ersten Block, gebaut aus `containers/start/`. */
 export const START_IMAGE = 'hub.gwvs.de/levelup/linux-fundamentals/start'

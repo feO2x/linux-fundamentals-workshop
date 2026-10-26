@@ -23,7 +23,7 @@ const config: RevealConfig = {
   center: false,
 }
 
-// Plugins liest der Deck nur beim ersten Rendern – daher eine feste Liste.
+// Plugins liest der Deck nur beim ersten Rendern - daher eine feste Liste.
 const plugins = [RevealHighlight]
 
 export default function SlidesApp() {

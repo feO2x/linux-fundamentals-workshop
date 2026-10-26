@@ -1,21 +1,14 @@
 import { Fragment, Slide } from '@revealjs/react'
-import toolsDockerfile from '../../../containers/tools/Dockerfile?raw'
+import type { ReactNode } from 'react'
 import { ContentLayout } from '../ContentLayout'
-import { BARE_IMAGE, TOOLS_IMAGE, runCommand } from '../containers'
+import { BARE_IMAGE, runCommand } from '../containers'
 import { ExerciseSlide } from '../ExerciseSlide'
 import { SectionSlide } from '../SectionSlide'
+import { Spoiler } from '../Spoiler'
 import { StepCode } from '../StepCode'
 import { WhenDeckReady } from '../WhenDeckReady'
 
 const BLOCK_ID = 'apt'
-
-// Die RUN-Anweisung aus dem Ersatz-Image: dieselben Schritte wie in der Übung.
-const dockerfileLines = toolsDockerfile.split('\n')
-const runStart = dockerfileLines.findIndex((line) => line.startsWith('RUN '))
-const runEnd = dockerfileLines.findIndex(
-  (line, index) => index >= runStart && !line.endsWith('\\'),
-)
-const runInstruction = dockerfileLines.slice(runStart, runEnd + 1)
 
 // Ausgabe von `dpkg -L tree` im nackten Image.
 const dpkgOutput = [
@@ -44,6 +37,46 @@ const colorPromptSteps = [
   'root@workshop:~# source ~/.bashrc',
 ]
 
+// Lösungen zur Übung, gegen das gebaute Tools-Image geprüft.
+const solutions: { task: string; commands: string[]; answer: ReactNode }[] = [
+  {
+    task: 'tree und less installieren',
+    commands: ['apt update', 'apt install tree less'],
+    answer: (
+      <>
+        Ohne <code>apt update</code> findet apt keines der beiden Pakete
+      </>
+    ),
+  },
+  {
+    task: 'Wo liegt less?',
+    commands: ['dpkg -L less'],
+    answer: (
+      <>
+        <code>/usr/bin/less</code>
+      </>
+    ),
+  },
+  {
+    task: 'Durch die Liste blättern',
+    commands: ['apt search tree | less'],
+    answer: (
+      <>
+        Pfeiltasten und Leertaste blättern, <code>q</code> beendet
+      </>
+    ),
+  },
+  {
+    task: 'Bonus: farbiger Prompt',
+    commands: [
+      "grep -n '#force' ~/.bashrc",
+      "sed -i 's/^#force/force/' ~/.bashrc",
+      'source ~/.bashrc',
+    ],
+    answer: 'Der Prompt ist wieder grün',
+  },
+]
+
 /** Block „Paketverwaltung mit apt“: Werkzeuge selbst installieren. */
 export function AptBlock() {
   return (
@@ -69,7 +102,7 @@ export function AptBlock() {
           <WhenDeckReady>
             <Fragment as="p" className="takeaway">
               Dieses Image ist so nackt wie ein frisches <code>ubuntu:24.04</code>. Was
-              fehlt, installiert ihr selbst – mit apt, dem Paketmanager von Ubuntu.
+              fehlt, installiert ihr selbst - mit apt, dem Paketmanager von Ubuntu.
             </Fragment>
           </WhenDeckReady>
         </ContentLayout>
@@ -94,7 +127,7 @@ export function AptBlock() {
             <Fragment as="ul" className="points">
               <li>
                 apt kennt Pakete nur aus seinen Paketlisten in{' '}
-                <code>/var/lib/apt/lists</code> – und die sind im Image leer.
+                <code>/var/lib/apt/lists</code> - und die sind im Image leer.
               </li>
               <li>
                 <code>apt update</code> lädt die Listen herunter. Erst danach findet{' '}
@@ -139,7 +172,7 @@ export function AptBlock() {
               </li>
               <li>
                 Das Programm landet in <code>/usr/bin</code>, die Doku in{' '}
-                <code>/usr/share/doc</code> – die Landkarte von vorhin.
+                <code>/usr/share/doc</code> - die Landkarte von vorhin.
               </li>
               <li>
                 Es gibt keinen Programmordner wie <code>C:\Programme</code>. Ein Paket
@@ -157,45 +190,10 @@ export function AptBlock() {
       </Slide>
 
       <Slide>
-        <ContentLayout title="Dasselbe im Dockerfile">
-          <p className="note">
-            So ist das Ersatz-Image für diesen Block gebaut – mit euren Schritten:
-          </p>
-          <StepCode
-            language="dockerfile"
-            lines={runInstruction}
-            className="code--small"
-          />
-          <WhenDeckReady>
-            <dl className="legend legend--auto">
-              <Fragment as="div" className="legend__row">
-                <dt>apt-get</dt>
-                <dd>
-                  wie <code>apt</code>, aber für Skripte gedacht
-                </dd>
-              </Fragment>
-              <Fragment as="div" className="legend__row">
-                <dt>-y</dt>
-                <dd>ohne Rückfrage – beim Bauen tippt niemand</dd>
-              </Fragment>
-              <Fragment as="div" className="legend__row">
-                <dt>--no-install-recommends</dt>
-                <dd>nur das Nötigste, das Image bleibt klein</dd>
-              </Fragment>
-              <Fragment as="div" className="legend__row">
-                <dt>rm -rf …/lists/*</dt>
-                <dd>Paketlisten wieder löschen – deshalb war eure Liste eben leer</dd>
-              </Fragment>
-            </dl>
-          </WhenDeckReady>
-        </ContentLayout>
-      </Slide>
-
-      <Slide>
         <ContentLayout title="Wo sind die Farben hin?">
           <p className="note">
-            Im Start-Image war euer Prompt grün und blau. Der Prompt ist eine Einstellung
-            eurer Shell – und die steht in <code>~/.bashrc</code>.
+            Im Start-Image war euer Prompt grün. Der Prompt ist eine Einstellung eurer
+            Shell - und die steht in <code>~/.bashrc</code>.
           </p>
           <StepCode
             language="shell"
@@ -203,24 +201,27 @@ export function AptBlock() {
             steps="1-2|3|4"
             className="code--small"
           />
+          {/* Jede Zeile erscheint mit ihrem Code-Schritt: Die ersten beiden gehören
+              zu den Zeilen 1-2, die von Anfang an hervorgehoben sind, die anderen
+              teilen sich den Index mit den Schritten für Zeile 3 und 4. */}
           <WhenDeckReady>
             <dl className="legend legend--auto">
-              <Fragment as="div" className="legend__row">
+              <div className="legend__row">
                 <dt>grep -n</dt>
                 <dd>Zeilen mit einem Suchbegriff finden, samt Zeilennummer</dd>
-              </Fragment>
-              <Fragment as="div" className="legend__row">
+              </div>
+              <div className="legend__row">
                 <dt>#</dt>
-                <dd>macht die Zeile zum Kommentar – die Einstellung ist aus</dd>
-              </Fragment>
-              <Fragment as="div" className="legend__row">
+                <dd>macht die Zeile zum Kommentar - die Einstellung ist aus</dd>
+              </div>
+              <Fragment as="div" className="legend__row" index={0}>
                 <dt>sed -i 's/alt/neu/'</dt>
                 <dd>ersetzt Text direkt in der Datei</dd>
               </Fragment>
-              <Fragment as="div" className="legend__row">
+              <Fragment as="div" className="legend__row" index={1}>
                 <dt>source</dt>
                 <dd>
-                  liest die Datei neu ein – sonst wirkt sie erst in der nächsten Shell
+                  liest die Datei neu ein - sonst wirkt sie erst in der nächsten Shell
                 </dd>
               </Fragment>
             </dl>
@@ -247,13 +248,29 @@ export function AptBlock() {
           </>,
           'Bonus: Holt euch den farbigen Prompt zurück.',
         ]}
-      >
-        <p className="note">
-          <strong>apt kommt nicht durch?</strong> Dann startet stattdessen das
-          Ersatz-Image, in dem beides schon installiert ist:
-        </p>
-        <StepCode lines={[runCommand('workshop', TOOLS_IMAGE)]} className="code--small" />
-      </ExerciseSlide>
+      />
+
+      <Slide>
+        <ContentLayout title="Werkzeuge: So geht's">
+          <Spoiler>
+            <table className="solutions solutions--stacked">
+              <tbody>
+                {solutions.map((solution) => (
+                  <tr key={solution.task}>
+                    <td>{solution.task}</td>
+                    <td className="solutions__path">
+                      {solution.commands.map((command) => (
+                        <code key={command}>{command}</code>
+                      ))}
+                    </td>
+                    <td>{solution.answer}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </Spoiler>
+        </ContentLayout>
+      </Slide>
     </>
   )
 }

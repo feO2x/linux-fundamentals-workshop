@@ -23,12 +23,12 @@ export function Opening() {
         <ContentLayout title="Euer Ziel für heute">
           <p className="lede lede--strong">
             Um {finalExercise.start} bekommt ihr ein absichtlich kaputtes Setup: Eine
-            Anwendung soll laufen, Logs schreiben und ihr Passwort schützen – und nichts
-            davon klappt. Ihr findet die Fehler und repariert sie selbst.
+            Anwendung soll laufen, Logs schreiben und ihr Passwort schützen - das klappt
+            aber nicht so richtig. Ihr findet die Fehler und repariert sie.
           </p>
           <Fragment as="p" className="note">
-            Dafür braucht ihr keine auswendig gelernten Kommandos, sondern einen
-            Grundsatz:
+            Dafür braucht ihr keinen riesigen Satz an auswendig gelernten Kommandos,
+            sondern einen Grundsatz:
           </Fragment>
           <Fragment as="div">
             <Principle />

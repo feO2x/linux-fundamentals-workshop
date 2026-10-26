@@ -160,7 +160,7 @@ export function VerzeichnisBlock() {
           <div className="columns">
             <ul className="points">
               <li>
-                Kein <code>C:</code> oder <code>D:</code> – alles hängt unter{' '}
+                Kein <code>C:</code> oder <code>D:</code> - alles hängt unter{' '}
                 <code>/</code>, der Wurzel.
               </li>
               <li>
@@ -180,13 +180,13 @@ export function VerzeichnisBlock() {
 
       <Slide>
         <ContentLayout title="Bewegen und umschauen">
-          <p className="note">Kennt ihr aus dem Bash-Workshop – hier zum Nachschlagen:</p>
+          <p className="note">Kennt ihr aus dem Bash-Workshop - hier zum Nachschlagen:</p>
           <StepCode
             lines={[
-              'pwd        # print working directory – Wo bin ich?',
-              'ls         # list – Was liegt hier?',
-              'ls -la     # alles, auch versteckte Dateien (beginnen mit .)',
-              'cd /etc    # change directory – absoluter Pfad: beginnt mit /',
+              'pwd        # print working directory - Wo bin ich?',
+              'ls         # list - Was liegt hier?',
+              'ls -lah    # Liste, auch versteckte Dateien, mit Größenangaben',
+              'cd /etc    # change directory - absoluter Pfad: beginnt mit /',
               'cd apt     # relativer Pfad: ab dem aktuellen Verzeichnis',
               'cd ..      # eine Ebene nach oben',
               'cd ~       # ins Home-Verzeichnis (cd allein tut dasselbe)',
@@ -231,7 +231,7 @@ export function VerzeichnisBlock() {
               '/usr/bin/ls',
               'root@workshop:~# echo $PATH',
               '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
-              'root@workshop:~# ls -ld /bin',
+              'root@workshop:~# ls -lah /bin',
               'lrwxrwxrwx 1 root root 7 Apr 22  2024 /bin -> usr/bin',
             ]}
             steps="1-2|3-4|5-6"
@@ -284,7 +284,7 @@ export function VerzeichnisBlock() {
             <StepCode
               language="shell"
               lines={[
-                'root@workshop:~# ls /etc',
+                'root@workshop:~# ls -lah /etc',
                 '…  passwd  profile  shells  skel  …',
                 'root@workshop:~# cat /etc/shells',
                 '# /etc/shells: valid login shells',
@@ -357,7 +357,7 @@ export function VerzeichnisBlock() {
           <WhenDeckReady>
             <Fragment as="ul" className="points">
               <li>
-                <code>uname</code> fragt den Kernel – und der gehört dem Host.
+                <code>uname</code> fragt den Kernel - und der gehört dem Host.
               </li>
               <li>
                 <code>/etc/os-release</code> ist eine Datei im Container. Sie beschreibt
