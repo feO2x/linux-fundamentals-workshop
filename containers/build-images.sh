@@ -11,7 +11,7 @@
 # fehlgeschlagener Build keinen halben Stand in der Registry hinterlässt.
 set -euo pipefail
 
-REGISTRY_PREFIX='hub.gwvs.de/levelup/linux-fundamentals'
+REGISTRY_PREFIX='hub.gwvs.de/gwvs/linux-fundamentals'
 
 containers_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
