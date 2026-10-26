@@ -9,9 +9,14 @@
 #
 # Mit --push werden erst alle Images gebaut und danach gepusht, damit ein
 # fehlgeschlagener Build keinen halben Stand in der Registry hinterlässt.
+#
+# Jedes Image wird für alle Plattformen in PLATFORMS gebaut, damit es auf
+# Intel/AMD-Rechnern und auf ARM (z. B. Macs mit Apple Silicon) nativ läuft.
+# Das braucht den containerd-Image-Store von Docker (siehe README).
 set -euo pipefail
 
 REGISTRY_PREFIX='hub.gwvs.de/gwvs/linux-fundamentals'
+PLATFORMS='linux/amd64,linux/arm64'
 
 containers_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
@@ -60,8 +65,8 @@ done
 
 if [ "$build" = true ]; then
   for image in "${images[@]}"; do
-    echo "==> docker build $REGISTRY_PREFIX/$image"
-    docker build -t "$REGISTRY_PREFIX/$image" "$containers_dir/$image"
+    echo "==> docker build $REGISTRY_PREFIX/$image ($PLATFORMS)"
+    docker build --platform "$PLATFORMS" -t "$REGISTRY_PREFIX/$image" "$containers_dir/$image"
   done
 fi
 

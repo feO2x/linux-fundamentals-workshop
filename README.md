@@ -36,6 +36,12 @@ containers/build-images.sh start users  # nur die genannten
 
 Mit `--push` pusht das Skript die Images danach in die Registry, mit `--push --no-build` pusht es die schon gebauten, ohne neu zu bauen. Beides funktioniert auch zusammen mit Image-Namen.
 
+Jedes Image wird für `linux/amd64` und `linux/arm64` gebaut, damit es auf Intel/AMD-Rechnern genauso nativ läuft wie auf ARM, z. B. Macs mit Apple Silicon. `docker run` wählt automatisch die passende Variante. Dafür braucht Docker den containerd-Image-Store. Bei neuen Installationen ist er standardmäßig aktiv, bei älteren lässt er sich in Docker Desktop unter Settings → General → „Use containerd for pulling and storing images“ einschalten. Die fremde Plattform baut Docker per Emulation (QEMU), das dauert etwas länger. Docker Desktop bringt QEMU mit, unter Linux richtet es `docker run --privileged --rm tonistiigi/binfmt --install all` ein. Eine bestimmte Variante lässt sich mit `--platform` starten:
+
+```bash
+docker run --rm --platform linux/amd64 hub.gwvs.de/gwvs/linux-fundamentals/start uname -m  # x86_64
+```
+
 Prüfen, ob die erwarteten Werkzeuge da sind, hier am Beispiel von `start`:
 
 ```bash
