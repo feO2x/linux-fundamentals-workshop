@@ -1,21 +1,28 @@
 #!/usr/bin/env bash
-# Baut die Workshop-Images aus containers/<name>/ und taggt sie mit dem Pfad,
-# den die Folien anzeigen (siehe src/slides/containers.ts).
+# Baut die Workshop-Images aus containers/<name>/ und taggt sie für jede
+# Registry in IMAGE_PREFIXES: für hub.gwvs.de mit dem Pfad, den die Folien
+# anzeigen (siehe src/slides/containers.ts), dazu für Docker Hub.
 #
 #   containers/build-images.sh                          # alle Images bauen
 #   containers/build-images.sh start users              # nur die genannten
 #   containers/build-images.sh --push                   # alle bauen und pushen
 #   containers/build-images.sh --push --no-build tools  # nur pushen
 #
-# Mit --push werden erst alle Images gebaut und danach gepusht, damit ein
-# fehlgeschlagener Build keinen halben Stand in der Registry hinterlässt.
+# Mit --push werden erst alle Images gebaut und danach in alle Registrys
+# gepusht, damit ein fehlgeschlagener Build keinen halben Stand in einer
+# Registry hinterlässt.
 #
 # Jedes Image wird für alle Plattformen in PLATFORMS gebaut, damit es auf
 # Intel/AMD-Rechnern und auf ARM (z. B. Macs mit Apple Silicon) nativ läuft.
 # Das braucht den containerd-Image-Store von Docker (siehe README).
 set -euo pipefail
 
-REGISTRY_PREFIX='hub.gwvs.de/gwvs/linux-fundamentals'
+# Ein Image heißt <Präfix><name>. Docker Hub kennt keine verschachtelten
+# Pfade, deshalb dort linux-fundamentals-<name>.
+IMAGE_PREFIXES=(
+  'hub.gwvs.de/gwvs/linux-fundamentals/'
+  'docker.io/feo2x/linux-fundamentals-'
+)
 PLATFORMS='linux/amd64,linux/arm64'
 
 containers_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -65,14 +72,20 @@ done
 
 if [ "$build" = true ]; then
   for image in "${images[@]}"; do
-    echo "==> docker build $REGISTRY_PREFIX/$image ($PLATFORMS)"
-    docker build --platform "$PLATFORMS" -t "$REGISTRY_PREFIX/$image" "$containers_dir/$image"
+    tags=()
+    for prefix in "${IMAGE_PREFIXES[@]}"; do
+      tags+=(-t "$prefix$image")
+    done
+    echo "==> docker build ${IMAGE_PREFIXES[0]}$image ($PLATFORMS)"
+    docker build --platform "$PLATFORMS" "${tags[@]}" "$containers_dir/$image"
   done
 fi
 
 if [ "$push" = true ]; then
-  for image in "${images[@]}"; do
-    echo "==> docker push $REGISTRY_PREFIX/$image"
-    docker push "$REGISTRY_PREFIX/$image"
+  for prefix in "${IMAGE_PREFIXES[@]}"; do
+    for image in "${images[@]}"; do
+      echo "==> docker push $prefix$image"
+      docker push "$prefix$image"
+    done
   done
 fi
