@@ -27,7 +27,7 @@ Das Verzeichnis `containers/<name>/` ist zugleich der Build-Kontext. So landet n
 
 ### Lokal bauen und prüfen
 
-`containers/build-images.sh` baut jedes Image mit seinem Verzeichnis als Kontext und taggt es als `hub.gwvs.de/levelup/linux-fundamentals/<name>`, also mit dem Pfad, den die Folien anzeigen:
+`containers/build-images.sh` baut jedes Image mit seinem Verzeichnis als Kontext und taggt es als `hub.gwvs.de/gwvs/linux-fundamentals/<name>`, also mit dem Pfad, den die Folien anzeigen:
 
 ```bash
 containers/build-images.sh              # alle Images
@@ -39,13 +39,13 @@ Mit `--push` pusht das Skript die Images danach in die Registry, mit `--push --n
 Prüfen, ob die erwarteten Werkzeuge da sind, hier am Beispiel von `start`:
 
 ```bash
-docker run --rm hub.gwvs.de/levelup/linux-fundamentals/start sh -c 'command -v ps; command -v tree'
+docker run --rm hub.gwvs.de/gwvs/linux-fundamentals/start sh -c 'command -v ps; command -v tree'
 ```
 
 Und wie im Workshop interaktiv starten (der Prompt sollte `root@workshop:~#` lauten):
 
 ```bash
-docker run --rm -it --hostname workshop hub.gwvs.de/levelup/linux-fundamentals/start
+docker run --rm -it --hostname workshop hub.gwvs.de/gwvs/linux-fundamentals/start
 ```
 
 ### Abschlussübung prüfen
