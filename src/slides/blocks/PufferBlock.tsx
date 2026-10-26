@@ -1,121 +1,54 @@
-import { Fragment, Slide } from '@revealjs/react'
+import { Slide } from '@revealjs/react'
 import { CenteredLayout } from '../CenteredLayout'
-import { ContentLayout } from '../ContentLayout'
-import { Principle } from '../Principle'
 import { SCHEDULE } from '../schedule'
 import { SectionSlide } from '../SectionSlide'
+import nanaAvatar from '../assets/techworld-with-nana.jpg'
 
 const BLOCK_ID = 'puffer'
 
 const end = SCHEDULE[SCHEDULE.length - 1].end
 
-// Was aus dem Workshop im Dockerfile wieder auftaucht.
-const transfer = [
+// Zum Weiterlernen nach dem Workshop, ohne die Tracking-Parameter der Teilen-Links.
+const NANA_CHANNEL = 'https://www.youtube.com/@TechWorldwithNana'
+const nanaVideos = [
+  { title: 'Bash Scripting Tutorial for Beginners', url: 'https://youtu.be/PNhq_4d-5ek' },
   {
-    workshop: 'Container teilen sich den Kernel',
-    docker: (
-      <>
-        <code>FROM ubuntu:24.04</code> bringt nur den User Space mit
-      </>
-    ),
-  },
-  {
-    workshop: (
-      <>
-        <code>apt update</code>, dann <code>apt install</code>
-      </>
-    ),
-    docker: (
-      <>
-        <code>RUN apt-get update &amp;&amp; apt-get install -y …</code>
-      </>
-    ),
-  },
-  {
-    workshop: 'PID 1 ist eure Anwendung',
-    docker: (
-      <>
-        <code>CMD</code> legt PID 1 fest
-      </>
-    ),
-  },
-  {
-    workshop: (
-      <>
-        <code>su - appuser</code>
-      </>
-    ),
-    docker: <code>USER appuser</code>,
-  },
-  {
-    workshop: (
-      <>
-        <code>chown</code>, <code>chmod</code>
-      </>
-    ),
-    docker: (
-      <>
-        <code>COPY --chown</code>, <code>RUN chmod</code>
-      </>
-    ),
-  },
-  {
-    workshop: 'UID und GID sind nur Zahlen',
-    docker: 'Dateien in Volumes gehören einer Zahl, nicht einem Namen',
+    title: "20% of Linux Commands You'll Use 80% of the Time",
+    url: 'https://youtu.be/CLh2ACdXNbc',
   },
 ]
 
-/** Block „Puffer & Fragen“: Wiederholung und Transfer zu Docker. */
+/** Block „Puffer & Fragen“: offene Fragen und Tipps zum Weiterlernen. */
 export function PufferBlock() {
   return (
     <>
       <SectionSlide blockId={BLOCK_ID} />
 
       <Slide>
-        <ContentLayout title="Was ihr heute gelernt habt">
-          <Principle />
-          <ul className="points">
-            <Fragment as="li">
-              Wo ihr sucht: <code>/etc</code> für Einstellungen, <code>/var/log</code> für
-              Logs, <code>/proc</code> für laufende Prozesse.
-            </Fragment>
-            <Fragment as="li">
-              Wie ihr sucht: Was suche ich? Wo liegt so etwas? Umschauen, reinschauen.
-            </Fragment>
-            <Fragment as="li">
-              Wer was darf: Besitzer, Gruppe, alle anderen - und es gilt die erste Gruppe
-              von Rechten, die passt.
-            </Fragment>
-          </ul>
-        </ContentLayout>
-      </Slide>
-
-      <Slide>
-        <ContentLayout title="Von hier zu Docker">
-          <table className="solutions">
-            <thead>
-              <tr>
-                <th>Im Workshop</th>
-                <th>Im Dockerfile</th>
-              </tr>
-            </thead>
-            <tbody>
-              {transfer.map((row, index) => (
-                <Fragment key={index} as="tr">
-                  <td>{row.workshop}</td>
-                  <td>{row.docker}</td>
-                </Fragment>
-              ))}
-            </tbody>
-          </table>
-        </ContentLayout>
-      </Slide>
-
-      <Slide>
         <CenteredLayout>
           <p className="eyebrow">Ende um {end}</p>
-          <h2 className="section-title">Fragen?</h2>
-          <p className="lede">Danke fürs Mitmachen!</p>
+          <h2 className="section-title">Danke fürs Mitmachen!</h2>
+          <div className="further">
+            <img className="further__avatar" src={nanaAvatar} alt="" />
+            <div>
+              <p className="further__label">Zum Weiterlernen auf YouTube</p>
+              <p className="further__channel">
+                <a href={NANA_CHANNEL} target="_blank" rel="noreferrer">
+                  TechWorld with Nana
+                </a>{' '}
+                <span className="further__handle">@TechWorldwithNana</span>
+              </p>
+              <ul className="further__videos">
+                {nanaVideos.map((video) => (
+                  <li key={video.url}>
+                    <a href={video.url} target="_blank" rel="noreferrer">
+                      {video.title}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
         </CenteredLayout>
       </Slide>
     </>

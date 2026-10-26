@@ -157,8 +157,8 @@ export const AGENDA: AgendaBlock[] = [
     title: 'Puffer & Fragen',
     duration: 15,
     kind: 'buffer',
-    summary: 'Wiederholung, offene Fragen und der Transfer zum Thema Docker.',
-    question: 'Was nehmt ihr mit - und was hat das alles mit Docker zu tun?',
+    summary: 'Offene Fragen und Tipps zum Weiterlernen.',
+    question: 'Was nehmt ihr mit aus dem Workshop?',
   },
 ]
 
