@@ -1,28 +1,63 @@
 import { Fragment, Slide } from '@revealjs/react'
+import type { ReactNode } from 'react'
 import { ContentLayout } from '../ContentLayout'
 import { InodeDiagram } from '../diagrams/InodeDiagram'
 import { ExerciseSlide } from '../ExerciseSlide'
 import { SectionSlide } from '../SectionSlide'
+import { Spoiler } from '../Spoiler'
 import { StepCode } from '../StepCode'
 import { WhenDeckReady } from '../WhenDeckReady'
 
 const BLOCK_ID = 'links-inodes'
+
+// Lösungen zur Übung, gegen das gebaute Users-Image geprüft.
+const solutions: { task: string; commands: string[]; answer: ReactNode }[] = [
+  {
+    task: 'Anlegen',
+    commands: ['echo hallo > original', 'ln original hart', 'ln -s original weich'],
+    answer: (
+      <>
+        Ohne <code>-s</code> entsteht ein Hardlink, mit <code>-s</code> ein Softlink
+      </>
+    ),
+  },
+  {
+    task: 'Vergleichen',
+    commands: ['ls -li'],
+    answer: (
+      <>
+        <code>hart</code> und <code>original</code> haben dieselbe Inode-Nummer und zählen
+        2&nbsp;Namen. <code>weich</code> hat eine eigene Nummer.
+      </>
+    ),
+  },
+  {
+    task: 'Rechte über hart ändern',
+    commands: ['chmod go-r hart', 'ls -l original'],
+    answer: (
+      <>
+        Auch <code>original</code> zeigt <code>rw-------</code>: Die Rechte hängen am
+        Inode, und den teilen sich beide Namen.
+      </>
+    ),
+  },
+  {
+    task: 'Original löschen',
+    commands: ['rm original', 'cat hart', 'cat weich'],
+    answer: (
+      <>
+        <code>hart</code> zeigt weiter „hallo“, jetzt mit nur noch einem Namen.{' '}
+        <code>weich</code> ist ein toter Link: No such file or directory.
+      </>
+    ),
+  },
+]
 
 /** Block „Links & Inodes“: Hard- und Softlinks, und dass der Name nicht die Datei ist. */
 export function LinksBlock() {
   return (
     <>
       <SectionSlide blockId={BLOCK_ID} />
-
-      <Slide>
-        <ContentLayout title="Der Name ist nicht die Datei">
-          <InodeDiagram />
-          <Fragment as="p" className="note">
-            Ein Verzeichnis ist nur eine Liste: Name → Inode-Nummer. Rechte, Besitzer und
-            Größe hängen am Inode, nicht am Namen.
-          </Fragment>
-        </ContentLayout>
-      </Slide>
 
       <Slide>
         <ContentLayout title="Hardlink und Softlink anlegen">
@@ -44,15 +79,26 @@ export function LinksBlock() {
           <WhenDeckReady>
             <Fragment as="ul" className="points">
               <li>
-                <code>hart</code> ist ein zweiter Name für denselben Inode. Die{' '}
-                <code>2</code> zählt die Namen.
+                Die erste Spalte ist die Inode-Nummer: Darunter verwaltet der Kernel die
+                eigentliche Datei. <code>hart</code> und <code>original</code> haben
+                dieselbe - die <code>2</code> zählt die Namen.
               </li>
               <li>
-                <code>weich</code> hat einen eigenen Inode. Darin steht nur der Pfad{' '}
-                <code>original</code>.
+                <code>weich</code> hat eine eigene Nummer, also eine eigene kleine Datei.
+                Darin steht nur der Pfad <code>original</code>.
               </li>
             </Fragment>
           </WhenDeckReady>
+        </ContentLayout>
+      </Slide>
+
+      <Slide>
+        <ContentLayout title="Der Name ist nicht die Datei">
+          <InodeDiagram />
+          <Fragment as="p" className="note">
+            Ein Verzeichnis ist nur eine Liste: Name → Inode-Nummer. Rechte, Besitzer und
+            Größe hängen am Inode, nicht am Namen.
+          </Fragment>
         </ContentLayout>
       </Slide>
 
@@ -95,12 +141,34 @@ export function LinksBlock() {
             Vergleicht mit <code>ls -li</code> die Inode-Nummern und die Zahl der Namen.
           </>,
           <>
-            Ändert die Rechte über den Hardlink (<code>chmod 600 hart</code>). Was
+            Ändert die Rechte über den Hardlink (<code>chmod go-r hart</code>). Was
             passiert mit dem Original - und warum?
           </>,
           'Löscht das Original. Was sagen beide Links jetzt?',
         ]}
       />
+
+      <Slide>
+        <ContentLayout title="Zwei Arten von Links: So geht's">
+          <Spoiler>
+            <table className="solutions solutions--stacked">
+              <tbody>
+                {solutions.map((solution) => (
+                  <tr key={solution.task}>
+                    <td>{solution.task}</td>
+                    <td className="solutions__path">
+                      {solution.commands.map((command) => (
+                        <code key={command}>{command}</code>
+                      ))}
+                    </td>
+                    <td>{solution.answer}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </Spoiler>
+        </ContentLayout>
+      </Slide>
     </>
   )
 }
