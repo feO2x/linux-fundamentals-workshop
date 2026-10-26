@@ -238,11 +238,13 @@ export function BerechtigungenBlock() {
         <ContentLayout title="chmod: Rechte ändern">
           <StepCode
             lines={[
-              'chmod u+x skript.sh    # u: Besitzer darf ausführen',
-              'chmod g+w notiz.txt    # g: Gruppe darf schreiben',
-              'chmod o-r notiz.txt    # o: alle anderen nicht mehr lesen',
-              'chmod 640 notiz.txt    # alles auf einmal, als Zahl: rw-r-----',
+              'chmod u+x skript.sh          # u: Besitzer darf ausführen',
+              'chmod g+w notiz.txt          # g: Gruppe darf schreiben',
+              'chmod o-r notiz.txt          # o: alle anderen nicht mehr lesen',
+              'chmod 640 notiz.txt          # alles auf einmal, als Zahl: rw-r-----',
+              'chmod u=rw,g=r,o= notiz.txt  # dasselbe mit =',
             ]}
+            className="code--small"
           />
           <WhenDeckReady>
             <Fragment as="p" className="note">
