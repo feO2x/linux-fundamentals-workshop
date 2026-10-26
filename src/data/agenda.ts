@@ -115,15 +115,15 @@ export const AGENDA: AgendaBlock[] = [
   {
     id: 'berechtigungen',
     title: 'Berechtigungen',
-    duration: 45,
-    praxis: 30,
+    duration: 35,
+    praxis: 20,
     kind: 'content',
     summary:
-      'Das Kernstück des Workshops. rwx und die Oktalschreibweise, Besitzer und Gruppe — und das x-Bit auf Verzeichnissen, das erfahrungsgemäß niemand auf Anhieb richtig rät.',
+      'Das Kernstück des Workshops. rwx und die Oktalschreibweise, Besitzer und Gruppe — und was das x-Bit auf Verzeichnissen bedeutet.',
     question: 'Warum darf alice nicht nach /root - und woher weiß Linux das?',
     commands: ['ls -l', 'chmod', 'chown', 'umask'],
     praxisNote:
-      'In Stufen: ls -l gemeinsam entziffern, Datei zwischen alice und bob freigeben, Oktal-Drill, dann chmod 644 auf ein Verzeichnis und cd versuchen.',
+      'In Stufen: ls -l gemeinsam entziffern, Oktal-Drill, dann eine Datei zwischen alice und bob freigeben.',
   },
   {
     id: 'links-inodes',
@@ -155,7 +155,7 @@ export const AGENDA: AgendaBlock[] = [
   {
     id: 'puffer',
     title: 'Puffer & Fragen',
-    duration: 5,
+    duration: 15,
     kind: 'buffer',
     summary: 'Wiederholung, offene Fragen und der Transfer zum Thema Docker.',
     question: 'Was nehmt ihr mit - und was hat das alles mit Docker zu tun?',

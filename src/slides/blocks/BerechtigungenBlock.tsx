@@ -1,8 +1,10 @@
 import { Fragment, Slide } from '@revealjs/react'
+import type { ReactNode } from 'react'
 import { ContentLayout } from '../ContentLayout'
 import { USERS_IMAGE, runCommand } from '../containers'
 import { ExerciseSlide } from '../ExerciseSlide'
 import { SectionSlide } from '../SectionSlide'
+import { Spoiler } from '../Spoiler'
 import { StepCode } from '../StepCode'
 import { WhenDeckReady } from '../WhenDeckReady'
 
@@ -44,6 +46,63 @@ const octalDrill = [
   { octal: '600', mode: 'rw-------', use: 'private Datei, z. B. ein SSH-Schlüssel' },
   { octal: '660', mode: 'rw-rw----', use: 'Datei für ein Team' },
   { octal: '750', mode: 'rwxr-x---', use: 'Verzeichnis für ein Team' },
+]
+
+// Wie alices umask die Rechte einer neuen Datei filtert, Teil für Teil.
+const umaskRows = [
+  { label: 'touch wünscht sich', parts: ['rw-', 'rw-', 'rw-'] },
+  { label: 'alices umask erlaubt', parts: ['rwx', 'rwx', 'r-x'] },
+  { label: 'die Datei bekommt', parts: ['rw-', 'rw-', 'r--'] },
+]
+const umaskPartClasses = ['mode__user', 'mode__group', 'mode__other']
+
+// Lösungen zur Übung „Teilt eine Datei“, gegen das gebaute Users-Image geprüft.
+const sharingSolutions: { task: string; commands: string[]; answer: ReactNode }[] = [
+  {
+    task: 'Anlegen',
+    commands: ['su - alice', 'touch /srv/team/notiz.txt', 'ls -l /srv/team/notiz.txt'],
+    answer: (
+      <>
+        Besitzer und Gruppe sind alice, die Rechte <code>rw-rw-r--</code>
+      </>
+    ),
+  },
+  {
+    task: 'Lesen, anhängen',
+    commands: [
+      'su - bob',
+      'cat /srv/team/notiz.txt',
+      'echo Milch >> /srv/team/notiz.txt',
+    ],
+    answer: (
+      <>
+        Lesen klappt, anhängen nicht: Für bob gelten die letzten drei, <code>r--</code>
+      </>
+    ),
+  },
+  {
+    task: 'An team geben',
+    commands: ['su - alice', 'chown alice:team /srv/team/notiz.txt'],
+    answer: (
+      <>
+        Jetzt gelten für bob die mittleren drei, <code>rw-</code>. Anhängen klappt.
+      </>
+    ),
+  },
+  {
+    task: 'Nur alice und team',
+    commands: ['chmod o-r /srv/team/notiz.txt'],
+    answer: (
+      <>
+        Alle anderen verlieren das r: <code>rw-rw----</code>
+      </>
+    ),
+  },
+  {
+    task: 'Bonus: an bob verschenken',
+    commands: ['chown bob /srv/team/notiz.txt'],
+    answer: 'Operation not permitted: Einen neuen Besitzer legt nur root fest.',
+  },
 ]
 
 /** Block „Berechtigungen“: rwx, Oktalschreibweise, Besitzer und Gruppe. */
@@ -89,11 +148,11 @@ export function BerechtigungenBlock() {
           />
           <WhenDeckReady>
             <Fragment as="ul" className="points">
+              <li>Vorne stehen Typ und Rechte, dahinter Besitzer und Gruppe.</li>
               <li>
-                Vorne stehen Typ und Rechte, dahinter Besitzer und Gruppe. <code>-d</code>{' '}
-                zeigt das Verzeichnis selbst statt seines Inhalts.
+                Die Rechte zeigen an, welche Operationen (lesen, schreiben, ausführen)
+                erlaubt sind.
               </li>
-              <li>Linux schreibt dran, wer was darf. Ihr müsst es nur lesen können.</li>
             </Fragment>
           </WhenDeckReady>
         </ContentLayout>
@@ -140,7 +199,8 @@ export function BerechtigungenBlock() {
             </tbody>
           </table>
           <Fragment as="p" className="takeaway">
-            Vorsicht beim x auf Verzeichnissen - dazu gleich eine Übung zum Raten.
+            Vorsicht beim x auf Verzeichnissen: Ohne x kommt ihr nicht hinein, auch wenn
+            ihr die Namen lesen dürft.
           </Fragment>
           <Fragment as="p" className="note">
             <code>/tmp</code> zeigt <code>drwxrwxrwt</code>: Dort dürfen alle Dateien
@@ -221,7 +281,7 @@ export function BerechtigungenBlock() {
       </Slide>
 
       <Slide>
-        <ContentLayout title="Drill: Was bedeutet …?">
+        <ContentLayout title="Was bedeutet …?">
           <table className="solutions">
             <tbody>
               {octalDrill.map((row) => (
@@ -265,12 +325,52 @@ export function BerechtigungenBlock() {
       </Slide>
 
       <Slide>
+        <ContentLayout title="Die umask filtert neue Rechte">
+          <p className="note">
+            <code>touch datei</code> legt eine leere Datei an - gibt es sie schon, ändert
+            es nur ihre Uhrzeit.
+          </p>
+          <div className="umask-filter">
+            {umaskRows.map((row, index) => {
+              const content = (
+                <>
+                  <span className="umask-filter__label">{row.label}</span>
+                  <span className="umask-filter__mode">
+                    {row.parts.map((part, partIndex) => (
+                      <span key={partIndex} className={umaskPartClasses[partIndex]}>
+                        {part}
+                      </span>
+                    ))}
+                  </span>
+                </>
+              )
+              // Der Wunsch steht von Anfang an da, umask und Ergebnis folgen.
+              return index === 0 ? (
+                <div key={row.label} className="umask-filter__row">
+                  {content}
+                </div>
+              ) : (
+                <Fragment key={row.label} as="div" className="umask-filter__row">
+                  {content}
+                </Fragment>
+              )
+            })}
+          </div>
+          <Fragment as="p" className="takeaway">
+            Durch kommt nur, was in beiden oberen Zeilen steht. Ein x, das{' '}
+            <code>touch</code> nie wollte, kommt auch nicht dazu - deshalb braucht ein
+            neues Skript <code>chmod +x</code>.
+          </Fragment>
+        </ContentLayout>
+      </Slide>
+
+      <Slide>
         <ContentLayout title="Woher kommen die Rechte neuer Dateien?">
           <StepCode
             language="shell"
             lines={[
-              'alice@workshop:~$ umask',
-              '0002',
+              'alice@workshop:~$ umask -S',
+              'u=rwx,g=rwx,o=rx',
               'alice@workshop:~$ touch neu.txt',
               'alice@workshop:~$ mkdir neuordner',
               'alice@workshop:~$ ls -ld neu.txt neuordner',
@@ -283,13 +383,14 @@ export function BerechtigungenBlock() {
           <WhenDeckReady>
             <Fragment as="ul" className="points">
               <li>
-                Neue Dateien starten bei <code>666</code>, Verzeichnisse bei{' '}
-                <code>777</code>. Die <code>umask</code> nimmt Rechte weg: 666 − 002 =
-                664.
+                <code>umask -S</code> zeigt, was die umask erlaubt. Die Datei bekommt kein
+                x, weil <code>touch</code> keins wollte. <code>mkdir</code> wünscht sich{' '}
+                <code>rwxrwxrwx</code>, deshalb hat das Verzeichnis eins.
               </li>
               <li>
-                root hat <code>0022</code> und bekommt <code>644</code>. Bei alice ist
-                Gruppe-schreiben harmlos: In der Gruppe alice ist nur alice selbst.
+                Bei root erlaubt die umask der Gruppe kein w (<code>g=rx</code>), neue
+                Dateien bekommen <code>rw-r--r--</code>. Bei alice ist Gruppe-schreiben
+                harmlos: In der Gruppe alice ist nur alice selbst.
               </li>
             </Fragment>
           </WhenDeckReady>
@@ -312,7 +413,7 @@ export function BerechtigungenBlock() {
           <>
             Als alice: Gebt die Datei der Gruppe team. Probiert es als bob noch einmal.
           </>,
-          'Sorgt dafür, dass nur alice und team die Datei lesen können. Welche Zahl braucht ihr?',
+          'Sorgt dafür, dass nur alice und team die Datei lesen können.',
           <>
             Bonus: Versucht als alice, die Datei mit <code>chown</code> an bob zu
             verschenken.
@@ -326,58 +427,29 @@ export function BerechtigungenBlock() {
         </p>
       </ExerciseSlide>
 
-      <ExerciseSlide
-        blockId={BLOCK_ID}
-        minutes={10}
-        title="Übung: Das x-Bit auf Verzeichnissen"
-        tasks={[
-          <>
-            Als alice: Legt <code>/tmp/ordner</code> mit einer Datei darin an.
-          </>,
-          <>
-            Nehmt mit <code>chmod 644 /tmp/ordner</code> das x weg.
-          </>,
-          <>
-            <strong>Ratet zuerst:</strong> Was passiert bei <code>ls /tmp/ordner</code>,{' '}
-            <code>cd /tmp/ordner</code> und <code>cat /tmp/ordner/datei</code>? Dann
-            probiert es aus.
-          </>,
-        ]}
-      >
-        <p className="note">
-          Mit <code>chmod 755 /tmp/ordner</code> bekommt ihr den Ordner wieder.
-        </p>
-      </ExerciseSlide>
-
       <Slide>
-        <ContentLayout title="Auflösung: x heißt hineingehen">
-          <StepCode
-            language="shell"
-            lines={[
-              'alice@workshop:~$ ls /tmp/ordner',
-              "ls: cannot access '/tmp/ordner/datei': Permission denied",
-              'datei',
-              'alice@workshop:~$ cd /tmp/ordner',
-              '-bash: cd: /tmp/ordner: Permission denied',
-              'alice@workshop:~$ cat /tmp/ordner/datei',
-              'cat: /tmp/ordner/datei: Permission denied',
-            ]}
-            steps="1-3|4-5|6-7"
-            className="code--small"
-          />
-          <WhenDeckReady>
-            <Fragment as="ul" className="points">
-              <li>
-                Mit <code>r</code>, aber ohne <code>x</code> seht ihr nur die Namen.
-                Hinein und an die Dateien kommt ihr nicht - auch dann nicht, wenn euch der
-                Ordner gehört.
-              </li>
-              <li>
-                Umgekehrt geht es auch: Mit <code>x</code>, aber ohne <code>r</code>{' '}
-                öffnet ihr Dateien, deren Namen ihr kennt, könnt aber nicht auflisten.
-              </li>
-            </Fragment>
-          </WhenDeckReady>
+        <ContentLayout title="Teilt eine Datei: So geht's">
+          <Spoiler>
+            <table className="solutions solutions--stacked">
+              <tbody>
+                {sharingSolutions.map((solution) => (
+                  <tr key={solution.task}>
+                    <td>{solution.task}</td>
+                    <td className="solutions__path">
+                      {solution.commands.map((command) => (
+                        <code key={command}>{command}</code>
+                      ))}
+                    </td>
+                    <td>{solution.answer}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <p className="note">
+              Vor jedem <code>su -</code> geht ihr mit <code>exit</code> zurück zu root.{' '}
+              <code>chmod</code> und <code>chown</code> führt alice aus.
+            </p>
+          </Spoiler>
         </ContentLayout>
       </Slide>
     </>

@@ -623,6 +623,11 @@
   white-space: nowrap;
 }
 
+/* Hinweis unter einer Lösungstabelle, z. B. zum Benutzerwechsel. */
+.solutions + .note {
+  margin-top: 16px;
+}
+
 /* Rückfrage und Lösung liegen übereinander (r-stack). */
 .spoiler {
   align-items: start;
@@ -677,6 +682,37 @@
 
 .mode__type {
   color: var(--text-muted);
+}
+
+/* Wunsch, umask und Ergebnis untereinander, die Rechte spaltengenau. */
+.umask-filter {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-self: flex-start;
+  padding: 20px 32px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.umask-filter__row {
+  display: grid;
+  grid-template-columns: 300px max-content;
+  align-items: baseline;
+}
+
+.umask-filter__label {
+  color: var(--text-muted);
+  font-size: 0.85em;
+}
+
+.umask-filter__mode {
+  display: flex;
+  gap: 0.35em;
+  font-family: var(--font-mono);
+  font-size: 1.5em;
+  font-weight: 600;
 }
 
 .mode__user {
