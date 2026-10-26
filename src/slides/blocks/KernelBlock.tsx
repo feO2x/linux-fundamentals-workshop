@@ -81,8 +81,8 @@ export function KernelBlock() {
             lines={[
               'root@workshop:~# ps aux',
               'USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND',
-              'root           1  0.5  0.0   5028  4260 pts/0    Ss   09:01   0:00 /bin/bash',
-              'root           9  0.0  0.0   8296  4368 pts/0    R+   09:04   0:00 ps aux',
+              'root           1  0.5  0.0   5028  4260 pts/0    Ss   08:31   0:00 /bin/bash',
+              'root           9  0.0  0.0   8296  4368 pts/0    R+   08:34   0:00 ps aux',
             ]}
             steps="1|3|4"
             className="code--small"

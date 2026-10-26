@@ -24,7 +24,7 @@ export interface AgendaBlock {
 }
 
 /** Startzeit des Workshops, Basis für alle berechneten Uhrzeiten. */
-export const START_TIME = '09:00'
+export const START_TIME = '08:30'
 
 export const AGENDA: AgendaBlock[] = [
   {
