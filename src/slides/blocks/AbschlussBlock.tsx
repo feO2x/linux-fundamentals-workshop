@@ -2,13 +2,16 @@ import { Fragment, Slide } from '@revealjs/react'
 import type { ReactNode } from 'react'
 import fixedDockerfile from '../../../containers/users/fixed.Dockerfile?raw'
 import { ContentLayout } from '../ContentLayout'
-import { runCommand, useImage } from '../containers'
+import { namedRunCommand, removeCommand, startCommand, useImage } from '../containers'
 import { ExerciseSlide } from '../ExerciseSlide'
 import { SectionSlide } from '../SectionSlide'
 import { Spoiler } from '../Spoiler'
 import { StepCode } from '../StepCode'
 
 const BLOCK_ID = 'abschlussuebung'
+
+// Ohne --rm, damit die Reparaturen ein versehentliches exit überleben.
+const CONTAINER_NAME = 'abschluss'
 
 // Das reparierte Setup als Dockerfile, ohne die Kommentare am Anfang.
 const dockerfileLines = fixedDockerfile
@@ -72,12 +75,13 @@ export function AbschlussBlock() {
       <Slide>
         <ContentLayout title="Euer Auftrag">
           <StepCode
-            lines={[runCommand('workshop', usersImage)]}
-            className="code--small"
+            lines={[namedRunCommand(CONTAINER_NAME, 'workshop', usersImage)]}
+            className="code--smaller"
           />
           <p className="note">
-            Startet einen frischen Container. Die App in <code>/opt/app</code> soll
-            Folgendes tun - leider klappt nichts davon:
+            Startet einen frischen Container, diesmal ohne <code>--rm</code> und mit
+            Namen. Die App in <code>/opt/app</code> soll Folgendes tun - leider klappt
+            nichts davon:
           </p>
           <ul className="points">
             <li>
@@ -119,6 +123,12 @@ export function AbschlussBlock() {
           <span className="question__label">Bei jeder Fehlermeldung</span>
           Wer bin ich (<code>id</code>)? Wem gehört das (<code>ls -l</code>)? Welche drei
           Zeichen gelten für mich?
+        </p>
+        <p className="note">
+          <strong>Aus Versehen beendet?</strong>{' '}
+          <code>{startCommand(CONTAINER_NAME)}</code> holt euch zurück, eure Reparaturen
+          sind noch da. Neu anfangen: <code>{removeCommand(CONTAINER_NAME)}</code>, dann
+          wieder <code>docker run</code>.
         </p>
       </ExerciseSlide>
 

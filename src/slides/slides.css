@@ -218,6 +218,12 @@
   font-size: 0.7em;
 }
 
+/* Für den docker run der Abschlussübung: Mit --name und dem Image von
+   hub.gwvs.de ist er gut 90 Zeichen lang. */
+.reveal .slides pre.code--smaller code.hljs {
+  font-size: 0.62em;
+}
+
 /* Für lange Ausgaben wie tree -L 1 /. */
 .reveal .slides pre.code--dense code.hljs {
   padding: 12px 20px;
