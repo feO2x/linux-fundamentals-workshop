@@ -233,6 +233,53 @@
   background: var(--accent-wash);
 }
 
+/* Tabs, die am oberen Rand eines Codeblocks hängen (RegistryTabs). Der
+   gewählte Tab überdeckt den oberen Rahmen des Blocks und geht so in ihn über. */
+.registry-tabs {
+  display: flex;
+  flex-direction: column;
+}
+
+.registry-tabs__list {
+  display: flex;
+  gap: 4px;
+}
+
+.registry-tabs__tab {
+  position: relative;
+  z-index: 1;
+  margin-bottom: -1px;
+  padding: 6px 18px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-bottom: none;
+  border-radius: var(--radius) var(--radius) 0 0;
+  color: var(--text-muted);
+  font-family: var(--font-sans);
+  font-size: 0.6em;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.registry-tabs__tab:hover {
+  color: var(--text);
+}
+
+.registry-tabs__tab[aria-pressed='true'] {
+  background: var(--surface);
+  border-color: var(--border);
+  color: var(--accent);
+}
+
+.registry-tabs__tab:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+
+.reveal .slides .registry-tabs pre code.hljs {
+  border-top-left-radius: 0;
+}
+
 /* Hebt nur das Kommando hervor; die Ausgabe darunter bleibt voll lesbar. */
 .reveal pre.code--command .hljs.has-highlights tr:not(.highlight-line) {
   opacity: 1;

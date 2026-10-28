@@ -1,14 +1,8 @@
 import { Fragment, Slide } from '@revealjs/react'
 import { ContentLayout } from '../ContentLayout'
-import {
-  BARE_IMAGE,
-  START_IMAGE,
-  TOOLS_IMAGE,
-  USERS_IMAGE,
-  pullCommand,
-  runCommand,
-} from '../containers'
+import { pullCommand, runCommand, useImage } from '../containers'
 import { ExerciseSlide } from '../ExerciseSlide'
+import { RegistryTabs } from '../RegistryTabs'
 import { SectionSlide } from '../SectionSlide'
 import { StepCode } from '../StepCode'
 import { WhenDeckReady } from '../WhenDeckReady'
@@ -17,25 +11,32 @@ const BLOCK_ID = 'einstieg'
 
 /** Block „Einstieg & Setup“: Container starten und erste Orientierung. */
 export function EinstiegBlock() {
+  const startImage = useImage('start')
+  const bareImage = useImage('bare')
+  const toolsImage = useImage('tools')
+  const usersImage = useImage('users')
+
   return (
     <>
       <SectionSlide blockId={BLOCK_ID} />
 
       <Slide>
         <ContentLayout title="Euer Linux für heute">
-          <StepCode
-            lines={[
-              '# Vor dem Workshop: Images herunterladen',
-              pullCommand(START_IMAGE),
-              pullCommand(BARE_IMAGE),
-              pullCommand(TOOLS_IMAGE),
-              pullCommand(USERS_IMAGE),
-              '# Container starten',
-              runCommand('workshop', START_IMAGE),
-            ]}
-            steps="1-5|6-7"
-            className="code--small"
-          />
+          <RegistryTabs>
+            <StepCode
+              lines={[
+                '# Vor dem Workshop: Images herunterladen',
+                pullCommand(startImage),
+                pullCommand(bareImage),
+                pullCommand(toolsImage),
+                pullCommand(usersImage),
+                '# Container starten',
+                runCommand('workshop', startImage),
+              ]}
+              steps="1-5|6-7"
+              className="code--small"
+            />
+          </RegistryTabs>
           <WhenDeckReady>
             <Fragment as="dl" className="legend">
               <dt>

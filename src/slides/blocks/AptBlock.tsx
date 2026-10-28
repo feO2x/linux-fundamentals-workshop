@@ -1,7 +1,7 @@
 import { Fragment, Slide } from '@revealjs/react'
 import type { ReactNode } from 'react'
 import { ContentLayout } from '../ContentLayout'
-import { BARE_IMAGE, runCommand } from '../containers'
+import { runCommand, useImage } from '../containers'
 import { ExerciseSlide } from '../ExerciseSlide'
 import { SectionSlide } from '../SectionSlide'
 import { Spoiler } from '../Spoiler'
@@ -79,16 +79,15 @@ const solutions: { task: string; commands: string[]; answer: ReactNode }[] = [
 
 /** Block „Paketverwaltung mit apt“: Werkzeuge selbst installieren. */
 export function AptBlock() {
+  const bareImage = useImage('bare')
+
   return (
     <>
       <SectionSlide blockId={BLOCK_ID} />
 
       <Slide>
         <ContentLayout title="Ein neuer, nackter Container">
-          <StepCode
-            lines={[runCommand('workshop', BARE_IMAGE)]}
-            className="code--small"
-          />
+          <StepCode lines={[runCommand('workshop', bareImage)]} className="code--small" />
           <StepCode
             language="shell"
             lines={[
