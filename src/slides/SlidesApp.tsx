@@ -21,6 +21,9 @@ const config: RevealConfig = {
   width: 1280,
   height: 720,
   center: false,
+  // Jeder Block ist ein vertikaler Stack (siehe BlockStack). Mit 'linear' laufen ←/→
+  // trotzdem durch alle Folien, statt den Rest eines Blocks zu überspringen.
+  navigationMode: 'linear',
 }
 
 // Plugins liest der Deck nur beim ersten Rendern - daher eine feste Liste.

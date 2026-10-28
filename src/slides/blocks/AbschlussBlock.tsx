@@ -1,6 +1,7 @@
 import { Fragment, Slide } from '@revealjs/react'
 import type { ReactNode } from 'react'
 import fixedDockerfile from '../../../containers/users/fixed.Dockerfile?raw'
+import { BlockStack } from '../BlockStack'
 import { ContentLayout } from '../ContentLayout'
 import { namedRunCommand, removeCommand, startCommand, useImage } from '../containers'
 import { ExerciseSlide } from '../ExerciseSlide'
@@ -69,7 +70,7 @@ export function AbschlussBlock() {
   const usersImage = useImage('users')
 
   return (
-    <>
+    <BlockStack>
       <SectionSlide blockId={BLOCK_ID} />
 
       <Slide>
@@ -231,6 +232,6 @@ export function AbschlussBlock() {
           </div>
         </ContentLayout>
       </Slide>
-    </>
+    </BlockStack>
   )
 }

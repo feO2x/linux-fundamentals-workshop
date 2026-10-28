@@ -1,5 +1,6 @@
 import { Fragment, Slide } from '@revealjs/react'
 import type { ReactNode } from 'react'
+import { BlockStack } from '../BlockStack'
 import { ContentLayout } from '../ContentLayout'
 import { InodeDiagram } from '../diagrams/InodeDiagram'
 import { ExerciseSlide } from '../ExerciseSlide'
@@ -56,7 +57,7 @@ const solutions: { task: string; commands: string[]; answer: ReactNode }[] = [
 /** Block „Links & Inodes“: Hard- und Softlinks, und dass der Name nicht die Datei ist. */
 export function LinksBlock() {
   return (
-    <>
+    <BlockStack>
       <SectionSlide blockId={BLOCK_ID} />
 
       <Slide>
@@ -169,6 +170,6 @@ export function LinksBlock() {
           </Spoiler>
         </ContentLayout>
       </Slide>
-    </>
+    </BlockStack>
   )
 }

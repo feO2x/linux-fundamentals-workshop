@@ -8,7 +8,7 @@ interface Props {
 }
 
 /**
- * Abschnittsfolie am Anfang eines Blocks, erreichbar unter `#/<blockId>`.
+ * Abschnittsfolie oben im Stack eines Blocks, erreichbar unter `#/<blockId>`.
  * Titel, Frage und Uhrzeit kommen aus der Agenda.
  */
 export function SectionSlide({ blockId }: Props) {

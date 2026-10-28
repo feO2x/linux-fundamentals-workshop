@@ -1,4 +1,5 @@
 import { Slide } from '@revealjs/react'
+import { BlockStack } from '../BlockStack'
 import { CenteredLayout } from '../CenteredLayout'
 import { SCHEDULE } from '../schedule'
 import { SectionSlide } from '../SectionSlide'
@@ -21,7 +22,7 @@ const nanaVideos = [
 /** Block „Puffer & Fragen“: offene Fragen und Tipps zum Weiterlernen. */
 export function PufferBlock() {
   return (
-    <>
+    <BlockStack>
       <SectionSlide blockId={BLOCK_ID} />
 
       <Slide>
@@ -51,6 +52,6 @@ export function PufferBlock() {
           </div>
         </CenteredLayout>
       </Slide>
-    </>
+    </BlockStack>
   )
 }

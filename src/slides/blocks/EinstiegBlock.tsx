@@ -1,4 +1,5 @@
 import { Fragment, Slide } from '@revealjs/react'
+import { BlockStack } from '../BlockStack'
 import { ContentLayout } from '../ContentLayout'
 import { pullCommand, runCommand, useImage } from '../containers'
 import { ExerciseSlide } from '../ExerciseSlide'
@@ -17,7 +18,7 @@ export function EinstiegBlock() {
   const usersImage = useImage('users')
 
   return (
-    <>
+    <BlockStack>
       <SectionSlide blockId={BLOCK_ID} />
 
       <Slide>
@@ -171,6 +172,6 @@ export function EinstiegBlock() {
           Warum ist hier so viel weniger los als auf eurem eigenen Rechner?
         </p>
       </ExerciseSlide>
-    </>
+    </BlockStack>
   )
 }

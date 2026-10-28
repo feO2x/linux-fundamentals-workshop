@@ -1,5 +1,6 @@
 import { Fragment, Slide } from '@revealjs/react'
 import { AGENDA } from '../../data/agenda'
+import { BlockStack } from '../BlockStack'
 import { CenteredLayout } from '../CenteredLayout'
 import { ContentLayout } from '../ContentLayout'
 import { Principle } from '../Principle'
@@ -11,7 +12,7 @@ const finalExercise = slotOf('abschlussuebung')
 /** Titelfolie, Ziel des Workshops und Agenda-Übersicht. */
 export function Opening() {
   return (
-    <>
+    <BlockStack>
       <Slide>
         <CenteredLayout>
           <p className="eyebrow">Workshop</p>
@@ -54,6 +55,6 @@ export function Opening() {
           <p className="agenda-overview__end">Ende um {end}</p>
         </ContentLayout>
       </Slide>
-    </>
+    </BlockStack>
   )
 }
