@@ -37,6 +37,24 @@ export function runCommand(hostname: string, image: string): string {
   return `docker run --rm -it --hostname ${hostname} ${image}`
 }
 
+/**
+ * Startet einen benannten Container ohne `--rm`: Nach einem versehentlichen
+ * `exit` bleibt er gestoppt stehen, `startCommand` holt ihn zurück.
+ */
+export function namedRunCommand(name: string, hostname: string, image: string): string {
+  return `docker run -it --name ${name} --hostname ${hostname} ${image}`
+}
+
+/** Startet einen gestoppten Container wieder und verbindet das Terminal mit ihm. */
+export function startCommand(name: string): string {
+  return `docker start -ai ${name}`
+}
+
+/** Löscht einen gestoppten Container. */
+export function removeCommand(name: string): string {
+  return `docker rm ${name}`
+}
+
 // ---------- Gewählte Registry ----------
 
 /** Query-Parameter, mit dem ein Link die Registry vorgibt: `slides.html?registry=docker.io`. */
