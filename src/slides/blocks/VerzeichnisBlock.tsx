@@ -1,6 +1,7 @@
 import { Fragment, Slide } from '@revealjs/react'
 import type { ReactNode } from 'react'
 import { findBlock } from '../../data/agenda'
+import { BlockStack } from '../BlockStack'
 import { ContentLayout } from '../ContentLayout'
 import { ExerciseSlide } from '../ExerciseSlide'
 import { Principle } from '../Principle'
@@ -152,7 +153,7 @@ const scavengerHunt: { question: ReactNode; path: string[]; answer: ReactNode }[
 /** Block „Verzeichnisstruktur“: der Verzeichnisbaum und wie man darin sucht. */
 export function VerzeichnisBlock() {
   return (
-    <>
+    <BlockStack>
       <SectionSlide blockId={BLOCK_ID} />
 
       <Slide>
@@ -371,6 +372,6 @@ export function VerzeichnisBlock() {
           </WhenDeckReady>
         </ContentLayout>
       </Slide>
-    </>
+    </BlockStack>
   )
 }

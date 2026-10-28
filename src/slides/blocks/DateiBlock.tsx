@@ -1,5 +1,6 @@
 import { Fragment, Slide } from '@revealjs/react'
 import type { ReactNode } from 'react'
+import { BlockStack } from '../BlockStack'
 import { ContentLayout } from '../ContentLayout'
 import { ExerciseSlide } from '../ExerciseSlide'
 import { SearchPath } from '../SearchPath'
@@ -65,7 +66,7 @@ const solutions: { task: string; commands: string[]; answer: ReactNode }[] = [
 /** Block „Alles ist eine Datei“: /proc, File Descriptors und /dev. */
 export function DateiBlock() {
   return (
-    <>
+    <BlockStack>
       <SectionSlide blockId={BLOCK_ID} />
 
       <Slide>
@@ -294,6 +295,6 @@ export function DateiBlock() {
           </Spoiler>
         </ContentLayout>
       </Slide>
-    </>
+    </BlockStack>
   )
 }

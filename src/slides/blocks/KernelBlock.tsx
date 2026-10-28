@@ -1,4 +1,5 @@
 import { Fragment, Slide } from '@revealjs/react'
+import { BlockStack } from '../BlockStack'
 import { ContentLayout } from '../ContentLayout'
 import { runCommand, useImage } from '../containers'
 import { KernelLayers } from '../diagrams/KernelLayers'
@@ -29,7 +30,7 @@ export function KernelBlock() {
   const startImage = useImage('start')
 
   return (
-    <>
+    <BlockStack>
       <SectionSlide blockId={BLOCK_ID} />
 
       <Slide>
@@ -144,6 +145,6 @@ export function KernelBlock() {
           (WSL 2 bzw. Docker Desktop).
         </p>
       </ExerciseSlide>
-    </>
+    </BlockStack>
   )
 }

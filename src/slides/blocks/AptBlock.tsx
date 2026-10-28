@@ -1,5 +1,6 @@
 import { Fragment, Slide } from '@revealjs/react'
 import type { ReactNode } from 'react'
+import { BlockStack } from '../BlockStack'
 import { ContentLayout } from '../ContentLayout'
 import { runCommand, useImage } from '../containers'
 import { ExerciseSlide } from '../ExerciseSlide'
@@ -82,7 +83,7 @@ export function AptBlock() {
   const bareImage = useImage('bare')
 
   return (
-    <>
+    <BlockStack>
       <SectionSlide blockId={BLOCK_ID} />
 
       <Slide>
@@ -270,6 +271,6 @@ export function AptBlock() {
           </Spoiler>
         </ContentLayout>
       </Slide>
-    </>
+    </BlockStack>
   )
 }

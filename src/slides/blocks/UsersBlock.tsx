@@ -1,6 +1,7 @@
 import { Fragment, Slide } from '@revealjs/react'
 import type { ReactNode } from 'react'
 import { findBlock } from '../../data/agenda'
+import { BlockStack } from '../BlockStack'
 import { ContentLayout } from '../ContentLayout'
 import { ExerciseSlide } from '../ExerciseSlide'
 import { SectionSlide } from '../SectionSlide'
@@ -83,7 +84,7 @@ const solutions: { task: string; commands: string[]; answer: ReactNode }[] = [
 /** Block „Users & Groups“: Benutzer, Gruppen und was der Kernel davon sieht. */
 export function UsersBlock() {
   return (
-    <>
+    <BlockStack>
       <SectionSlide blockId={BLOCK_ID} />
 
       <Slide>
@@ -380,6 +381,6 @@ export function UsersBlock() {
           </Spoiler>
         </ContentLayout>
       </Slide>
-    </>
+    </BlockStack>
   )
 }
