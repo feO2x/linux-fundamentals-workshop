@@ -1,6 +1,6 @@
 import { Fragment, Slide } from '@revealjs/react'
 import { ContentLayout } from '../ContentLayout'
-import { START_IMAGE, runCommand } from '../containers'
+import { runCommand, useImage } from '../containers'
 import { KernelLayers } from '../diagrams/KernelLayers'
 import { VmVsContainer } from '../diagrams/VmVsContainer'
 import { ExerciseSlide } from '../ExerciseSlide'
@@ -26,6 +26,8 @@ const syscalls = [
 
 /** Block „Kernel vs. User Space“: Kernel, Syscalls, Prozesse, VM vs. Container. */
 export function KernelBlock() {
+  const startImage = useImage('start')
+
   return (
     <>
       <SectionSlide blockId={BLOCK_ID} />
@@ -119,7 +121,7 @@ export function KernelBlock() {
           <>
             Öffnet ein zweites Terminal und startet einen Nachbarn:
             <StepCode
-              lines={[runCommand('nachbar', START_IMAGE)]}
+              lines={[runCommand('nachbar', startImage)]}
               className="code--small"
             />
           </>,

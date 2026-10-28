@@ -1,7 +1,7 @@
 import { Fragment, Slide } from '@revealjs/react'
 import type { ReactNode } from 'react'
 import { ContentLayout } from '../ContentLayout'
-import { USERS_IMAGE, runCommand } from '../containers'
+import { runCommand, useImage } from '../containers'
 import { ExerciseSlide } from '../ExerciseSlide'
 import { SectionSlide } from '../SectionSlide'
 import { Spoiler } from '../Spoiler'
@@ -107,6 +107,8 @@ const sharingSolutions: { task: string; commands: string[]; answer: ReactNode }[
 
 /** Block „Berechtigungen“: rwx, Oktalschreibweise, Besitzer und Gruppe. */
 export function BerechtigungenBlock() {
+  const usersImage = useImage('users')
+
   return (
     <>
       <SectionSlide blockId={BLOCK_ID} />
@@ -114,7 +116,7 @@ export function BerechtigungenBlock() {
       <Slide>
         <ContentLayout title="alice und bob sind schon da">
           <StepCode
-            lines={[runCommand('workshop', USERS_IMAGE)]}
+            lines={[runCommand('workshop', usersImage)]}
             className="code--small"
           />
           <StepCode

@@ -27,14 +27,28 @@ Das Verzeichnis `containers/<name>/` ist zugleich der Build-Kontext. So landet n
 
 ### Lokal bauen und prüfen
 
-`containers/build-images.sh` baut jedes Image mit seinem Verzeichnis als Kontext und taggt es als `hub.gwvs.de/gwvs/linux-fundamentals/<name>`, also mit dem Pfad, den die Folien anzeigen:
+`containers/build-images.sh` baut jedes Image mit seinem Verzeichnis als Kontext und taggt es zweimal: als `hub.gwvs.de/gwvs/linux-fundamentals/<name>`, also mit dem Pfad, den die Folien anzeigen, und als `feo2x/linux-fundamentals-<name>` für Docker Hub (Docker Hub kennt keine verschachtelten Pfade):
 
 ```bash
 containers/build-images.sh              # alle Images
 containers/build-images.sh start users  # nur die genannten
 ```
 
-Mit `--push` pusht das Skript die Images danach in die Registry, mit `--push --no-build` pusht es die schon gebauten, ohne neu zu bauen. Beides funktioniert auch zusammen mit Image-Namen.
+Mit `--push <registry>` pusht das Skript die Images danach in die genannte Registry, `hub.gwvs.de` oder `docker.io`. Für beide gibt man `--push` zweimal an, das Skript pusht dann in dieser Reihenfolge:
+
+```bash
+containers/build-images.sh --push docker.io                     # nur Docker Hub
+containers/build-images.sh --push hub.gwvs.de --push docker.io  # beide
+containers/build-images.sh --push docker.io --no-build tools    # nur pushen, nicht neu bauen
+```
+
+Gebaut und getaggt wird immer für beide Registrys, damit sich ein Image später auch mit `--no-build` in die andere pushen lässt. Vor dem Push muss man bei der Registry angemeldet sein (`docker login hub.gwvs.de` bzw. `docker login`).
+
+Jedes Image wird für `linux/amd64` und `linux/arm64` gebaut, damit es auf Intel/AMD-Rechnern genauso nativ läuft wie auf ARM, z. B. Macs mit Apple Silicon. `docker run` wählt automatisch die passende Variante. Dafür braucht Docker den containerd-Image-Store. Bei neuen Installationen ist er standardmäßig aktiv, bei älteren lässt er sich in Docker Desktop unter Settings → General → „Use containerd for pulling and storing images“ einschalten. Die fremde Plattform baut Docker per Emulation (QEMU), das dauert etwas länger. Docker Desktop bringt QEMU mit, unter Linux richtet es `docker run --privileged --rm tonistiigi/binfmt --install all` ein. Eine bestimmte Variante lässt sich mit `--platform` starten:
+
+```bash
+docker run --rm --platform linux/amd64 hub.gwvs.de/gwvs/linux-fundamentals/start uname -m  # x86_64
+```
 
 Prüfen, ob die erwarteten Werkzeuge da sind, hier am Beispiel von `start`:
 
@@ -59,6 +73,6 @@ docker run --rm linux-workshop-app-fixed
 
 Die letzte Zeile der Ausgabe muss `Workshop-App 1.1 läuft.` lauten.
 
-Die Images werden nicht von GitHub aus veröffentlicht, sondern von Hand mit `containers/build-images.sh --push` in die interne Registry gepusht. Die Image-Pfade, die die Folien anzeigen, legt `src/slides/containers.ts` fest; der Präfix in `containers/build-images.sh` muss dazu passen. Achtung: Die Folien liegen öffentlich auf GitHub Pages, die Pfade sind dort also sichtbar.
+Die Images werden nicht von GitHub aus veröffentlicht, sondern von Hand mit `containers/build-images.sh --push <registry>` in die interne Registry und nach Docker Hub gepusht. Die Präfixe beider Registrys legt `image_prefix` in `containers/build-images.sh` fest. Die Image-Pfade, die die Folien anzeigen, legt `imageRef` in `src/slides/containers.ts` fest; die Präfixe in `containers/build-images.sh` müssen dazu passen. Auf der Folie „Euer Linux für heute“ lässt sich die Registry per Tab wechseln, das gilt dann für alle Folien. Standard ist hub.gwvs.de, ein Link kann Docker Hub vorgeben: `slides.html?registry=docker.io`. Achtung: Die Folien liegen öffentlich auf GitHub Pages, die Pfade sind dort also sichtbar.
 
 Ändert sich ein Image, müssen auch die Folien passen: Die Lösungen der Schnitzeljagd und die Beispielausgaben (`/etc/shells`, `/etc/os-release`) in `src/slides/blocks/VerzeichnisBlock.tsx` sind gegen das gebaute `start`-Image geprüft, die Ausgaben in `AptBlock.tsx`, `DateiBlock.tsx` und `UsersBlock.tsx` gegen `bare` bzw. `tools`, die in `BerechtigungenBlock.tsx`, `LinksBlock.tsx` und `AbschlussBlock.tsx` gegen `users`. Die sudo-Folie in `UsersBlock.tsx` stammt aus einem `ubuntu:24.04`-Container mit nachinstalliertem `sudo`. Die Dockerfile-Folien lesen `containers/tools/Dockerfile` und `containers/users/fixed.Dockerfile` direkt ein.

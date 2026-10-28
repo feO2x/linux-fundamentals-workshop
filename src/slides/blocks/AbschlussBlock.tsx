@@ -2,7 +2,7 @@ import { Fragment, Slide } from '@revealjs/react'
 import type { ReactNode } from 'react'
 import fixedDockerfile from '../../../containers/users/fixed.Dockerfile?raw'
 import { ContentLayout } from '../ContentLayout'
-import { USERS_IMAGE, runCommand } from '../containers'
+import { runCommand, useImage } from '../containers'
 import { ExerciseSlide } from '../ExerciseSlide'
 import { SectionSlide } from '../SectionSlide'
 import { Spoiler } from '../Spoiler'
@@ -63,6 +63,8 @@ const fixes: { symptom: ReactNode; cause: ReactNode; commands: string[] }[] = [
 
 /** Block „Abschlussübung“: ein kaputtes Setup diagnostizieren und reparieren. */
 export function AbschlussBlock() {
+  const usersImage = useImage('users')
+
   return (
     <>
       <SectionSlide blockId={BLOCK_ID} />
@@ -70,7 +72,7 @@ export function AbschlussBlock() {
       <Slide>
         <ContentLayout title="Euer Auftrag">
           <StepCode
-            lines={[runCommand('workshop', USERS_IMAGE)]}
+            lines={[runCommand('workshop', usersImage)]}
             className="code--small"
           />
           <p className="note">
